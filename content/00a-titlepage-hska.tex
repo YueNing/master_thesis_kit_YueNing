@@ -1,0 +1,60 @@
+\begin{titlepage}
+\tikzset{external/export next=false}
+\begin{tikzpicture}[
+remember picture,
+overlay,
+every node/.style={inner sep=0pt, outer sep=0pt}
+]
+
+% The solid red triangle
+\draw[color=HSKAred,thick,fill=HSKAred]
+(current page.north west) -- ++(10mm,0mm) -- ++(-85:298.2mm) --
+(current page.south west) -- cycle;
+
+% The red ruler
+\draw[color=HSKAred,semithick] (current page.north west) ++(10mm,0.5mm)  % set current coordinate
+\foreach \x in {0,1,...,30} { % the skew line is approx. 30cm
+  ++(-85:1mm) -- +(5:4mm)
+	++(-85:1mm) -- +(5:2mm)
+	++(-85:1mm) -- +(5:2mm)
+	++(-85:1mm) -- +(5:2mm)
+	++(-85:1mm) -- +(5:2mm)
+	++(-85:1mm) -- +(5:3mm)
+	++(-85:1mm) -- +(5:2mm)
+	++(-85:1mm) -- +(5:2mm)
+	++(-85:1mm) -- +(5:2mm)
+	++(-85:1mm) -- +(5:2mm)
+}
+; % end path
+
+\node[anchor=north east] at ($(current page.north east)+( -25mm,-21mm)$)
+{\includegraphics[height=25mm]{./logos/hska.pdf}};
+
+\node[anchor=north east,node font={\sffamily\bfseries\large}] at ($(current page.south east)+(-13mm, 15mm)$)
+{www.hs-karlsruhe.de};
+
+\node[anchor=south,node font={\bfseries\huge},text width=15cm,align=center] at ($(current page)+(0mm, 50mm)$)
+{\worktitle};
+
+\node[anchor=base,node font={\scshape\LARGE},text width=15cm,align=center] at ($(current page)+(0mm, 30mm)$)
+{\typeofthesis};
+
+\node[anchor=base,node font={\scshape\large},text width=15cm,align=center] at ($(current page)+(0mm, 20mm)$)
+{Hochschule Karlsruhe\\Technik und Wirtschaft};
+
+\node[anchor=base,node font={\bfseries\large},text width=15cm,align=center] at ($(current page)+(0mm, -10mm)$)
+{\nameofauthor};
+
+\node[anchor=base,node font={\large},text width=15cm,align=center] at ($(current page)+(0mm, -20mm)$)
+{\dateofexam};
+
+\node[anchor=base,node font={\large},text width=15cm,align=center] at ($(current page)+(0mm, -70mm)$)
+{\begin{tabular}{l@{\hspace{1cm}}l}
+Verantwortlicher Betreuer: & \reviewer \\
+Betreuender Mitarbeiter:   & \advisorA \\
+                           & \advisorB \\
+\end{tabular}
+};
+
+\end{tikzpicture}
+\end{titlepage}

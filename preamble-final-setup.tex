@@ -1,0 +1,93 @@
+\hypersetup{pdftitle={\worktitle},
+  pdfsubject={\typeofthesis},
+  pdfauthor={\nameofauthor},
+  pdfstartview=Fit,
+  pdfpagemode={UseOutlines},
+  bookmarksnumbered=true,
+  bookmarksopen=false,
+  pdfborder={0 0 0},
+  pdfpagelayout=TwoColumnRight
+}
+
+\newtheorem{theorem}{Satz}[chapter]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\crefname{chapter}{Kapitel}{Kapitel}
+\crefname{section}{Abschnitt}{Abschnitte}
+\crefname{subsection}{Abschnitt}{Abschnitte}
+\crefname{figure}{Abbildung}{Abbildungen}
+\crefname{table}{Tabelle}{Tabellen}
+\crefname{appendix}{Anhang}{Anhänge}
+
+\crefname{theorem}{Satz}{Sätze}
+\crefname{definition}{Definition}{Definitionen}
+\crefname{lemma}{Lemma}{Lemmata}
+\crefname{corollary}{Korollar}{Korollare}
+\crefname{proposition}{Proposition}{Propositionen}
+
+\newcommand{\crefpairconjunction}{ und }
+\newcommand{\crefmiddleconjunction}{, }
+\newcommand{\creflastconjunction}{ und }
+\newcommand{\crefpairgroupconjunction}{ sowie }
+\newcommand{\crefmiddlegroupconjunction}{, }
+\newcommand{\creflastgroupconjunction}{ sowie }
+
+\lstloadlanguages{
+  C,
+  [ISO]C++,
+  Java,
+	[LaTeX]TeX
+}
+
+\lstset{
+  basicstyle=\small\ttfamily,
+	keywordstyle=\bfseries,
+	commentstyle=\normalfont,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=5pt,
+  tabsize=2,
+  extendedchars=true,
+  breaklines=true,
+  showspaces=false,
+  showtabs=false,
+  showstringspaces=false,
+  captionpos=b
+}
+\lstdefinestyle{nonumbers}{numbers=none}
+
+\lstnewenvironment{latex}[1][]{%
+  \lstset{%
+    language=[LaTeX]TeX,%
+    morekeywords={cref,%
+      includegraphics,%
+      toprule,%
+      midrule,%
+      bottomrule,%
+      tikzsetnextfilename,%
+      enquote,%
+			newacronym,%
+			longnewglossaryentry,%
+      subfloat},%
+		#1}%
+}{}
+
+\lstnewenvironment{java}[1][]{%
+  \lstset{language=Java,#1}%
+}{}
+
+\renewcommand*{\marginfont}{\raggedright\sffamily\footnotesize}
+\let\omarginnote\marginnote
+\renewcommand{\marginnote}[1]{\leavevmode\omarginnote{#1}\ignorespaces}
+
+\makeindex
+
+\setacronymstyle{long-short}
+\makeglossaries
+
+\bibliography{literature}
+\nocite{*}

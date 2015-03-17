@@ -1,0 +1,558 @@
+\chapter{Etwas LaTeX}
+
+In diesem Kapitel sind einige LaTeX-Dinge zusammengesammelt, die immer wieder
+auch von Personen verkehrt gemacht werden, die bereits längere Zeit mit LaTeX
+arbeiten. Dies soll hier also keine Einführung in LaTeX werden, sondern spiegelt
+nur meine Erfahrung der häufigsten Fehler wieder. Außerdem soll gezeigt werden,
+wie bestimmte Dinge innerhalb dieser Vorlage gemacht werden.
+
+Grundsätzlich sollte man bei \index{Problem}Problemen nie, nimmer, niemals einfach nach
+einer Lösung im Internet suchen. 95\,\% der Lösungen im Internet sind
+bestenfalls falsch, aber eigentlich der größte Mist für den die jeweiligen
+Autoren angespitzt in den Boden gerammt, im eigen Saft gegart, gevierteilt und
+anschließend in Beton gegossen gehören. Aber eigentlich ist es schade um den
+guten Beton.
+
+\section{Dokumentationsquellen}
+
+Statt wahllos im Internet nach \index{Losung@Lösung}Lösungen zu suchen, sucht man direkt auf
+\url{http://www.ctan.org/tex-archive/} nach dem Paketnamen und verwendet die
+dortige Originaldokumentation des Paketautors selbst. Dort zu findende \index{Warnung}Warnungen
+sollte man ernst nehmen und nicht machen, auch wenn irgendwo anders behauptet
+wird, es würde so funktionieren. Es funktioniert NICHT oder nur scheinbar.
+
+Im Rahmen dieser Vorlage sind insbesondere die \index{Dokumentation}Dokumentationen aus dem
+Literaturverzeichnis wärmstens zu empfehlen.
+
+\section{Referenzen}
+
+Querverweise sollten nicht mit dem Befehl \verb#\ref{...}# gesetzt werden sondern
+mit \verb#\cref{...}# und verwandten Befehlen aus dem Paket \texttt{cleveref}
+\parencite{Cubitt2013}. Diese Befehle haben den Vorteil nicht nur die Nummer
+zu referenzieren, sondern auch den Typ mit anzugeben. Hinzukommt eine
+intelligente Verwendung der Pluralform und \index{Sortierung}Sortierung bei Mehrfachaufzählungen
+auch unterschiedlichen Typs. Will man bspw. auf zwei Abbildungen und eine Tabelle
+mit den Marken (\enquote{Labels})
+\begin{itemize}
+\item \texttt{fig:texniccenter-new-profile-1}
+\item \texttt{tab:files-dirs-of-template}
+\item \texttt{fig:texniccenter-new-profile-2}
+\end{itemize}
+verweisen, so schreibt man einfach per Komma getrennt
+\begin{latex}[caption={Cleveres Referenzieren},label={lst:cref}]
+\cref{fig:texniccenter-new-profile-1,
+      tab:files-dirs-of-template,
+      fig:texniccenter-new-profile-2}
+\end{latex}
+und erhält als Resultat \enquote{\cref{fig:texniccenter-new-profile-1,tab:files-dirs-of-template,fig:texniccenter-new-profile-2}}.
+
+\section{Fließumgebungen (Floats)}
+
+Fließumgebungen sind bei LaTeX blockbildende \index{Element!blockbildend}Elemente,
+die nicht an der Stelle erscheinen, an der sie im Quellcode definiert sind sondern aus optischen
+Gründen an umhergeschoben werden können. Typische Beispiele sind Tabellen,
+Bilder, längere Codeausschnitte und ähnliche Dinge. Später wird noch auf
+Bilder und Tabellen im Detail eingegangen, aber an diese Stelle sollen vier
+Todsünden in Bezug auf Fließumgebungen abgehandelt werden.
+
+Todsünde Nummer eins ist die Verwendung der \index{Platzierung}Platzierungsangabe \texttt{H}, also
+bspw.
+\begin{latex}[caption={Verbot von \texttt{H} als Platzierungsangabe},label={lst:prohibited-h}]
+\begin{figure}[H]
+\end{figure}
+\end{latex}
+um zu erzwingen, dass ein Fließobjekt an dieser Stelle (engl. \enquote{here})
+passiert, wenn \texttt{h} nicht genügt. Wenn \texttt{h} nicht genügt, dann liegt
+der Fehler bereits woanders und man sollte in das Log schauen, warum LaTeX
+die Umgebung nicht platzieren kann und das originäre Problem lösen. Alles andere
+macht es nur schlimmer.
+
+Todsünde Nummer zwei ist die Verwendung von Leerzeilen innerhalb der
+Fließumgebung oder auch das Abrücken der Fließumgebung mit einer Leerzeile von
+dem Text der die Fließumgebung referenziert. Leerzeilen sind bei LaTeX Absätze
+und damit potentielle Stellen für Seitenumbrüche. Korrekt ist also folgendes:
+\begin{latex}[caption={Verbot von Leerzeilen},label={lst:prohibited-blank-lines}]
+Ein Text der auf die \cref{fig:my-fig} verweist
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{./images/my-image.png}
+  \caption{Eine tolle Abbildung}
+  \label{fig:my-fig}
+\end{figure}
+und ohne Leerzeile an der figure-Umgebung dransteht.
+
+Dies ist nun ein neuer Absatz.
+\end{latex}
+Wie man erkennen kann, steht die \texttt{figure}-Umgebung sogar mitten im Satz
+zu der sie gehört. Der häufigste Grund, warum die Platzierungsoptionen
+\texttt{t}, \texttt{b}, \texttt{h} und  \texttt{p} nicht so verhalten, wie
+man erwartet, ist, dass die \texttt{figure}-Umgebung aus Gründen der Übersicht
+mit Leerzeilen abgesetzt wird, sodass diese dann für LaTeX einen eigenen Block
+bildet.
+
+Todsünde Nummer drei ist die Verwendung von \verb#\begin{center}# und
+\verb#\end{center}# statt von \verb#\centering# innerhalb der Fließumgebung.
+Ersteres erzeugt wieder einen internen Absatz und damit einen eigenen Block.
+Dies ist also genauso schlimm wie Leerzeilen.
+
+Todsünde Nummer vier ist die falsche Reihenfolge von \verb#\caption{...}# und
+\verb#\label{...}#. Die Reihenfolge ist \emph{immer} das Objekt selbst (also
+\verb#\includegraphics# oder \verb#tabular#, usw.), dann folgt \verb#\caption{...}#
+und zum Schluss \verb#\label{...}#.
+
+\section{Tabellen}
+
+Typografisch gute Tabellen haben \emph{niemals} vertikale Trennlinien sondern
+nur wenige horizontale Linien. Ferner haben sie eine trennende Linie ganz oben
+und ganz unten. Hierfür stellt das Paket \texttt{booktabs} die Befehle
+\begin{itemize}
+  \item \verb#\toprule#
+	\item \verb#\midrule#
+	\item \verb#\bottomrule#
+\end{itemize}
+zur Verfügung. Der Befehl \verb#\hline# ist tabu. Für eine ausführliche
+Erläuterung auch über gute und schlechte Tabellen siehe die Dokumentation des
+\texttt{booktabs}-Pakets \parencite{Fear2005}.
+
+Eine gute Tabelle hat also folgenden Code
+\begin{latex}[caption={Tabellen in LaTeX},label={lst:tables}]
+\begin{table}
+  \centering
+  \begin{tabular}{l l l}                       \toprule
+    Datei       &  Bedeutung    &  Benutzer \\ \midrule
+    ./main.tex  &  Hauptdatei   &  nein     \\
+    ./figures/  &  Zeichnungen  &  ja       \\
+    ./content/  &  Kapitel      &  ja       \\
+    ./logos/    &  Logos        &  nein     \\ \bottomrule
+  \end{tabular}
+  \caption{Dateien der Vorlage}
+  \label{tab:files-dirs-of-template}
+\end{table}
+\end{latex}
+und sieht dann so aus wie \cref{tab:files-dirs-of-template}.
+
+Sollten eine Tabelle einmal so breit sein, dass sie nicht mehr horizontal auf
+eine Seite passt, so ist es natürlich möglich, diese mithilfe des Pakets
+\texttt{rotfloat} \parencite{Sommerfeldt2004} statt in eine \texttt{table}- in eine
+\texttt{sidewaystable}-Umgebung zu setzen. Also
+\begin{latex}[caption={Gedrehte Tabelle},label={lst:rotated-table}]
+\begin{sidewaystable}
+  \centering
+  \begin{tabular}{...}
+    ...
+  \end{tabular}
+  \caption{Bezeichnung}
+  \label{Referenzmarke}
+\end{sidewaystable}
+\end{latex}
+ein Ergebnis sieht man in \cref{tab:ex-sideways}.
+\newcolumntype{M}{>{\begin{minipage}[t]{2.7cm}\raggedright}c<{\end{minipage}}}
+\newenvironment{tabitemize}{%
+\begin{list}{\textbullet}{%
+\setlength\topsep{0pt}%
+\setlength\parsep{0pt}%
+\setlength\itemsep{0pt}%
+\setlength\leftmargin{0em}%
+\setlength\leftmargin{1em}%
+\setlength\labelwidth{0.5em}%
+\setlength\labelsep{0.5em}%
+}
+}{%
+\end{list}
+}
+\begin{sidewaystable}[p]
+\scriptsize
+\centering
+\begin{tabular}{l M M M M M} \toprule\addlinespace[0pt]
+ & \multicolumn{5}{c}{\bfseries Level} \tabularnewline
+ & \multicolumn{2}{c}{\bfseries Qualitative} & \multicolumn{3}{c}{\bfseries Quantitative} \tabularnewline
+ & \bfseries\centering Nominal & \bfseries\centering Ordinal & \bfseries\centering Interval & \bfseries\centering Ratio & \bfseries\centering Absolute \tabularnewline \addlinespace[0pt]\midrule\addlinespace[0pt]
+Empirical relation &
+\begin{tabitemize}\item[$\sim$] Equivalence\end{tabitemize} &
+\begin{tabitemize}\item[$\sim$] Equivalence\item[$\prec$] Ordering\end{tabitemize} &
+\begin{tabitemize}\item[$\sim$] Equivalence\item[$\prec$] Ordering\end{tabitemize} &
+\begin{tabitemize}\item[$\sim$] Equivalence\item[$\prec$] Ordering\strut\end{tabitemize} &
+\begin{tabitemize}\item[$\sim$] Equivalence\item[$\prec$] Ordering\strut\end{tabitemize} \tabularnewline \midrule
+Empirical operation &
+ &
+ &
+\begin{tabitemize}\item[$\oplus$] Addition\end{tabitemize} &
+\begin{tabitemize}\item[$\oplus$] Addition\item[$\otimes$] Multiplication\strut\end{tabitemize} &
+\begin{tabitemize}\item[$\oplus$] Addition\item[$\otimes$] Multiplication\strut\end{tabitemize} \tabularnewline \midrule
+Feasable transformation &
+$m' = f( m )$ for $f$ bij.\strut &
+$m' = f( m )$ for $f$ mon.\strut &
+$m' = am + b$ for $a>0$\strut &
+$m' = am$ for $a>0$\strut &
+$m' = m$\strut \tabularnewline \midrule
+Examples of features &
+\begin{tabitemize}\item Telephone numbers\item Postal codes\item Gender\strut\end{tabitemize} &
+\begin{tabitemize}\item Grades\item Degree of hardness\item Wind intensity\strut\end{tabitemize} &
+\begin{tabitemize}\item Temperatur in F\textdegree\item Calendric time\item Geographic altitude\strut\end{tabitemize} &
+\begin{tabitemize}\item Temperatur in K\item Mass\item Length\item Electric current\strut\end{tabitemize} &
+\begin{tabitemize}\item Quantum numbers\item Error number\strut\end{tabitemize} \tabularnewline \midrule
+Range of features &
+\begin{tabitemize}\item Numbers\item Names\item Symbols\strut\end{tabitemize} &
+Natural numbers &
+Real numbers &
+Real, positive numbers &
+Natural numbers \tabularnewline \midrule
+Expressiveness & low & \dots & \dots & \dots & high\strut \tabularnewline \addlinespace[0pt]\bottomrule
+\end{tabular}
+\caption{Beispiel für eine breite, gedrehte Tabelle (hier: Taxonomie der Maßskalen)}
+\label{tab:ex-sideways}
+\end{sidewaystable}
+
+\section{Bilder, Grafiken und Diagramme}
+
+Bei Grafiken sind zwei Fälle zu unterscheiden:
+\begin{itemize}
+  \item \index{Bild!Binär-}Bilder in einem Binärformat (\texttt{PNG}, \texttt{TIFF}, \texttt{JPG}, \texttt{PDF}, etc.)
+	\item \index{Bild!Vektor-}Grafiken, die im \gls{tikz}-Quellcode vorliegen 
+\end{itemize}
+Grundlegender Unterschied ist, dass Binärformatgrafiken mit \verb#\includegraphics#
+eingebunden werden während \gls{tikz}-Grafiken mit \verb#\input# eingebunden und
+von \texttt{pdflatex} kompiliert werden.
+
+Für Binärformatbilder ist ein vollständiges Beispiel also
+\begin{latex}[caption={Binärgrafik in LaTeX},label={lst:binary-image}]
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{./images/my-image.png}
+  \caption{Eine tolle Abbildung}
+  \label{fig:my-image}
+\end{figure}
+\end{latex}
+Der Code für eine \gls{tikz}-Grafik ist hingegen
+\begin{latex}[caption={TikZ-Zeichnung in LaTeX},label={lst:tikz-figure}]
+\begin{figure}[htbp]
+  \centering
+	\tikzsetnextfilename{my-tikz-figure}
+  \input{./figures-src/my-tikz-figure.tex}
+  \caption{Eine tolle Zeichnung}
+  \label{fig:my-figure}
+\end{figure}
+\end{latex}
+Das Kommando \verb#\tikzsetnextfilename{...}# ist nicht unbedingt notwendig
+aber sehr zu empfehlen, da dies als Name für das temporäre Kompilat im Ordner
+\texttt{./figures-compiled/} genommen wird. Dieser sollte gleich dem Namen
+des Quelldatei (ohne Endung) gewählt werden. Ansonsten nimmt \texttt{pdflatex}
+eine hochlaufende Nummer als Dateiname, was die Fehlersuche sehr erschwert.
+
+Bilder können auch in
+\index{Abbildung|see{Bild}}\index{Bild!Unterabbildung}Unterabbildungen gesetzt
+und sowohl als ganzes
+\begin{figure}[tbp]\centering
+\subfloat[La Savoureuse, Lepuix, Frankreich (\copyright\ Thomas Bresson)]{
+  \label{fig:subfloat-example-01}
+	\includegraphics{./images/subfloat-example-01.jpg}
+} \qquad
+\subfloat[Bangkok, Thailand (\copyright\ Prachanart Viriyaraks)]{
+  \label{fig:subfloat-example-02}
+	\includegraphics{./images/subfloat-example-02.jpg}
+} \\
+\subfloat[Wahkeena Falls, Lincoln Park, USA (\copyright\ srslyguys)]{
+  \label{fig:subfloat-example-03}
+	\includegraphics{./images/subfloat-example-03.jpg}
+} \qquad
+\subfloat[Nacionalni park Plitvička jezer, Kroatien (\copyright\ Roman Bonnefoy)]{
+  \label{fig:subfloat-example-04}
+	\includegraphics{./images/subfloat-example-04.jpg}
+}
+\caption{Wasserfälle der Welt als Beispiel für Unterabbildungen}
+\label{fig:subfloat-example}
+\end{figure}
+(vgl. \cref{fig:subfloat-example}) als auch einzeln (vgl.
+\cref{fig:subfloat-example-01,fig:subfloat-example-02,fig:subfloat-example-03,fig:subfloat-example-04})
+referenziert werden. Der Beispielcode mit dem Paket \texttt{Subfig}
+\parencite{Cochran2005} hierzu ist
+\begin{latex}[caption={Unterabbildungen in LaTeX},label={lst:subfigures}]
+\begin{figure}
+\centering
+\subfloat[Unterbezeichnung 1)]{
+  \label{fig:my-sub-figure-1}
+	\includegraphics{./Pfad/zu/Bild/1}
+} \qquad
+\subfloat[Unterbezeichnung 2]{
+  \label{fig:my-sub-figure-2}
+	\includegraphics{./Pfad/zu/Bild/2}
+}
+\caption{Bezeichnung}
+\label{fig:my-whole-figure}
+\end{figure}
+\end{latex}
+
+\Gls{tikz} eignet sich hervorragend, um wissenschaftliche Zeichnungen, Vektorgrafiken
+und \index{Diagramm}Diagramme direkt mithilfe von LaTeX zu setzen, sodass die Schrift direkt zum
+restlichen Dokument passt. Zu \gls{tikz} und dem darauf aufsetzenden \gls{pgfplots} gibt
+es hervorragende Dokumentation \parencites{Tantau2013}{Feuersaenger2014}.
+
+
+Möglich sind zum Beispiel einfache \index{Diagramm!Punkt-}Punktdiagramme wie in \cref{fig:ica} oder
+aufwendigere Diagramme mit mehreren \index{Achsensystem|see{Diagramm}}Achsensystemen wie in \cref{fig:pca}.
+\begin{figure}[tbp]\centering
+\subfloat[Ursprünglicher Merkmalsraum]{
+  \label{fig:ica-1}
+	\tikzsetnextfilename{ica-1}
+	\input{./figures-src/ica-1.tex}
+} \quad
+\subfloat[Transienter Merkmalsraum (Nach Whitening, z.\,B. durch \glstext{pca} inkl. Normalisierung)]{
+  \label{fig:ica-2}
+	\tikzsetnextfilename{ica-2}
+	\input{./figures-src/ica-2.tex}
+} \quad
+\subfloat[Transformierter Merkmalsraum]{
+  \label{fig:ica-3}
+	\tikzsetnextfilename{ica-3}
+	\input{./figures-src/ica-3.tex}
+}
+\caption{Diagramme mit TikZ direkt in LaTeX (hier: Die Schritte der \enquote{Independent component analysis})}
+\label{fig:ica}
+\end{figure}
+\begin{figure}[tbp]\centering
+\subfloat[Ungünstige Projektion]{
+  \label{fig:pca-1}
+  \tikzsetnextfilename{pca-1}
+  \input{./figures-src/pca-1.tex}
+} \quad
+\subfloat[Zielführende Projektion]{
+  \label{fig:pca-2}
+  \tikzsetnextfilename{pca-2}
+  \input{./figures-src/pca-2.tex}
+}
+\caption{Aufwändiges Diagramm mit TikZ (hier: Probleme der \enquote{Principal component analysis})}
+\label{fig:pca}
+\end{figure}
+Mit TikZ ist es auch möglich, kommutative Diagramme zu erstellen (vgl. \cref{fig:kpca})
+\begin{figure}[tbp]\centering
+  \tikzsetnextfilename{kpca}
+	\input{./figures-src/kpca.tex}
+	\caption{Kommutative Diagramm mit TikZ}
+  \label{fig:kpca}
+\end{figure}
+oder Netzwerkkommunikationsgraphen (vgl. \cref{fig:net-comm}).
+\begin{figure}[tbp]\centering
+  \tikzsetnextfilename{net-comm}
+	\input{./figures-src/net-comm.tex}
+	\caption{Netzwerkkommunikationsgraph mit TikZ}
+  \label{fig:net-comm}
+\end{figure}
+Natürlich darf auch eine Übersicht über die KIT-Corporate-Identity-Farben
+nicht fehlen (s. \cref{fig:kit-colors}).
+\begin{figure}[tbp]\centering
+  \tikzsetnextfilename{kit-colors}
+	\input{./figures-src/kit-colors.tex}
+	\caption{KIT-Corporate-Identity-Farben}
+  \label{fig:kit-colors}
+\end{figure}
+
+\section{Theoreme und Listings}
+
+Für eine mathematische Ausarbeitung gibt es LaTeX-\glspl{umgebung}, um
+\index{Satz|see{Theorem}}\index{Theorem}Sätze (Theoreme), \index{Lemma|see{Theorem}}Lemma,
+\index{Beispiel|see{Theorem}}Beispiele etc. im üblichen Stil von
+Mathematik-Büchern zu setzen und zu referenzieren. Vordefiniert sind die
+\glspl{umgebung}
+\begin{itemize}
+  \item \texttt{theorem} für Sätze
+  \item \texttt{definition} für Definitionen
+  \item \texttt{lemma} für Lemma
+  \item \texttt{corollary} für Korollare
+  \item \texttt{proposition} für Propositionen
+\end{itemize}
+Die übliche Verwendung ist
+\begin{latex}[caption={Beispiel für Theorem-Umgebungen},label={lst:ntheorem}]
+\begin{theorem}[Optionaler Name]\label{thm:my-thoerem}
+...
+\end{theorem}
+\end{latex}
+Weitere Informationen findet man in der Dokumentation zum \texttt{ntheorem}-Paket
+\parencite{May2011}. Das Ganze sieht dann beispielsweise wie folgt aus.
+
+\begin{theorem}[Theorem von Arthur Dent]\label{thm:arthur-dent} Die Antwort auf
+die Frage nach dem Leben, dem Universum und den ganzen Rest ist 42.
+\end{theorem}
+
+\begin{proposition}[Zweifelhafte Folgerung] LaTeX ist schön. Beweis folgt
+unmittelbar aus \cref{thm:arthur-dent}.
+\end{proposition}
+
+Zum Einbinden und formatieren von \index{Code|see{Listing}}Code-Beispielen --
+sog. \index{Listing}Listings -- wird das Paket \texttt{listings}
+\parencite{Hoffmann2014} unterstützt. Das Hervorheben von
+\index{Schlusselwort@Schlüsselwort}Schlüsselwörtern wird von LaTeX automatisch
+erledigt, wenn die korrekte Sprache des Listings angegeben ist. Vordefininiert
+sind die Umgebungen \texttt{java} für \gls{java} und \texttt{latex} für \gls{latex}.
+Ein Beispiel
+\begin{latex}[%
+  caption={Listing-Beispiel},%
+  label={lst:listing}]
+\begin{java}[caption={A Java Hello-World example},label={lst:hello-world}]
+public class HelloWorld {
+  public static void main( String[] args ) {
+    System.out.println( "HelloWorld" );
+  }
+}
+\end{java}
+\end{latex}
+Das Ergebnis ist
+\begin{java}[caption={A Java Hello-World example},label={lst:hello-world}]
+public class HelloWorld {
+  public static void main( String[] args ) {
+    System.out.println( "HelloWorld" );
+  }
+}
+\end{java}
+Man beachte, dass anders als bei anderen Umgebungen die Bezeichnung
+(\texttt{caption}) und die Referenzmarke (\texttt{label}) nicht als gesonderte
+Befehle sondern als optionale Argumente übergeben werden. Dies liegt daran,
+dass ein Listing in der Regel keine Fließumgebung ist, sondern an der Stelle
+im Text erscheint, an der sie im Code auch steht. Ferner folgt ein Listing den
+ganz normalen Seitenumbruchsregeln. Das heißt, überlanger Code wird einfach
+umgebrochen. Um ein Listing zu einem Fließobjekt zu machen, muss das optionale
+Argument \texttt{float=<tbp>} angegeben werden. Die
+\index{Platzierung}Plazierungsangabe \texttt{h} für \enquote{hier} ist nicht
+erlaubt. Denn dies ist das Standardverhalten ohne \texttt{float}.
+
+
+\section{Literaturangaben}
+
+Die Erstellung eines Literaturverzeichnisses geschieht mithilfe von \gls{biblatex}.
+Hier soll an dieser Stelle nicht viel Erklärung dazugegeben werden, denn die
+offizielle Dokumentation ist eine der besten Dokumentation, die ich überhaupt
+kenne \parencite{Lehman2013}. Insbesondere seien die Abschnitte \enquote{3.7
+Citation Commands} und das gesamte Kapitel \enquote{2 Database Guide} ans Herz
+gelegt. Ersteres erklärt, wie im Text korrekt auf eine \index{Zitat}Zitatstelle verwiesen
+wird, letzteres erklärt wie die BIB-Datei auszusehen hat.
+
+Wer nicht die Originaldokumentation liest sondern nach irgendwelche (stets total
+falschen) Lösungen im Internet sucht, weil er zu faul ist einfach nur mal lesen,
+der hat mit Fug und Recht jede nur denkbare schlechte Note auf seine Arbeit
+verdient.
+
+\section{Stichwortverzeichnis (Index) und Glossar}
+
+Die Vorlage unterstützt auch ein Stichwortverzeichnis und ein Glossar. Ein
+Stichwortverzeichnis (oder Index) ist einfach nur eine alphabetisch sortierte
+Liste von Begriffen mit einer Auflistung der \index{Fundstelle}Fundstellen
+im Dokument. Ein Glossar ist eine alphabetisch sortierte Liste von Begriffen mit
+\index{Erklarung@Erklärung}Erklärung.
+
+Der Index wird erzeugt, indem im Quellcode der Befehl \verb#\index{Begriff}#
+eingefügt wird. Wichtig, der Begriff selbst wird dadurch nicht gedruckt, sondern
+muss noch einmal wiederholt werden, um auch gedruckt zu werden. Dieses Verhalten
+ist beabsichtigt, sodass im Index immer nur die Grundform des Wortes verwendet
+wird, aber im Text natürlich die richtige Deklination. Also:
+\begin{latex}[caption={Beispiel für Index},label={lst:index}]
+Die meisten Funktionen dieser \index{Vorlage}Vorlage, werden durch
+\index{Paket}Standardpakete bereitgestellt.
+\end{latex}
+Obiges Beispiel erzeugt einen Indexeintrag für \enquote{Vorlage} der auf
+\enquote{Vorlage} verweist und einen Eintrag \enquote{Paket} der auf 
+\enquote{Standardpaket} verweist.
+
+Um ein Glossar zu erzeugen, müssen die Glossarbegriffe zunächst definiert werden.
+Dies geschieht in der Datei \texttt{./content/00-glossary-definitions.tex}.
+Es gibt zwei Haupttypen von Glossarbegriffen: Abkürzungen (Akronyme) und allg.
+Einträge (z.\,B. Fachtermini).
+
+Abkürzungen werden mit
+\begin{latex}[caption={Definition von Abkürzungen},label={lst:acro}]
+\newacronym[%
+  shortplural={AUen},%
+  longplural={Abgasuntersuchungen}%
+] {au}{AU}{Abgasuntersuchung}
+\end{latex}
+Die drei Hauptargumente sind in dieser Reihenfolge Marke, Abkürzung und
+Ausschreibung. Optionale Argumente sind die kurze und lange Pluralform.
+
+Allgemeine Glossarbegriffe werden mit
+\begin{latex}[caption={Definition von allg. Glossareinträgen},label={lst:gls}]
+\longnewglossaryentry{pkg}{%
+  name={Paket},%
+  plural={Pakete}}%
+{%
+  Hier folgt eine lange Definition, die auch mehr als einen
+	Absatz beinhalten darf.
+}
+\end{latex}
+erzeugt.
+
+Im Text werden die Einträge durch den Befehl \verb#\gls{Marke}# verwendet.
+Der wesentliche Unterschied zwischen einer Abkürzung und einem allg.
+Glossareintrag ist, dass bei Abkürzungen bei erstmaliger Verwendung die
+Abkürzung gedruckt und die Langform in Klammer dahinter gesetzt wird.
+Bei allg. Glossareinträgen wird einfach nur der Name gesetzt. Statt
+\verb#\gls{Marke}# gibt es noch viele weitere Befehle, um im Kontext des
+umgebenen Textes die korrekte Pluralform, Großschreibung am Satzanfang, etc.
+zu gewährleisten. Hierfür konsultiere man das Handbuch zum Paket \texttt{glossaries}
+(Pluralform, sic!) \parencite{talbot2014}.
+
+\section{Mathematik}
+
+Grundsätzlich gilt, was in \parencites{ams1999a}{ams1999b} steht. In der Datei
+\texttt{./preamble/05-math.tex} sind eine Menge Kurzkommandos definiert, um eine
+einheitliche Typografie von \index{Skalar}Skalaren, \index{Vektor}Vektoren,
+\index{Matrix}Matrizen, \index{Zufallsvariable}Zufallsvariablen etc.
+zur vereinfachen. In diese Dateien einfach mal reinschauen, welche Kurzkommandos
+es gibt.
+
+Auf zwei besondere Kommandos wird näher eingegangen, weil dies häufig falsch
+gemacht wird.
+\begin{itemize}
+  \item Für die Matrixtransponierte gibt es das Kommando \verb#\Tr#, also
+	\verb#$\mA^{\Tr}$# liefert $\mA^{\Tr}$
+	
+	\item Bei \index{Integral}Integralen muss das \enquote{Differential-d} gemäß
+	ISO in aufrechter Schrift als Operator gesetzt sein mit einem kleinen Abstand
+	zum Integranden. Hierfür gibt es das spezielle Kommando \verb#\diff#. Also
+	\begin{equation}
+	 \int^1_0 x^2 d x = \frac{1}{3} \qquad \text{(falsche Typografie!)}
+	\end{equation}
+	ist falsch, während \verb#\int^1_0 x^2 \diff x = \frac{1}{3}# das Richtige
+	liefert
+	\begin{equation}
+	 \int^1_0 x^2 \diff x = \frac{1}{3} \qquad \text{(richtige Typografie!)}
+	\end{equation}
+\end{itemize}
+
+\section{Sonstiges (URLs, Anführungszeichen, Sprache und Randnotizen)}
+
+Hier nur eine lockere Sammlung von kleineren Hinweisen, für die ein eigener
+Abschnitt zuviel gewesen wäre.
+
+\subsection{URLs}
+
+\index{Internetadresse|see{URL}}Internetadressen werden in das Kommando \verb#\url{...}# eingefasst
+
+\subsection{Anführungszeichen}
+
+Um irgendwas in Anführungszeichen einzufassen, wird das Kommando 
+\verb#\enquote{...}# verwendet. Dies hat den Vorteil, dass man sich nicht um die
+korrekte typografische Variation der Anführungszeichen in Abhängigkeit der
+\index{Sprache}Sprache kümmern muss und auch verschachtelte Anführungszeichen korrekt behandelt
+werden. Also aus
+\begin{latex}[caption={Behandlung von Anführungszeichen},label={lst:quotes},escapechar=\#]
+ \enquote{Beim Erreichen der K#ü#ste sprach Hamlet: \enquote{Es ist etwas faul im Staate D#ä#nemark}}.
+\end{latex}
+wird \enquote{Beim Erreichen der Küste sprach Hamlet: \enquote{Es ist etwas faul
+im Staate Dänemark}} mit korrekt verschachtelten einfachen Anführungszeichen.
+
+\subsection{Sprachumschaltung (Deutsch, Englisch, etc.)}
+
+Um für einen Teil des Textes die \index{Sprache}Sprache zu wechseln, damit die
+\index{Silbentrennung}Silbentrennung und die Auswahl der Anführungszeichen
+korrekt funktioniert, gibt es zwei Kommandos. Für einen kürzeren Text gibt es
+\verb#\foreignlanguage[Sprache]{...}#. Dann wird für den Text in den
+geschweiften Klammern die angegebene Sprache verwendet. Um die Sprache bis zum
+nächsten Aufruf des gleichen Kommandos dauerhaft umstellen, gibt es
+\verb#\selectlanguage[Sprache]#. Gegenwärtig unterstütze Sprachen sind
+\texttt{ngerman} für Deutsch nach neuer
+\index{Rechtschreibung!neue deutsche}Rechtschreibung und \texttt{american} für
+Englisch nach amerikanischer \index{Rechtschreibung!amerikanisch}Rechtschreibung.
+
+\subsection{Randnotizen}
+
+Randnotizen werden mit dem Kommando \verb#\marginnote{...}# gesetzt\marginnote{Ich bin eine überflüssige Randnotiz}.
+Diese eignet sich zum Beispiel um im Text Stellen zu kennzeichnen, an denen
+man noch arbeiten sollte.

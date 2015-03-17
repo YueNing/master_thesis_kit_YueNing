@@ -1,0 +1,54 @@
+\begin{titlepage}
+\tikzset{external/export next=false}
+\begin{tikzpicture}[
+remember picture,
+overlay,
+every node/.style={inner sep=0pt, outer sep=0pt}
+]
+\draw[color=KITblack50,thick]
+($(current page.north west)+( 15mm,-12mm)$) --
+($(current page.north east)+(-20mm,-12mm)$) arc (90:0:7mm) --
+($(current page.south east)+(-13mm, 17mm)$) --
+($(current page.south west)+( 22mm, 17mm)$) arc (270:180:7mm) --
+($(current page.north west)+( 15mm,-12mm)$);
+
+\node[anchor=north west] at ($(current page.north west)+( 27mm,-21mm)$)
+{\includegraphics[height=1.7cm]{./logos/kit-en.pdf}};
+
+\node[anchor=north east] at ($(current page.north east)+( -25mm,-21mm)$)
+{\includegraphics[height=1.7cm]{./logos/iosb.pdf}};
+
+\node[anchor=south] at ($(current page.south)+( 0mm,30mm)$)
+{\includegraphics[height=1.7cm]{./logos/ies.pdf}};
+
+\node[anchor=north west,node font={\sffamily\tiny}] at ($(current page.south west)+( 22mm, 15mm)$)
+{KIT -- Universität des Landes Baden-Württemberg und nationales Forschungszentrum in der Helmholtz-Gemeinschaft};
+
+\node[anchor=north east,node font={\sffamily\bfseries\large}] at ($(current page.south east)+(-13mm, 15mm)$)
+{www.kit.edu};
+
+\node[anchor=south,node font={\bfseries\huge},text width=15cm,align=center] at ($(current page)+(0mm, 50mm)$)
+{\worktitle};
+
+\node[anchor=base,node font={\scshape\LARGE},text width=15cm,align=center] at ($(current page)+(0mm, 30mm)$)
+{\typeofthesis};
+
+\node[anchor=base,node font={\scshape\large},text width=15cm,align=center] at ($(current page)+(0mm, 20mm)$)
+{KIT -- Karlsruher Institut für Technologie\\Fraunhofer IOSB -- Fraunhofer-Institut für Optronik,\\Systemtechnik und Bildauswertung};
+
+\node[anchor=base,node font={\bfseries\large},text width=15cm,align=center] at ($(current page)+(0mm, -10mm)$)
+{\nameofauthor};
+
+\node[anchor=base,node font={\large},text width=15cm,align=center] at ($(current page)+(0mm, -20mm)$)
+{\dateofexam};
+
+\node[anchor=base,node font={\large},text width=15cm,align=center] at ($(current page)+(0mm, -70mm)$)
+{\begin{tabular}{l@{\hspace{1cm}}l}
+Verantwortlicher Betreuer: & \reviewer \\
+Betreuender Mitarbeiter:   & \advisorA \\
+                           & \advisorB \\
+\end{tabular}
+};
+
+\end{tikzpicture}
+\end{titlepage}

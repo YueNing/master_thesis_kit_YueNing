@@ -1,0 +1,55 @@
+% Introduction has no numbering, but creates an entry in the table of contents
+% and sets the page header. Therefore use \addchap instead of \chapter.
+\addchap{Einleitung}
+
+Am Lehrstuhl für Interaktive Echtzeitsysteme (IES) des Karlsruhe Instituts für
+Technologie (KIT) wurde von Philipp Wook die erste LaTeX-Vorlage zur Erstellung
+von wissenschaftlichen Arbeiten erstellt. Diese basierte ihrerseits auf der
+Vorlage von Matthias Pospiech von der Leibniz Universität Hannover. Die von
+Matthias Pospiech und durch Philipp Wook stark erweitere Vorlage, hatte den
+Anspruch die \enquote{eierlegende Wollmilchsau} zu sein und möglichst alle
+Anwendungsfälle abzudecken.
+
+Leider hatte diese Vorlage -- da sie ständig um zusätzliche \glspl{pkg} erweitert
+wurde -- auch zwei meiner Meinung nach entscheidende Nachteile:
+\begin{itemize}
+  \item Es setzte auf den alten \glspl{bibtex}-Paketen auf anstatt des neueren
+	  \texttt{biblatex}-Ökosystems. Dadurch war eine durchgängige
+		\gls{utf8}-Unterstützung nicht möglich und die ein oder andere Konstellation
+		von Umlauten hat immer mal wieder \enquote{geknallt}.
+		
+  \item Zum Erstellen von \index{Grafik|see{Bild}}\index{Bild!Vektor-}Vektorgrafiken mit einer hohen
+	Druck- undTypografiequalität gibt es \gls{tikz}. Die alte Vorlage unterstütze
+	zwar 	grundlegendes \gls{tikz}, aber bei vielen \gls{tikz}-Zusatzpaketen kam
+	es zu 	Inkompatibilitäten mit anderen Paketen.
+\end{itemize}
+
+Diese Vorlage ist quasi ein Neudesign der Vorlage von Philipp Wook. Allerdings
+hat sie intern nicht mehr allzu viele Gemeinsamkeiten. Im Wesentlichen wurde
+versucht das Layout nachzuahmen, um eine halbwegs konsistentes Erscheinungsbild
+zwischen Dokumenten mit alter und neuer Vorlage zu erreichen.
+
+Natürlich ist so ein Neustart nicht ohne Nachteile möglich. Gegenwärtig ist
+diese Vorlage noch sehr \enquote{schlank} und viele Möglichkeiten der alten
+Vorlage sind noch nicht wieder nachgebaut. Dies wird in Zukunft und bei Bedarf
+geschehen.
+
+Einige Möglichkeiten der alten Vorlage werden aber nie wieder ihren Weg in diese
+Vorlage finden. Dies betrifft alle LaTeX-Pakete die in irgendeiner Weise
+\gls{postscript} benötigen. Um das volle Potential von \gls{utf8}, \gls{biblatex} und
+\gls{tikz} ausnutzen zu können, ist die Verarbeitungskette auf
+\begin{equation*}
+\text{\texttt{LaTeX}-Quellcode} \xrightarrow{\text{\texttt{pdflatex}}} \text{\texttt{PDF}}
+\end{equation*}
+reduziert worden. Umwege wie
+\begin{equation*}
+\text{\texttt{LaTeX}-Quellcode} \xrightarrow{\text{\texttt{latex}}} \text{\texttt{DVI}} \xrightarrow{\text{\texttt{dvi2ps}}} \text{\texttt{PS}} \xrightarrow{\text{\texttt{ps2pdf}}} \text{\texttt{PDF}}
+\end{equation*}
+sind ausgeschlossen. Das bedeutet insbesondere, dass alle Optionen, die das
+bekannte Paket \index{pstricks}\texttt{pstricks} bietet nicht mehr zur Verfügung
+stehen. Allerdings bietet hier \gls{tikz} immer eine Ersatzlösung an. Das
+einzige, was definitiv gar nicht mehr funktioniert und auch nicht durch
+\gls{tikz} nachgestellt werden kann, ist das direkte Einbinden von
+\gls{postscript}"~ bzw. \glstext{eps}-Abbildungen. Diese
+müssen nun zunächst durch externe Tools in \glstext{pdf} konvertiert werden.
+

@@ -1,0 +1,94 @@
+\usepackage[final]{graphicx}
+\usepackage[table,dvipsnames,svgnames]{xcolor}
+\usepackage{KAcolors}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,matrix,graphs,arrows,patterns,shapes,external,calc,fit,backgrounds}
+\usepackage{pgfplots}
+\usepgfplotslibrary{ternary}
+\tikzsetexternalprefix{./figures-compiled/}
+\tikzset{external/aux in dpth={false},external/disable dependency files}
+\tikzexternalize[shell escape=-enable-write18]
+
+\tikzset{
+  /tikz/line width=0.6pt,%  Default line width is 'semithick'
+}
+
+\pgfplotsset{
+  compat=1.11,%
+  plot coordinates/math parser=false,%
+  tick label style={font=\footnotesize},%
+  label style={font=\small},%
+	scale only axis,%
+	axis lines=center,%
+	axis on top,%
+  every axis legend/.append style={cells={anchor=west},draw=none,font=\small},%
+  every axis plot/.append style={semithick},%
+	KIT scatter plot A/.style={%
+    draw=none,only marks,mark=*,mark options={draw=KITblue,fill=KITblue}},%
+	KIT scatter plot B/.style={%
+    draw=none,only marks,mark=square*,mark options={draw=KITred,fill=KITred}},%
+	KIT scatter plot C/.style={%
+    draw=none,only marks,mark=diamond*,mark options={draw=KITorange,fill=KITorange}},%
+	KIT scatter plot explicit/.style={%
+    scatter,%
+    scatter/classes={%
+      a={mark=*,KITblue},%
+      b={mark=square*,KITred},%
+      c={mark=diamond*,KITorange}},%
+    only marks,%
+    scatter src=explicit symbolic,%
+    z buffer=sort},%
+  KIT ybar plot A/.style={%
+    ybar,fill=KITblue,draw=none},%
+  KIT ybar plot B/.style={%
+    ybar,fill=KITred,draw=none},%
+  KIT ybar plot C/.style={%
+    ybar,fill=KITorange,draw=none},%
+  KIT xbar plot A/.style={%
+    ybar,fill=KITblue,draw=none},%
+  KIT xbar plot B/.style={%
+    ybar,fill=KITred,draw=none},%
+  KIT xbar plot C/.style={%
+    ybar,fill=KITorange,draw=none},%
+  KIT line plot A/.style={%
+    KITblue,semithick},%
+  KIT line plot B/.style={%
+    KITred,semithick},%
+  KIT line plot C/.style={%
+    KITorange,semithick},%
+  KIT line plot D/.style={%
+    KITlilac,semithick},%
+  KIT line plot E/.style={%
+    KITbrown,semithick},%
+  KIT line plot F/.style={%
+    KITblue,semithick,dashed},%
+  KIT line plot G/.style={%
+    KITred,semithick,dashed},%
+  KIT line plot H/.style={%
+    KITorange,semithick,dashed},%
+  KIT line plot I/.style={%
+    KITlilac,semithick,dashed},%
+  KIT line plot J/.style={%
+    KITbrown,semithick,dashed},%
+	KIT smooth plot A/.style={%
+    KITblue,semithick,smooth},%
+  KIT smooth plot B/.style={%
+    KITred,semithick,smooth},%
+  KIT smooth plot C/.style={%
+    KITorange,semithick,smooth},%
+  KIT smooth plot D/.style={%
+    KITlilac,semithick,smooth},%
+  KIT smooth plot E/.style={%
+    KITbrown,semithick,smooth},%
+  KIT smooth plot F/.style={%
+    KITblue,semithick,dashed,smooth},%
+  KIT smooth plot G/.style={%
+    KITred,semithick,dashed,smooth},%
+  KIT smooth plot H/.style={%
+    KITorange,semithick,dashed,smooth},%
+  KIT smooth plot I/.style={%
+    KITlilac,semithick,dashed,smooth},%
+  KIT smooth plot J/.style={%
+    KITbrown,semithick,dashed,smooth},%
+}

@@ -1,0 +1,61 @@
+\PassOptionsToPackage{table,dvipsnames,svgnames}{xcolor}
+\documentclass[%
+  draft=true, % Set to 'false' before final printing
+	a4paper,
+  fontsize=11pt,
+  version=last,
+	BCOR=10mm,
+	DIV=11,
+	toc=bibliography,
+	toc=listof,
+	toc=index,
+	hyperref,
+	amsmath,
+	ngerman,
+	twoside,
+	headinclude=true,
+	footnotes=multiple
+ ]{scrbook}
+
+\input{preamble}
+
+\newcommand{\worktitle}{Advances in new tächnologies concerning recentness and related research areas}
+\newcommand{\typeofthesis}{Masterarbeit}
+\newcommand{\nameofauthor}{Hans Mustermann}
+\newcommand{\placeofexam}{Karlsruhe}
+\newcommand{\dateofexam}{42. Hintester 2038}
+\newcommand{\reviewer}{Prof. S. U. Per}
+\newcommand{\advisorA}{Dr. B. Ester}
+\newcommand{\advisorB}{B. Löd}
+
+\input{preamble-final-setup}
+
+\input{content/00-glossary-definitions}
+
+\begin{document}
+
+\frontmatter
+
+\input{content/00a-titlepage-hska}
+
+\input{content/00b-declaration-hska}
+
+\input{content/00c-notation}
+
+\input{content/00d-toc}
+
+\mainmatter
+
+\input{content/00z-introduction}
+
+\input{content/01-structure}
+
+\input{content/02-applications-tools}
+
+\input{content/03-latex}
+
+\backmatter
+
+\input{content/99-backmatter}
+
+\end{document}
