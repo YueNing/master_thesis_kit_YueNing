@@ -24,7 +24,6 @@
 *.out
 *.synctex.gz
 /figures-compiled
-main.pdf
 main.synctex
 main.auxlock
 main.run.xml
