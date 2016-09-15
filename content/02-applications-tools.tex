@@ -67,6 +67,14 @@ Im Register \texttt{(La)TeX} ist das \index{Compilerargument}Compilerargument\\
 im Register \texttt{Viewer} ist der Anwendungspfad\\
 {\small\verb#SumatraPDF.exe -inverse-search "\"TeXnicCenter.exe\" /ddecmd \"[goto('%f','%l')]'\"#}\\
 
+\section{TeXStudio unter Linux}
+Zur Konfiguration von TeXStudio muss TexLive manuell installiert werden. Siehe dazu \url{https://wiki.ubuntuusers.de/TeX_Live/#Manuell}. Ansonsten sind die packages nicht kompatibel aufgrund von falschen Versionen. 
+Bei der small Installation werden noch einige Packete benötigt, siehe Liste im Git. Dabei muss ausschliesslich \texttt{tlmgr} verwendet werden, um Versionskonflikte zu vermeiden. Um damit installierte Programme zu exportieren und damit aus der Konsole nutzen zu können: \begin{lstlisting}[language=bash]
+$ export PATH=/usr/local/texlive/2016/bin/x86_64-linux:$PATH
+\end{lstlisting}
+Im Git liegt außerdem eine tex-profile \texttt{fraunhofer"=-vorlage"=-thesis"=.txsprofile}. Dann lässt sich mit dem \texttt{Kompilieren} (einfacher grüner Pfeil) Button das Dokument komplett durchkompilieren inklusive Literaturverzeichnis. Zum Bauen ohne Literatur und direktem Anzeigen dient der Button \texttt{Erstellen und Anzeigen} (doppelter grüner Pfeil).
+
+
 \section{TikzEdt}
 
 Hochqualitative Zeichnungen können mit \gls{tikz} erstellt werden. \Gls{tikz} ist jedoch
