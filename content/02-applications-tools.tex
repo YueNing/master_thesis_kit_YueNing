@@ -30,6 +30,19 @@ Wenn kein \index{Fehler}Fehler aufgetreten ist, sollte nach dem vierten Durchlau
 von \texttt{pdflatex} die \index{Warnung!Please re-run latex}Warnung
 \texttt{Please re-run latex} verschwunden sein.
 
+\section{Ubuntu Pakete}
+Unter 17.04 sollte es funktionieren, wenn folgende Pakete installiert wurden. Vermutlich reichen auch weniger Pakete:\\
+{\small\verb#texlive-bibtex-extra texlive-lang-german texlive-fonts-extra texlive#}\\
+{\small\verb#fonts-linuxlibertine biber texmaker#}
+(Texmaker ist eine Latex IDE, die aber vermutlich über dependencies schon einige Pakete mitbringt)
+
+
+\section{IDE Configuration}
+
+Wenn das Build-Kommando von der IDE aus angestoßen werden soll, muss diese entsprechend konfiguiert werden.
+TikZ, welches die schönen Graphen malt, möchte gerne Shell Zugriff, dies muss ihm mit dem Paramter {\small\verb#--enable-write18#} (Windows), bzw. {\small\verb#--shell-escape#} (Linux) erlaubt werden.
+Außerdem muss statt {\small\verb#"biblatex %.aux"#} für die Referenzen {\small\verb#"biber %"#} genutzt werden.
+
 \section{TeXnicCenter -- Integrierte Entwicklungsumgebung für Windows}
 
 Um nicht obige Kommandos immer per Hand tippen zu müssen, empfiehlt sich die
