@@ -13,10 +13,10 @@
 ## Betreuung
 * In der Regel gibt es wöchentliche Treffen mit dem Betreuer
 
-##Studierenden-Workshop:
+## Studierenden-Workshop:
 Momentan findet im zweimonatigen Rhythmus ein Studierenden-Workshop mit anderen Abschlussarbeitern der Abteilung statt. Hierzu wird man gesondert eingeladen. Hier stellt man regelmäßig seinen aktuellen Stand vor und bekommt im Anschluss Fragen und Feedback von anderen Abschlussarbeitern.
 
-##Abgabe:
+## Abgabe:
 * **3 Exemplare (Prof. Beyerer, Zweitkorrektor, IES) gedruckt**  mit Thermobindung (Rückseite schwarz und vorne transparent).
 * Gedruckt werden kann die Arbeit am Institut
 * Wir empfehlen zum Binden [Copy90](https://goo.gl/maps/wtxjWddGmHMHZiiV7)
@@ -24,6 +24,9 @@ Momentan findet im zweimonatigen Rhythmus ein Studierenden-Workshop mit anderen 
 * Abgabe nach Absprache beim Betreuer oder beim Sekretariat von Prof. Beyerer
 * Zusätzlich finales PDF an IOSB Bibliothek schicken [biblio@iosb.fraunhofer.de](mailto:biblio@iosb.fraunhofer.de)
 
-##Abschlussvortrag:
+## Abschlussvortrag:
+* Der Vortrag muss innerhalb von zwei Wochen nach der Fertigmeldung stattfinden (Recht der Studierenden und Pflicht des Lehrstuhls)
 * Vor dem Abschlussvortrag gibt es verpflichtend einen Probevortrag
-* Dauer des Abschlussvortrag: **20-25 min. + 10 min. Fragen**. 
+* Dauer des Abschlussvortrag: **20-25 min. + 10 min. Fragen**
+* Wer dringend eine 4.0-Bescheinigung oder unbedingt einen möglichst frühen Vortragstermin benötigt, möge frühzeitig seinen Betreuer informieren.
+  * Eine 4.0-Bescheinigung kann man frühestens unmittelbar nach dem Vortrag bekommen. 
