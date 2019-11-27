@@ -1,6 +1,6 @@
-#Organisatorisches zur Abschlussarbeit:
+# Organisatorisches zur Abschlussarbeit:
 
-##Allgemeines:
+## Allgemeines:
 * Zu Beginn der Arbeit erhält man einen Betreuungsvertrag mit dem IOSB für Zugang zum Haus
 * Man erhält einen Zugang zum externen Gitlab in dem man dieses Repository forken kann um das Repo für die eigene Arbeit anzulegen
 
@@ -14,14 +14,14 @@
 * In der Regel gibt es wöchentliche Treffen mit dem Betreuer
 
 ##Studierenden-Workshop:
-Momentan findet im zweimonatigen Rythmus ein Studierenden-Workshop mit anderen Abschlussarbeitern der Abteilung statt. Hierzu wird man gesondert eingeladen. Hier stellt man regelmäßig seinen aktuellen Stand vor und bekommt im Anschluss Fragen und Feedback von anderen Abschlussarbeitern.
+Momentan findet im zweimonatigen Rhythmus ein Studierenden-Workshop mit anderen Abschlussarbeitern der Abteilung statt. Hierzu wird man gesondert eingeladen. Hier stellt man regelmäßig seinen aktuellen Stand vor und bekommt im Anschluss Fragen und Feedback von anderen Abschlussarbeitern.
 
 ##Abgabe:
 * **3 Exemplare (Prof. Beyerer, Zweitkorrektor, IES) gedruckt**  mit Thermobindung (Rückseite schwarz und vorne transparent).
 * Gedruckt werden kann die Arbeit am Institut
 * Wir empfehlen zum Binden [Copy90](https://goo.gl/maps/wtxjWddGmHMHZiiV7)
 * **Wichtig: Prüfen ob jedes Exemplar unterschrieben ist**
-* Abgabe nach Absprache beim Betreuer oder beim Sekretäriat von Prof. Beyerer
+* Abgabe nach Absprache beim Betreuer oder beim Sekretariat von Prof. Beyerer
 * Zusätzlich finales PDF an IOSB Bibliothek schicken [biblio@iosb.fraunhofer.de](mailto:biblio@iosb.fraunhofer.de)
 
 ##Abschlussvortrag:
