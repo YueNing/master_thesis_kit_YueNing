@@ -8,10 +8,11 @@
 
 ## Beginn/Start der Arbeit
 * In der Regel gilt es zum Thema einen Einseiter anzufertigen auf dessen Basis die Arbeit angemeldet wird.
-* Für die Anmeldung schreibt der Betreuer eine Mail an Frau Gross am Lehrsuhl mit folgenden Angaben:
+* Für die Anmeldung schreibt der Betreuer eine Mail an Frau Gross (gaby.gross@kit.edu) am Lehrsuhl mit folgenden Angaben:
   * Stammdaten Student inkl. Matrikelnummer
   * Titel auf deutsch und englisch
   * Die Angabe ob die Arbeit auf deutsch oder englisch geschrieben wird
+  * Beginn der Arbeit
   * Die Namen der Betreuer
 * Zum Start der Arbeit sollte auch ein Zeitplan entworfen werden und eine erste grobe Gliederung mit geschätztem Umfang der Kapitel erstellt werden
 * Nachdem die Arbeit angemeldet worden ist, muss man sich auch im Campus System zur Bachelor-/Masterarbeit anmelden.
@@ -36,3 +37,6 @@ Momentan findet im zweimonatigen Rhythmus ein Studierenden-Workshop mit anderen 
 * Dauer des Abschlussvortrag: **20-25 min. + 10 min. Fragen**
 * Wer dringend eine 4.0-Bescheinigung oder unbedingt einen möglichst frühen Vortragstermin benötigt, möge frühzeitig seinen Betreuer informieren.
   * Eine 4.0-Bescheinigung kann man frühestens unmittelbar nach dem Vortrag bekommen. 
+ 
+## Gutachten:
+ * Die Gutachten der Abschlussarbeiten müssen bei Bachelorarbeiten 6 Wochen, bei Masterarbeiten spätestens 8 Wochen nach der Abgabe bzw. nach dem Vortrag, je nachdem welcher Termin später war,  fertig sein. 
