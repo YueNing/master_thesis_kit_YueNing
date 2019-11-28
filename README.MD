@@ -2,7 +2,9 @@
 
 ## Allgemeines:
 * Zu Beginn der Arbeit erhält man einen Betreuungsvertrag mit dem IOSB für Zugang zum Haus
-* Man erhält einen Zugang zum externen Gitlab in dem man dieses Repository forken kann um das Repo für die eigene Arbeit anzulegen
+* Man erhält einen Zugang zum externen Gitlab. Dort legt der Beutreuer einen Fork der Vorlage für den Studenten an.
+** @Betreuer: Durch die Beschränkung von GitLab muss man das Template zuerst in einen neuen Namespace forken, dann umbennen (sowohl der Name als auch die URL!) und danach in den Namespace abschlussarbeiten-gruppe-krm verschieben. Damit wird sichergestellt, dass es zu unserem Gruppennamespace gehört und nicht im Namespace des Studenten liegt. Das würde Probleme mit der Rechteverwaltung erzeugen.
+
 
 
 ## Beginn/Start der Arbeit
