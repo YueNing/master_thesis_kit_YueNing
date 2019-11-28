@@ -3,16 +3,16 @@
 ## Allgemeines:
 * Zu Beginn der Arbeit erhält man einen Betreuungsvertrag mit dem IOSB für Zugang zum Haus
 * Man erhält einen Zugang zum externen Gitlab. Dort legt der Beutreuer einen Fork der Vorlage für den Studenten an.
- * @Betreuer: Durch die Beschränkung von GitLab muss man das Template zuerst in einen neuen Namespace forken, dann umbennen (sowohl der Name als auch die URL!) und danach in den Namespace abschlussarbeiten-gruppe-krm verschieben. Damit wird sichergestellt, dass es zu unserem Gruppennamespace gehört und nicht im Namespace des Studenten liegt. Das würde Probleme mit der Rechteverwaltung erzeugen.
+  * @Betreuer: Durch die Beschränkung von GitLab muss man das Template zuerst in einen neuen Namespace forken, dann umbennen (sowohl der Name als auch die URL!) und danach in den Namespace abschlussarbeiten-gruppe-krm verschieben. Damit wird sichergestellt, dass es zu unserem Gruppennamespace gehört und nicht im Namespace des Studenten liegt. Das würde Probleme mit der Rechteverwaltung erzeugen.
 
 
 ## Beginn/Start der Arbeit
 * In der Regel gilt es zum Thema einen Einseiter anzufertigen auf dessen Basis die Arbeit angemeldet wird.
 * Für die Anmeldung schreibt der Betreuer eine Mail an Frau Gross am Lehrsuhl mit folgenden Angaben:
- * Stammdaten Student inkl. Matrikelnummer
- * Titel auf deutsch und englisch
- * Die Angabe ob die Arbeit auf deutsch oder englisch geschrieben wird
- * Die Namen der Betreuer
+  * Stammdaten Student inkl. Matrikelnummer
+  * Titel auf deutsch und englisch
+  * Die Angabe ob die Arbeit auf deutsch oder englisch geschrieben wird
+  * Die Namen der Betreuer
 * Zum Start der Arbeit sollte auch ein Zeitplan entworfen werden und eine erste grobe Gliederung mit geschätztem Umfang der Kapitel erstellt werden
 * Nachdem die Arbeit angemeldet worden ist, muss man sich auch im Campus System zur Bachelor-/Masterarbeit anmelden.
 
