@@ -39,4 +39,11 @@ Momentan findet im zweimonatigen Rhythmus ein Studierenden-Workshop mit anderen 
   * Eine 4.0-Bescheinigung kann man frühestens unmittelbar nach dem Vortrag bekommen. 
  
 ## Gutachten:
- * Die Gutachten der Abschlussarbeiten müssen bei Bachelorarbeiten 6 Wochen, bei Masterarbeiten spätestens 8 Wochen nach der Abgabe bzw. nach dem Vortrag, je nachdem welcher Termin später war,  fertig sein. 
+Die Gutachten der Abschlussarbeiten müssen bei Bachelorarbeiten 6 Wochen, bei Masterarbeiten spätestens 8 Wochen nach der Abgabe bzw. nach dem Vortrag, je nachdem welcher Termin später war,  fertig sein. 
+Bewertet werden Abschlussarbeiten nach folgenden Kriterien:
+* Erarbeitung des Konzepts: Wie stark hat der Student eigene Ideen eingebracht
+* Durchführung der Arbeit: Wie organisiert und strukturiert war der Student, wurde selbstständig gearbeitet
+* Erzieltes Ergebnis: Qualität der erarbeiteten Ergebnisse
+* Schirftliche Ausarbeitung: Qualität der schriftlichen Ausarbeitung
+* Vortrag: Qualität des Vortrags
+ 
