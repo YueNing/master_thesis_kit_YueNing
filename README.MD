@@ -47,7 +47,7 @@ Bewertet werden Abschlussarbeiten nach folgenden Kriterien:
 * Schirftliche Ausarbeitung: Qualität der schriftlichen Ausarbeitung
 * Vortrag: Qualität des Vortrags
 
-##Bearbeitungszeit: 
+## Bearbeitungszeit: 
 **Achtung: Die Bearbeitungszeiten sind immer in der jeweils aktuell geltenden Prüfungsordnungen zu überprüfen, hier sind die Bearbeitungszeiten ab Anmeldungen der Prüfungsordnungen für den Studiengang Informatik (SPO 2015 Stand: 16.04.20) aufgelistet**
 * Bachelor: 4 Monate
 * Master: 6 Monate
