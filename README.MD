@@ -8,7 +8,7 @@
 
 ## Beginn/Start der Arbeit
 * In der Regel gilt es zum Thema einen Einseiter anzufertigen auf dessen Basis die Arbeit angemeldet wird.
-* Für die Anmeldung schreibt der Betreuer eine Mail an Frau Gross (gaby.gross@kit.edu) am Lehrsuhl mit folgenden Angaben:
+* Für die Anmeldung schreibt der Betreuer eine Mail an Frau Gross (gaby.gross@kit.edu) am Lehrstuhl mit folgenden Angaben:
   * Stammdaten Student inkl. Matrikelnummer
   * Titel auf deutsch und englisch
   * Die Angabe ob die Arbeit auf deutsch oder englisch geschrieben wird
