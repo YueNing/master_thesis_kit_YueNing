@@ -1,0 +1,223 @@
+\chapter{Background}
+
+\section{Game theory}
+
+\subsection{Nash Equilibrium}
+The concept of a Nash equilibrium plays a central role in noncooperative game theory[]. The definition in simple setting of a finite player is described as follow. I players indexed by i=1,...,I. The strategy of agent i is si choosed from Ni pure strategies. A strategy profile of all agents written as s = (s1, s2, sI), si|si' for the strategy profile (s1, ... si-1, si+1, sI), or the s with the part of i changed from si to si'. For each player i and strategy s, ui(s) denotes i's expected utility[]. 
+
+\begin{proposition}[Nash Equilibrium]
+For each agent $i$ and $si'$, $u_i(s) >= u_i(s|s_i')$
+\end{proposition}
+
+In terms of words description, the definition of Nash equilibrium is that if other agents do not change its strategy, then no single agent can obtain higher utility. 
+
+The learning process of RL-Agent in this paper can be considered as an incomplete information static non-cooperative game.
+ 
+\subsection{Pareto Efficient}
+
+\begin{proposition}[Pareto Efficient]
+no other feasible allocation $\{x_{1}',...,x_{n}'\}$ where, for 
+utility function $u_i$ for each agent $i$, $u_{i}(x_{i})$ for all $i\in \{1,...,n\}$ with $u_{i}(x_{i}')>u_{i}(x_{i})$ for some $i$[].
+\end{proposition}
+
+Pareto Efficient is a state at which resources in a system are optimized in a way that one dimension cannot improve without a second worsening. 
+
+\subsection{Markov Games}
+Methods mentioned in the paper are based on a multi-agent extension of Markov decision processes(\gls{mdps}) called partially observable Markov games. There are N players indexed by $n=1,2,...,N$.
+
+\section{Autonomous Negotiaion} \label{autonomous-negotiation}
+Negotiation is an important process in coordinating behavior and represents a principal topic in the field of multi-agent system research. There has been extensive research in the area of automated negotiating agents. 
+
+Automated agents can be used side-by-side with a human negotiator embarking on an important negotiation task. They can alleviate some of the effort required of people during negotiations and also assist people who are less qualified in the negotiation process. There may even be situations in which automated negotiators can replace the human negotiators. Thus, success in developing an automated agent with negotiation capabilities
+has great advantages and implications[].
+
+Through the negotiation agents, many problems that arise in real or simulated domain can be solved. 
+In industrial domains, 
+In commerical  domains, the Supply Chain Management System (SCMS)
+functionality is implemented through agent-based negotiation environment, in which contracts can be singed through negotiation between agents. Many papers describe ongoing effort in developing a Multi-agent System (MAS) for supply chain management[\gls{scml}].
+
+In game domains, bilateral negotiation in [GENIUS]
+
+\subsection{Utility Function}
+Utility function is an important concept in economics. It measures preferences over a set of goods and services. Utility represents the satisfaction that consumers receive for choosing and consuming a product or service[]. In NegMAS and SCML, utility function could measure either single offer or set of offers.
+
+Utility is measured in units called utils, but calculating the benefit or satisfaction that consumers receive from is abstract and difficult to pinpoint[]. In the package NegMAS, SCML are built-in some utility functions, through inheritance of these it is easy to design new Utility function by developer. Such as linear utiliy function and real utility function OneShotUfun designed in SCMLOneShotWorld.
+
+[1] linear utility function
+[2] real utility function OneShotUfun
+
+It is a important point for designing a new Agent in autonomous negotiation environments. For heuristic agents utility function is a keypoint to measure preferences. For reinforment learning agents utiliy function conducts the behavior of learnable agents, used as a part of reward function, significantly affect the design and evaluation of RL-Agent.
+
+\subsection{Rubinstein bargaining mechanism}
+Rubinstein bargaining mechanism is widely cited for multi-round bilateral negotiation \parencite{Rubinstein1982}.
+Two agents in the mechanism which has an infinite time horizon have to reach an agreement. 
+
+To the state of nash equilibrium.
+
+\subsection{Stacked alternating offers mechanism(SAOM)} \label{background:saom}
+\gls{saom} is also named as stacked alternating offers protocol. Agents can only take their action when it is their turn. SAOM allows negotiating agents to evaluate only the most recent offer in their turn and accordingly they can either accept offer, make a count offer or walk away.
+
+In the SCML OneShotWord, at the first step all of the agents will propose a first offer.
+
+\section{Artificial Intelligence}
+Artificial Intelligence is a broad branch of computer science that is focused on a machine’s capability to produce rational behavior from external inputs. The goal of AI is to create systems that can perform tasks that would otherwise require human intelligence[].
+
+There is a set of three related items that sometimes are erroneously used interchangeably, namely artificial intelligence, machine learning, and neural networks. According to Encyclopaedia Britannica, AI defines the ability of a digital computer or computer-controlled robot to perform tasks commonly associated with intelligent beings. On the other hand, according to H.A. Simon, one of the pioneers of the field, machine learning is a “field of study that gives computers the ability to learn without being explicitly programmed”
+
+\subsection{Sub-areas}
+Fig. \ref{fig:ai_taxonomy} shows the relationship of artificial intelligence, machine learning and deep learning.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{./images/ai_taxonomy.png}
+\caption{Sub-areas of artificial intelligence \parencite{Suman2020}}
+\label{fig:ai_taxonomy}
+\end{figure}
+
+\subsubsection{Artificial Intelligence}
+Artificial intelligence, also called machine intelligence, can be understood by an intelligence, unlike the natural intelligence shown by humans and animals, which is demonstrated by machines. It looks at ways of designing intelligent devices and systems that can address problems creatively that are often treated as a human prerogative. Thus, AI means that a machine somehow imitates human behavior.
+\subsubsection{Machine Learning} 
+Machine learning is an AI subset and consists of techniques that enable computers to recognize data and supply AI applications. Different algorithms (e.g., neural networks) contribute to problem resolution in ML.
+\subsubsection{Deep Learning}
+Deep learning, often called deep neural learning or deep neural network, is a subset of machine learning that uses neural networks to evaluate various factors with a similar framework to a human neural system. It has networks that can learn from unstructured or unlabeled data without supervision.
+
+\subsection{Methods}
+\subsubsection{Supervised Learning:} 
+\subsubsection{Unsupervised Learning:}
+\subsubsection{Semi-supervised Learning:}
+\subsubsection{Reinforcement Learning:}
+
+\subsection{Application Field}
+\subsubsection{eCommerce}
+\subsubsection{Logistics and Supply Chain}
+Artificial intelligence (AI) researchers have paid a great deal of attention to automated negotiation over the past decade and a number of prominent models have been proposed in the literature.
+\subsubsection{Tools for computer science}
+
+\section{Artificial Neural Network}
+
+\section{Reinforcement Learning}
+\subsection{Q-Learning}
+\begin{equation}
+\mathcal{L}(\theta)=\sum_{i=1}^{b}\left[\left(y_{i}-Q(s, a \mid \theta)\right)^{2}\right]
+\end{equation}
+\subsection{Policy Gradient \gls{pg}}
+\begin{equation}
+\nabla_{\theta} J(\theta)=\mathbb{E}_{s \sim p^{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \boldsymbol{\pi}_{\theta}(a \mid s) Q^{\boldsymbol{\pi}}(s, a)\right]
+\end{equation}
+
+\subsection{Deep Reinforcement Learning (\gls{drl})}
+\subsubsection{Deep Q-Networks}
+
+\subsubsection{Proximal Policy Optimization (\gls{ppo})}
+Disadvantage: the distrubition of action changed too quickly, when the reward is always positiv or negative, some possible action will be disapper.
+PPO use some contraint tricks to avoid it. such as clip of policy. The loss function based on PPO-clip is as follow.
+\begin{equation}
+L\left(s, a, \theta_{k}, \theta\right)=\min \left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)} A^{\pi_{\theta_{k}}}(s, a), \quad \operatorname{clip}\left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)}, 1-\epsilon, 1+\epsilon\right) A^{\pi_{\theta_{k}}}(s, a)\right)
+\end{equation} 
+
+\subsubsection{DPG, DDPG, \gls{maddpg}}
+
+DPG: create a $\mu$ function to determine the action instead the sample in PG.
+
+DDPG: use Actor-Critic model to create target and execute network. a variant of DPG. policy $\mu$ and critic $Q_\mu$ are approximated with deep neural networks.
+
+MADDPG: DDPG used in multi-agents environments.
+
+MADPG
+\begin{equation}
+\nabla_{\theta_{i}} J\left(\theta_{i}\right)=\mathbb{E}_{s \sim p^{\mu}, a_{i} \sim \pi_{i}}\left[\nabla_{\theta_{i}} \log \pi_{i}\left(a_{i} \mid o_{i}\right) Q_{i}^{\pi}\left(\mathbf{x}, a_{1}, \ldots, a_{N}\right)\right]
+\end{equation}
+
+Extension to deterministic policies
+
+\begin{equation}
+\nabla_{\theta_{i}} J\left(\boldsymbol{\mu}_{i}\right)=\mathbb{E}_{\mathbf{x}, a \sim \mathcal{D}}\left[\left.\nabla_{\theta_{i}} \boldsymbol{\mu}_{i}\left(a_{i} \mid o_{i}\right) \nabla_{a_{i}} Q_{i}^{\mu}\left(\mathbf{x}, a_{1}, \ldots, a_{N}\right)\right|_{a_{i}=\boldsymbol{\mu}_{i}\left(o_{i}\right)}\right]
+\end{equation}
+
+Loss function is 
+\begin{equation}
+\mathcal{L}\left(\theta_{i}\right)=\mathbb{E}_{\mathbf{x}, a, r, \mathbf{x}^{\prime}}\left[\left(Q_{i}^{\boldsymbol{\mu}}\left(\mathbf{x}, a_{1}, \ldots, a_{N}\right)-y\right)^{2}\right], \quad y=r_{i}+\left.\gamma Q_{i}^{\boldsymbol{\mu}^{\prime}}\left(\mathbf{x}^{\prime}, a_{1}^{\prime}, \ldots, a_{N}^{\prime}\right)\right|_{a_{j}^{\prime}=\boldsymbol{\mu}_{j}^{\prime}\left(o_{j}\right)}
+\end{equation}
+
+\subsubsection{Value Decomposition Networks}
+
+\subsubsection{Mixing Network used in \gls{qmix}}
+
+\subsubsection{\gls{qmix}}
+
+\section{Platform and Library}
+\subsection{GENIUS}
+\textbf{GENIUS:} An integrated environment for supporting the design of generic automated negotiators \parencite{Lin2014}.
+
+\subsection{\gls{negmas}} \label{background:negmas}
+\gls{negmas} can model situated simultaneous negotiations such as \gls{scm}. Nevertheless, it can model simpler bilateral and multi-lateral negotiations.
+
+\gls{negmas} is a python library for developing autonomous negotiation agents embedded in simulation environments. The name negmas stands for either NEGotiation MultiAgent System or NEGotiations Managed by Agent Simulations. The main goal of NegMAS is to advance the state of the art in situated simultaneous negotiations. Nevertheless, it can; and is being used; for modeling simpler bilateral and multi-lateral negotiations, preference elicitation , etc.
+
+\paragraph{\gls{negmas} and Bilateral Negotiation}
+\gls{negmas} implements natively \gls{saom} which can be set as bilateral negotiation mechanism.
+
+\subsection{\gls{scml}}
+A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of an opensource automated negotiation platform called \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. For example scml2019 will contain all files related to the 2019’s version of the competition.
+There are three main different versions of \gls{scml}, which have different designs.
+\begin{itemize}
+	\item SCML2020-OneShot
+	\item SCML2020/2021
+	\item SCML2019
+\end{itemize}
+
+\subsubsection{\gls{scml} and Concurrent Bilateral Negotiations}
+\gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an independent project to research \gls{scm}. \gls{scml} realized a \gls{scm} World to simulate the \gls{scm} process.  
+
+There are many agents which has same type in the \gls{scm} World. 
+
+Researchers have also developed many negotiation agents such as Agent1[], Agent2[], Agent3[] in GENIUS, Agent4[], Agent5[], Agent6[] in \gls{negmas}.
+
+\subsection{\gls{pytorch}} PyTorch is an open source machine learning library and framework which performs immediate execution of dynamic tensor computations with automatic differentiation and GPU acceleration, and does so while maintaining performance comparable to the fastest current libraries for deep learning. \parencite{NEURIPS2019_bdbca288}. While considering performance, it is also easier to apply and debug.
+
+\subsection{\gls{openai gym}}
+\gls{openai gym} is a toolkit for developing and comparing reinforcement learning algorithms \parencite{brockman2016openai}.
+\subsubsection{Environment}
+The core gym interface is \texttt{Env}, which is the unified environment interface. The following are the Env methods that developers should implement \parencite{NEURIPS2019_bdbca288}.
+
+\paragraph{STEP:} The 
+\paragraph{RESET:}
+\paragraph{RENDER:}
+\paragraph{CLOSE:}
+\paragraph{SEED:}
+
+\subsubsection{Stable Baselines}
+The stable baselines developed in the project stable-baselines \parencite{stable-baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l l l} \toprule
+\bfseries Name       & \bfseries Box  & \bfseries Discrete \\ \midrule
+\verb#A2C#                         & Yes  &  Yes \\
+\verb#ACER#                  			 & No   &  Yes \\
+\verb#ACKTR#                       & Yes  &  Yes \\
+\verb#DDPG#                        & Yes  &  No  \\
+\verb#DQN#                         & No   &  Yes \\
+\verb#HER#                         & Yes  &  Yes \\
+\verb#GAIL#                        & Yes  &  Yes \\
+\verb#PPO1#                        & Yes  &  Yes \\
+\verb#PPO2#                        & Yes  &  Yes \\
+\verb#SAC#                         & Yes  &  No  \\
+\verb#TD3#                         & Yes  &  No  \\
+\verb#TRPO#                        & Yes  &  Yes \\
+\bottomrule
+\end{tabular}
+\caption{stable baselines algorithms}
+\label{tab:stable-baselines}
+\end{table}
+
+\subsection{\gls{ray}}
+Ray is packaged with the following libraries for accelerating machine learning workloads.
+\begin{itemize}
+	\item Tune: Scalable Hyperparameter Tuning
+	\item RLlib: Scalable Reinforcement Learning
+	\item RaySGD: Distributed Training Wrappers
+	\item Ray Serve: Scalable and Programmable Serving
+\end{itemize}
+
+
+

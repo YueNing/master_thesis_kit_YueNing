@@ -6,7 +6,7 @@ Version=4
 MainFile=main.tex
 UseBibTeX=1
 UseMakeIndex=1
-ActiveProfile=LaTeX ⇨ PDF ===(bibtex8)===
+ActiveProfile=LaTeX ⇒ SumatraPDF + Biber
 ProjectLanguage=de
 ProjectDialect=DE
 

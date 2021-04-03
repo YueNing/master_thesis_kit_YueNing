@@ -1,0 +1,35 @@
+\chapter{Methods}
+Before applying follow-up methods in NegMAS and SCML, a single-agent environment and a multi-agents environment were developed to create a bridge between the negotiation library and the reinforcement learning algorithm.
+
+\section{Environment}
+This environment provide all informations needed for reinforcement learning. Action, Observation and Reard are passed throung callback functions defined in the Scenario(Game). In scenarios have pre-defined supply chain network and number of learnable agents. 
+Single agent bilateral negotiation training environement is shown as in \cref{fig:environment-single-agent}.
+Multi-agents concurrent bilateral negotiation training environment is shown as in \cref{fig:environment-multi-agents}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.60\textwidth]{./images/environment-single-agent.png}
+\caption{Environment for single agent bilateral negotiation based on NegMAS}
+\label{fig:environment-single-agent}
+\end{figure}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.60\textwidth]{./images/environment-multi-agents.png}
+\caption{Environment for multi-agents concurrent bilateral negotiation based on SCML}
+\label{fig:environment-multi-agents}
+\end{figure}
+
+\section{Independent agent in NegMAS}
+
+\section{MADDPG in SCML}
+Shown in \cref{fig:method-maddpg-scml}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth]{./images/scml-maddpg.png}
+\caption{maddpg used in multi agents concurrent negotiation based on standard \gls{scml}}
+\label{fig:method-maddpg-scml}
+\end{figure}
+
+\section{QMIX in SCML}
+test
