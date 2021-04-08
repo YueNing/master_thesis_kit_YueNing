@@ -76,9 +76,9 @@ PPO vs. DQN
 
 \section{\gls{scml} with \gls{openai gym}}
 \subsection{Configuration}
-\subsubsection{Negotiation Issues}
+\subsection{Negotiation Issues}
 \paragraph{Standard \gls{scml}} Negotiation issues are multi-issues, Quantity, Time and Price. 
-\paragraph{\gls{scml-oneshot}} Negotiation issues are multi-issues, Quantity and Price. Time is not important in this simulation world. All contracts will be executed at the same step in which agents reach agreements.
+\paragraph{\gls{scml} OneShot} Negotiation issues are multi-issues, Quantity and Price. Time is not important in this simulated world. All contracts will be executed at the same step in which agents reach agreements.
 
 \subsection{Model}
 The model consists of six parts, environment \texttt{\gls{mcbe}}, Scenario, World, Agent, Interface and \gls{madrl} algorithms.
@@ -105,18 +105,18 @@ the environment.
 \paragraph{RUN} Runs entire episode. After a negotiation step, the rewards, observations, actions, etc. are stored in the memory buffer. 
 \begin{itemize}
 	\item Observation: Current offer in negotiation mechanism. The observations of all agents are combined in one list. Agent can only access to its local observation during decentralised execution.
-	\item Reward: Sum reward of all learnable agents. Reward of single agent is the sum of utility value of the current offer after one negotiation step and profit of agent after one simulation step.
-	\item Done: Reaches the final state (last step of simulation world) or the maximum running time.
+	\item Reward: Sum reward of all learnable agents. Reward of single agent is the sum of utility value of the current offer after one negotiation step and profit of agent after one simulated step.
+	\item Done: Reaches the final state (last step of simulated World) or the maximum running time.
 	\item State: State of environment. It can be replaced by \texttt{Observation}.
 \end{itemize}
 
 \subsection{Scenario} \label{scenario}
-Scenario describes the structure of simulation world. It is similar as the assisted method \texttt{Game} in \gls{sbe} and provides logic for generating and resetting the world. With the help of Scenario, many scenarios can be created without changing of \gls{mcbe}. Figure \ref{fig:supply-chain-scenario-1} diagrams a simple scenario.
+Scenario describes the structure of running world. It is similar as the assisted method \texttt{Game} in \gls{sbe} and provides logic for generating and resetting the world. With the help of Scenario, many scenarios can be created without changing of \gls{mcbe}. Figure \ref{fig:supply-chain-scenario-1} diagrams a simple scenario.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{./images/supply-chain-scenario-1.png}
-\caption{Example of supply chain scenario, \gls{my-one-shot-drl-agent} vs. \gls{greedy-one-shot-agent}}
+\caption{Examples of supply chain scenario, }
 \label{fig:supply-chain-scenario-1}
 \end{figure}
 
@@ -124,20 +124,14 @@ Scenario Interface consists three normal functions and four callback functions p
 
 \paragraph{MAKE\_WORLD} Creates instance of game or training world.
 \paragraph{RESET\_WORLD} Sets the world to the initial state.
-\paragraph{RESET\_AGENT} Resets agent, returns initial observation.
+\paragraph{RESDET\_AGENT} Resets agent, returns initial observation.
 \paragraph{CALLBACK} OBSERVATION, REWARD, DONE and INFO
 
 \subsection{Challenges of the environment}
-\subsubsection{Combination with \gls{scml}}
-Compared with \gls{sbe}, \gls{mcbe} can not directly call the function designed in official \gls{scml}. \texttt{Step} in \gls{scml-oneshot} is one simulation step. In one simulation step, many negotiation steps will be performed. The action of the agent is a \texttt{proposal}, so it needs to be meticulous to control every step of the negotiation mechanism in the simulation world. The class \texttt{TrainWorld} inherited from SCMLOneShotWorld achieves this goal.
+\subsubsection{Combination with \gls{negmas}}
+\subsubsection{Non-stationary environment}
 
 \subsection{Analysis of the reinforcement learning algorithms}
-\subsubsection{Independent Learning vs. Centralized Learning}
-\paragraph{Non-stationary environment}
-Traditional reinforcement learning approaches such as Q-Learning or policy gradient
-are poorly suited to multi-agent environments. One issue is that each agent’s policy is changing as training progresses, and the environment becomes non-stationary from the perspective of any individual agent (in a way that is not explainable by changes in the agent’s own policy).
-
-\subsubsection{\gls{maddpg} vs. \gls{qmix}}
-Centralised learning of joint actions can naturally handle coordination problems and avoids non-stationarity, but is hard to scale, as the joint action space grows exponentially in the number of agents. In \parencite{Rashid2018}, author proposed a neural network to transform the centralised state into the weights of another neural network. This second neural network is constrained to be monotonic with respect to its inputs by keeping its weights positive. This feature makes it possible to learn when there are many agents.
+\subsubsection{\gls{drl} vs. \gls{madrl}}
 
 \subsection{Conclusion}

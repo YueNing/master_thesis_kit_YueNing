@@ -1,10 +1,10 @@
-\chapter{Methods and Experiments}
+\chapter{Methods and Experiments} \label{methods-and-experiments}
 
 \section{Single-Agent Bilateral Negotiation Environment (\gls{sbe})}
 In this environment, agent represents the negotiator in negotiation mechanism.
 
 \subsection{Independent Negotiator in NegMAS}
-In the environment has just single learnable \gls{drl} negotiator. All of \gls{rl} algorithms can be tested in this specific environment. In the experiment of this thesis, \gls{dqn} and \gls{ppo} were tested in four learning scenarios:
+In the environment has just single learnable \gls{drl} negotiator. All \gls{rl} algorithms with discrete action space can be tested in this specific environment. In the experiment of this thesis, \gls{dqn} and \gls{ppo} were tested in four learning cases:
 \begin{itemize}
 	\item single issue, acceptance strategy
 	\item single issue, offer strategy
@@ -12,8 +12,23 @@ In the environment has just single learnable \gls{drl} negotiator. All of \gls{r
 	\item multi-issues, offer startegy
 \end{itemize}
 
-\subsection{Experiment}
-MyDRLNegotiator vs AspirationNegotiator
+The training step of DQN is shown in Figure \ref{fig:dqn}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.40\textwidth]{./images/dqn.png}
+\caption{Training step of DQN}
+\label{fig:dqn}
+\end{figure}
+
+\subsection{Experiment} \label{sbe:experiment}
+Figure \ref{fig:bilateral-negotiation} diagrams the Game in \gls{sbe}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.50\textwidth]{./images/bilateral-negotiation.png}
+\caption{Bilateral Negotiation Game in \gls{sbe}, My Deep Reinforcement Learning Negotiator vs. Aspiration Negotiator}
+\label{fig:bilateral-negotiation}
+\end{figure}
+
 \subsubsection{single issue}
 Negotiation mechanism is \gls{saom}, split the learning strategy as two parts, acceptance strategy and offer strategy, 
 
@@ -35,30 +50,24 @@ Offer strategy: Actions of negotiator are all outcomes set in mechanism. The obs
 \section{Multi-Agent Concurrent Bilateral Negotiation Environment (\gls{mcbe})}
 In this environment, agent represents the factory manager and negotiation controller in standard \gls{scml} and \gls{scml} OneShot, respectively.
 
-The environment provides all informations that are needed for reinforcement learning. Action, Observation and Reward are passed through callback functions defined in the class \texttt{Scenario}. In addition, class \texttt{Scenario} contains predefined informations, such as structure of supply chain network, parameters of learnable agents and so on.
+The agent interacting with environment may be have many related trainable agents as the part of learner(e.g. one seller, one buyer) in the model. The detail of interactive logic is shown below in \ref{fig:interacting-logic-maddpg-scml}
 
-\gls{mcbe} is shown as in.
-
-\subsection{\gls{maddpg} in \gls{scml}}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1.0\textwidth]{./images/scnk.png}
+\caption{Interactive logic based on the perspective of \gls{scml}. N: The maximum number of concurrent negotiations for a single agent}
+\label{fig:interacting-logic-maddpg-scml}
+\end{figure}
+\subsection{\gls{maddpg} in \gls{scml}} \label{methods:maddpg}
 Shown in \ref{fig:method-maddpg-scml}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.80\textwidth]{./images/scml-maddpg.png}
-\caption{maddpg used in multi agents concurrent negotiation based on standard \gls{scml}}
+\caption{\gls{maddpg} used in \gls{mcbe}}
 \label{fig:method-maddpg-scml}
 \end{figure}
-
 Actors output actions as inputs to related agents interacting with the environment. Agents interacting with environment outputs the observation and reward as the inputs to related agents trained in the model. 
-
-The same agent interacting with environment may be have many related trainable agents as the part of agent(e.g. one seller, one buyer) in the model. The detail of interactive logic is shown below in \ref{fig:interacting-logic-maddpg-scml}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.90\textwidth]{./images/scnk.png}
-\caption{Interactive logic based on the perspective of \gls{scml}}
-\label{fig:interacting-logic-maddpg-scml}
-\end{figure}
 
 \begin{algorithm}[H]
   \SetAlgoLined
@@ -79,9 +88,38 @@ The same agent interacting with environment may be have many related trainable a
 \end{algorithm}
 
 \subsection{\gls{qmix} in \gls{scml}}
-test
+Data flow is shown in \ref{fig:method-qmix-scml}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth]{./images/scml-qmix.png}
+\caption{\gls{qmix} used in \gls{mcbe}}
+\label{fig:method-qmix-scml}
+\end{figure}
+
 \subsection{Experiment}
 \subsubsection{Concurrent Neogtiations in standard \gls{scml}}
+Standard \gls{scml} is a complex simulation world, which contains various parts with specific functions. The breif description of this simulation is introduced in chapter Background \ref{background-scml}. The experiment of this thesis focus on only the Negotiation Manager of Decision-Maker Agent. The above mentioned method maddpg \ref{methods:maddpg} is used in this experiment. 
+Scenario is diagramed in Figure \ref{fig:scenario-standar-scml}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth]{./images/scenario-standar-scml.png}
+\caption{M* represent My Component Based Agent with learner \gls{maddpg}, C* represent Opponent Agents, such as \gls{ind-dec-agent}}
+\label{fig:scenario-standar-scml}
+\end{figure}
+
+\paragraph{Evaluation} Before evaluating the result of concurrent bilateral negotiation with \gls{maddpg} in standard \gls{scml}. The result of a simple pre-test version which changes the range of negotiation issues with \gls{maddpg}
+is shown in \ref{fig:dynamical-range-issues-maddpg}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth]{./images/dynamic_range_issues_maddpg.png}
+\caption{}
+\label{fig:dynamical-range-issues-maddpg}
+\end{figure}
+
+
 \subsubsection{Concurrent Negotiations in OneShot \gls{scml}}
 \textbf{self-play}
 
@@ -107,6 +145,7 @@ Episode mean reward curve is shown in \ref{fig:oneshot-my-vs-greedy}
 \label{fig:oneshot-my-vs-greedy}
 \end{figure}
 
-\subsection{Evaluation}
+\paragraph{Evaluation}
+
 
 \section{Conclusion}

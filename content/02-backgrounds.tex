@@ -23,7 +23,9 @@ utility function $u_i$ for each agent $i$, $u_{i}(x_{i})$ for all $i\in \{1,...,
 Pareto Efficient is a state at which resources in a system are optimized in a way that one dimension cannot improve without a second worsening. 
 
 \subsection{Markov Games}
-Methods mentioned in the paper are based on a multi-agent extension of Markov decision processes(\gls{mdps}) called partially observable Markov games. There are N players indexed by $n=1,2,...,N$.
+\paragraph{Finite Markov Decision Processes}
+
+\paragraph{Multi-Agent Markov Decision Processes} Methods mentioned in the paper are based on a multi-agent extension of Markov decision processes(\gls{mdps}) called partially observable Markov games. There are N players indexed by $n=1,2,...,N$.
 
 \section{Autonomous Negotiaion} \label{autonomous-negotiation}
 Negotiation is an important process in coordinating behavior and represents a principal topic in the field of multi-agent system research. There has been extensive research in the area of automated negotiating agents. 
@@ -81,10 +83,14 @@ Machine learning is an AI subset and consists of techniques that enable computer
 Deep learning, often called deep neural learning or deep neural network, is a subset of machine learning that uses neural networks to evaluate various factors with a similar framework to a human neural system. It has networks that can learn from unstructured or unlabeled data without supervision.
 
 \subsection{Methods}
-\subsubsection{Supervised Learning:} 
-\subsubsection{Unsupervised Learning:}
-\subsubsection{Semi-supervised Learning:}
-\subsubsection{Reinforcement Learning:}
+\paragraph{Supervised Learning}
+Training data contains optimal outcomes (also known as inductive learning). Learning is tracked in this method. Some famous examples of supervised machine learning algorithms are Linear regression for regression problems. 
+\paragraph{Unsupervised Learning} 
+There are not the desired outputs in the training results. Clustering is an example. It is impossible to know what is and what is not good learning.
+\paragraph{Semi-supervised Learning}
+A few desired outputs are included in the training data.
+\paragraph{Reinforcement Learning}
+Rewards are given after a sequence of actions. In a given case, it is a matter of taking appropriate steps to maximize compensation. It is the most ambitious method of learning in AI.
 
 \subsection{Application Field}
 \subsubsection{eCommerce}
@@ -95,7 +101,60 @@ Artificial intelligence (AI) researchers have paid a great deal of attention to 
 \section{Artificial Neural Network}
 
 \section{Reinforcement Learning}
+\subsection{The Agent–Environment Interface}
+The reinforcement learning problem is meant to be a straightforward framing
+of the problem of learning from interaction to achieve a goal. The learner and
+decision-maker is called the agent. The thing it interacts with, comprising
+everything outside the agent, is called the environment. These interact continually, the agent selecting actions and the environment responding to those
+actions and presenting new situations to the agent \parencite{Sutton2018}. 
+Figure \ref{fig:agent-environment-interaction} diagrams the agent–environment interaction.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{./images/agent-environment-interaction.png}
+\caption{The agent–environment interaction in reinforcement learning, diagrammed In \parencite{Sutton2018}.}
+\label{fig:agent-environment-interaction}
+\end{figure}
+
+Above process is a typical single-agent interaction process. Single agent reinforcement learning algorithms are based on this process. By extending this interactive process, multi-agent interactive process can be intuitively diagrammed In \ref{fig:multi-agent-environment-interaction}. These learning cases are called Multi-Agent-Reinforcement Learning \gls{marl}. In the figure \ref{fig:multi-agent-environment-interaction} agent is splited as two parts perceptor and learner. Perceptors observe the environment and send the state to learners. Learners learn strategies based on the states, rewards and actions. There are many methods, which proposed in these years. Some \gls{madrl} methods will be discussed in following sections. According to the design requirements of the training environment, the structure of the interaction process is flexible.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{./images/multi-agent-environment-interaction.png}
+\caption{The multi-agent–environment interaction in reinforcement learning, diagrammed In \parencite{en13010123}.}
+\label{fig:multi-agent-environment-interaction}
+\end{figure}
+
+\subsection{Value Function}
+Value Function can be referred as the state-value function and state-action-value-function which consists fixed state or both state and action, respectively.
+
+\textbf{State-Value-Function} measures the goodness of each state. It is based on the return Reward G following a policy Pi. In a formal way, the value of $V_\pi(s)$ is:
+
+\begin{equation} 
+V_{\pi}(s)=\mathbb{E}_{\pi}\left[G_{t} \mid s=s_{t}\right]=\mathbb{E}_{\pi}\left[\sum_{j=0}^{T} \gamma^{j} r_{t+j+1} \mid s=s_{t}\right]
+\end{equation}
+
+\textbf{Action-Value Function} which measures the goodness of each pair of state, action. Compared with state-value function action is determined.
+
+\begin{equation}
+Q_{\pi}(s, a)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{j=0}^{T} \gamma^{j} r_{t+j+1} \mid S_{t}=s, A_{t}=a\right]
+\end{equation}
+
+\subsection{Bellman Functions}
+In summary, Bellman Functions decomposes the value function into two parts, the immediate reward plus the discounted future values. Equation \ref{equation:bellman-state-value-function} show how to recursively the Bellman equation is defined for the state-value function:
+
+\begin{equation} \label{equation:bellman-state-value-function}
+V_{\pi}(s)=\sum_{a} \pi(a \mid s) \cdot \sum_{s \prime} P_{s s^{\prime}}^{a}\left(r(s, a)+\gamma V_{\pi}\left(s^{\prime}\right)\right)
+\end{equation}
+
+As same as Bellman equation for the state-value function, equation \ref{equation:bellman-action-value-functio} tells us how to find recursively the value of a state-action pair following a policy $\pi$.
+\begin{equation} \label{equation:bellman-action-value-function}
+Q_{\pi}(s, a)=\sum_{s^{\prime}} P_{S S^{\prime}}^{a}\left(r(s, a)+\gamma V_{\pi}\left(s^{\prime}\right)\right)
+\end{equation}
+
 \subsection{Q-Learning}
+To maximize the total cumulative reward in the long sequence is the goal of Agent. The policy, which maximize the total cumulative reward is called optimal policy formed as $\pi`*$. Optimal State-Action-Value-Function and optimal State-Value-Function are formed as $Q_\pi`*(s, a)$ and $V_\pi`*(s)$, respectively.
+
 \begin{equation}
 \mathcal{L}(\theta)=\sum_{i=1}^{b}\left[\left(y_{i}-Q(s, a \mid \theta)\right)^{2}\right]
 \end{equation}
@@ -156,7 +215,7 @@ Loss function is
 \paragraph{\gls{negmas} and Bilateral Negotiation}
 \gls{negmas} implements natively \gls{saom} which can be set as bilateral negotiation mechanism.
 
-\subsection{\gls{scml}}
+\subsection{\gls{scml}} \label{background-scml}
 A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of an opensource automated negotiation platform called \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. For example scml2019 will contain all files related to the 2019’s version of the competition.
 There are three main different versions of \gls{scml}, which have different designs.
 \begin{itemize}
@@ -177,13 +236,40 @@ Researchers have also developed many negotiation agents such as Agent1[], Agent2
 \subsection{\gls{openai gym}}
 \gls{openai gym} is a toolkit for developing and comparing reinforcement learning algorithms \parencite{brockman2016openai}.
 \subsubsection{Environment}
-The core gym interface is \texttt{Env}, which is the unified environment interface. The following are the Env methods that developers should implement \parencite{NEURIPS2019_bdbca288}.
+The core gym interface is \texttt{Env}, which is the unified environment interface. The following are the Env methods that developers should implement \parencite{brockman2016openai}.
 
-\paragraph{STEP:} The 
-\paragraph{RESET:}
-\paragraph{RENDER:}
-\paragraph{CLOSE:}
-\paragraph{SEED:}
+\paragraph{STEP} Run one timestep of the environment's dynamics. When end of episode is reached, \texttt{reset()} is calld to reset this environment's state. Accepts an action and returns a tuple (observation, reward, done, info).
+\begin{itemize}
+\item observation (object): agent's observation of the current environment, such as frame of the game.
+\item reward (float): amount of reward returned after previous action, such as 1 when action is go to left.
+\item done (bool): whether the episode has ended, in which case further step() calls will return undefined results, such as agent is dead in game, as True.
+\item info (dict): contains auxiliary diagnostic information (helpful for debugging, and sometimes learning), such as goal of agent.
+\end{itemize}
+
+\paragraph{RESET} Resets the environment to an initial state and returns an initial observation. This function should not reset the environment's random number generator(s). Random variables in the environment's state should be sampled independently between multiple calls to \texttt{reset()}. Each call of \texttt{reset()} should yield an environment suitable for a new episode, independent of previous episodes.
+\paragraph{RENDER} Define how to display the output of the environment. Multiple modes can be used: 
+\begin{itemize}
+	\item human: Render to the current display or terminal and return nothing. Usually for human consumption
+	\item rgb\_array: Return an numpy.ndarray with shape (x, y, 3), representing RGB values for an x-by-y pixel image, suitable for turning into a video.
+	\item ansi: Return a string (str) or StringIO.StringIO containing a terminal-style text representation. The text can include newlines and ANSI escape sequences (e.g. for colors).
+\end{itemize}
+
+\paragraph{CLOSE} Override close in the subclass to perform any necessary cleanup. Environments will automatically \texttt{close()} themselves when garbage collected or when the program exits. Save datas at the end of the program.
+\paragraph{SEED} Sets the seed for this env's random number generator(s). It is useful for reproducing the results.
+\begin{lstlisting}[caption={Logic of \gls{openai gym} Interaction},label={lst:openaigym},language=python]
+ob0=env.reset() #sample environment state, return first observation
+a0=agent.act(ob0) #agent chooses first action
+ob1,rew0,done0,info0=env.step(a0) #environment returns observation,
+#reward, and boolean flag indicating if the episode is complete.
+a1=agent.act(ob1)
+ob2,rew1,done1,info1=env.step(a1)
+...
+a99=agent.act(o99)
+ob100,rew99,done99,info2=env.step(a99)
+# done99 == True => terminal
+\end{lstlisting}
+
+From Listing \ref{lst:openaigym}, user can get the logic of interaction in \gls{openai gym}.
 
 \subsubsection{Stable Baselines}
 The stable baselines developed in the project stable-baselines \parencite{stable-baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines}.

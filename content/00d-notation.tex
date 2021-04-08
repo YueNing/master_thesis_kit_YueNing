@@ -1,6 +1,6 @@
 \addchap*{Notation}
 \markboth{Notation}{}
-
+Lower case letters are used for the values of random variables and for scalar functions. Capital ltters are used for random variables and major algorithms variables.
 \addsec*{General identifier}
 
 \begin{tabular}{p{1.5cm} p{12cm}}
@@ -18,7 +18,27 @@ $\ssA$, \dots, $\ssZ$ & Mengensystem \\
 \addsec*{Special identifier}
 
 \begin{tabular}{p{1.5cm} p{12cm}}
-$t$ & Spezielle Bezeichner mit konkreter Bedeutung in dieser Arbeit, z.\,B. $t$ Zeitindex\\
+$s$ & State \\
+$a$ & action \\
+$\sS$ & set of nonterminal states \\
+$\sA(s)$ & set of actions possible in state $s$ \\
+$\sR$ & set of possible rewards \\
+
+$t$ & discrete time step \\
+$\mT$ & final time step of an episode \\
+$\mS_t$ & state at $t$ \\
+$\mA_t$ & action at $t$ \\
+$\mR_t$ & reward at $t$ \\
+$\mG_t$ & return (cumulative discounted reward) following $t$ \\
+$\pi$ & policy, decision-making rule \\
+$\pi(s)$ & action taken in state $s$ under \texttt{deterministic} policy $\pi$ \\
+$\pi(a|s)$ & probability of taking action $a$ in state $s$ under stochastic policy $\pi$ \\
+$p(s^',r|s, a)$ & probability of transitioning to state $s^'$, with reward $r$, from $s$, $a$ \\
+
+$v_\pi(s)$ & value of state $s$ under policy $\pi$ (except return) \\
+$v_*(s)$ & value of state $s$ under the optimal policy \\
+
+
 \end{tabular}
 
 \addsec*{General quantities}
