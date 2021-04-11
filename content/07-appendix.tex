@@ -1,0 +1,69 @@
+In the appendices, many detailed information are listed, such as algortihms of reinforcement learning.
+\begin{appendices}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+  \chapter{Algorithms}
+  \section{Single-Agent Reinforcement Learning}
+	\subsection{DQN} \label{appendix:dqn}
+	For completeness, the DQN algorithm used in Bilateral Negotiation Mechanism from \gls{negmas} is provided below.
+	
+	\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwData{}
+	\KwResult{}
+	Initialize replay buffer $D$ to capacity $N$\;
+	Initialize action-value function $Q$ with random weights $\theta$\;
+	Initialize target action-value function $\hat{Q}$ with weight $\theta^{-}=\theta$\;
+	\For{episode = 1, M}{
+	Receive state from simulator $s_1 = \{x_1\}$ and preprocessed state $\phi_{1}=\phi\left(s_{1}\right)$\;
+		\For{t = 1, T}{
+			With probability $\omega$ select a random action $a_t$ (first step)\;
+			otherwise select $a_{t}=\operatorname{argmax}_{a} Q\left(\phi\left(s_{t}\right), a ; \theta\right)$\;
+			Execute action $a_t$ in siumulator and observe reward $r_t$ and new state $x_{t+1}$\;		
+			Set $s_{t+1} = s_t, a_t, x_{t+1}$ and preprocess $\phi_{t+1} = \phi(s_{t+1})$ \;
+			Store transitions $(\phi_j, a_j, r_j, \phi_{t+1})$ in $D$ \;
+			Sample random minibatch of transitions $(\phi_j, a_j, r_j, \phi_{j+1})$ from $D$\;
+			Set $y_{j}=\left\{\begin{array}{cc}r_{j} & \text { if episode terminates at step } \mathrm{j}+1 \\ r_{j}+\gamma \max _{a^{\prime}} \hat{Q}\left(\phi_{j+1}, a^{\prime} ; \theta^{-}\right) & \text {otherwise }\end{array}\right.$\;
+			Perform a gradient descent step on $\left(y_{j}-Q\left(\phi_{j}, a_{j} ; \theta\right)\right)^{2}$ with respect to the network parameters\;
+			Every $C$ steps reset $\hat{Q} = Q$\;
+		}
+	}
+	\caption{Deep Q-learning with experience replay}
+	\end{algorithm}
+	\subsection{PPO}
+	\subsection{DPG}
+	\subsection{DDPG}
+  \section{Multi-Agent Reinforcement Learning}
+	\subsection{\gls{maddpg}} \label{appendix:algorithms:maddpg}
+	For completeness, the MADDPG algorithm used in \gls{scml} is provided below.
+	
+	\begin{algorithm}[H]
+  \SetAlgoLined
+  \KwData{State comes from simulator \gls{scml}}
+  \KwResult{action sequence, proposal offer or set dynamical range of negotiation issues}
+	
+	\For{episode = 1 to M}{
+		Initialize a random process $\mathcal{N}$ for action exploration\;
+		Receive the intial state from the Simulator\;
+		\For{t = 1 to max-episode-length}{
+				for each agent $i$, select action $a_{i}=\boldsymbol{\mu}_{\theta_{i}}\left(o_{i}\right)+\mathcal{N}_{t}$ w.r.t. the current policy and exploration.\;
+				Execute joint actions $a=\left(a_{1}, \ldots, a_{N}\right)$ and get the reward $r$ and new state $\mathbf{s}^{\prime}$\;
+				Store $\left(\mathbf{s}, a, r, \mathbf{s}^{\prime}\right)$ in replay buffer $\mathcal{D}$\;
+				$\mathbf{s} \leftarrow \mathbf{s}^{\prime}$\;
+				\For{agent $i=1$ to $N$}{
+					Sample a random minibatch of samples $\mathcal{B}$ $\left(\mathbf{s}^{j}, a^{j}, r^{j}, \mathbf{s}^{\prime j}\right)$ from $\mathcal{D}$\;
+					Set $y^{j}=r_{i}^{j}+\left.\gamma Q_{i}^{\mu^{\prime}}\left(\mathbf{s}^{\prime j}, a_{1}^{\prime}, \ldots, a_{N}^{\prime}\right)\right|_{a_{k}^{\prime}=\boldsymbol{\mu}_{k}^{\prime}\left(o_{k}^{j}\right)}$ \;
+					Update critic by minimizing the loss $\mathcal{L}\left(\theta_{i}\right)=\frac{1}{B} \sum_{j}\left(y^{j}-Q_{i}^{\boldsymbol{\mu}}\left(\mathbf{s}^{j}, a_{1}^{j}, \ldots, a_{N}^{j}\right)\right)^{2}$ \;
+					Update actor using the sampled policy gradient:
+					\begin{equation}
+						\left.\nabla_{\theta_{i}} J \approx \frac{1}{B} \sum_{j} \nabla_{\theta_{i}} \boldsymbol{\mu}_{i}\left(o_{i}^{j}\right) \nabla_{a_{i}} Q_{i}^{\mu}\left(\mathbf{s}^{j}, a_{1}^{j}, \ldots, a_{i}, \ldots, a_{N}^{j}\right)\right|_{a_{i}=\boldsymbol{\mu}_{i}\left(o_{i}^{j}\right)}
+					\end{equation}
+				}
+				Update target network parameters for each agent i: $\theta_{i}^{\prime} \leftarrow \tau \theta_{i}+(1-\tau) \theta_{i}^{\prime}$
+			}
+	}
+  \caption{Multi-Agent Deep Deterministic Policy Gradient for N agents}
+\end{algorithm}
+
+	\subsection{\gls{qmix}}
+	
+\end{appendices}

@@ -70,7 +70,7 @@ There is a set of three related items that sometimes are erroneously used interc
 Fig. \ref{fig:ai_taxonomy} shows the relationship of artificial intelligence, machine learning and deep learning.
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.5\textwidth]{./images/ai_taxonomy.png}
+\includegraphics[width=0.4\textwidth]{./images/ai_taxonomy.png}
 \caption{Sub-areas of artificial intelligence \parencite{Suman2020}}
 \label{fig:ai_taxonomy}
 \end{figure}
@@ -111,7 +111,7 @@ Figure \ref{fig:agent-environment-interaction} diagrams the agent–environment 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{./images/agent-environment-interaction.png}
+\includegraphics[width=0.5\textwidth]{./images/agent-environment-interaction.png}
 \caption{The agent–environment interaction in reinforcement learning, diagrammed In \parencite{Sutton2018}.}
 \label{fig:agent-environment-interaction}
 \end{figure}
@@ -147,7 +147,7 @@ In summary, Bellman Functions decomposes the value function into two parts, the 
 V_{\pi}(s)=\sum_{a} \pi(a \mid s) \cdot \sum_{s \prime} P_{s s^{\prime}}^{a}\left(r(s, a)+\gamma V_{\pi}\left(s^{\prime}\right)\right)
 \end{equation}
 
-As same as Bellman equation for the state-value function, equation \ref{equation:bellman-action-value-functio} tells us how to find recursively the value of a state-action pair following a policy $\pi$.
+As same as Bellman equation for the state-value function, equation \ref{equation:bellman-action-value-function} tells us how to find recursively the value of a state-action pair following a policy $\pi$.
 \begin{equation} \label{equation:bellman-action-value-function}
 Q_{\pi}(s, a)=\sum_{s^{\prime}} P_{S S^{\prime}}^{a}\left(r(s, a)+\gamma V_{\pi}\left(s^{\prime}\right)\right)
 \end{equation}
@@ -173,7 +173,7 @@ PPO use some contraint tricks to avoid it. such as clip of policy. The loss func
 L\left(s, a, \theta_{k}, \theta\right)=\min \left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)} A^{\pi_{\theta_{k}}}(s, a), \quad \operatorname{clip}\left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)}, 1-\epsilon, 1+\epsilon\right) A^{\pi_{\theta_{k}}}(s, a)\right)
 \end{equation} 
 
-\subsubsection{DPG, DDPG, \gls{maddpg}}
+\subsubsection{DPG, DDPG, \gls{maddpg}} \label{background:maddpg}
 
 DPG: create a $\mu$ function to determine the action instead the sample in PG.
 
@@ -208,24 +208,41 @@ Loss function is
 \textbf{GENIUS:} An integrated environment for supporting the design of generic automated negotiators \parencite{Lin2014}.
 
 \subsection{\gls{negmas}} \label{background:negmas}
-\gls{negmas} can model situated simultaneous negotiations such as \gls{scm}. Nevertheless, it can model simpler bilateral and multi-lateral negotiations.
+\gls{negmas} can model situated simultaneous negotiations such as \gls{scm} which will be discussed separately in the next section \ref{background-scml}. Nevertheless, it can model simpler bilateral and multi-lateral negotiations.
 
 \gls{negmas} is a python library for developing autonomous negotiation agents embedded in simulation environments. The name negmas stands for either NEGotiation MultiAgent System or NEGotiations Managed by Agent Simulations. The main goal of NegMAS is to advance the state of the art in situated simultaneous negotiations. Nevertheless, it can; and is being used; for modeling simpler bilateral and multi-lateral negotiations, preference elicitation , etc.
 
-\paragraph{\gls{negmas} and Bilateral Negotiation}
-\gls{negmas} implements natively \gls{saom} which can be set as bilateral negotiation mechanism.
+\paragraph{\gls{negmas} and Mechanism}
+\gls{negmas} has natively implemented five mechanism, Stacked Algernating Offers Mechanism (\gls{saom}), single-text negotiation mechanisms (st) \ref{}, multi-text mechanisms (mt) \ref{}, GA-based negotiation mechanisms\ref{} and chain negotiations mechasnim\ref{}. Among them, \gls{saom} is the negotiation mechanism that is discussed and used in the experiments of this thesis. It has been introduced in detail in section Autonomous Negotiation \ref{background:saom}. At the same time, in the related negotiatioin mechanism packages, some negotiators, such as AspirationNegotiator in negmas.sao, are developed as key part of the packages. These negotiation negotiator will be used as the baseline negotiators in the following experiments.
+\paragraph{\gls{negmas} and World}
+A simulation is an embedded domain in which agents behave. It is represented in \gls{negmas} by a World. The world in \gls{negmas} was designed to simply the common tasks involved in constructing negotiation driven simulations \ref{}. The entire simulation includes multiple simulation steps which is different with the negotiation rounds. A simulation step can have multiple negotiation rounds. In each step, agents can be allowed to take proactive actions by performing operations worldwide, reading their status from the world, or requesting/operating negotiations with other agents.
+
+The overview of the main components of a simulation in a \gls{negmas} world is shown in Figure \ref{fig:overview-negmas}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{./images/overview-negmas.png}
+\caption{Main components and interactive logic of a simulation in a \gls{negmas} world}
+\label{fig:overview-negmas}
+\end{figure}
 
 \subsection{\gls{scml}} \label{background-scml}
-A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of an opensource automated negotiation platform called \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. For example scml2019 will contain all files related to the 2019’s version of the competition.
-There are three main different versions of \gls{scml}, which have different designs.
+A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of an opensource automated negotiation platform called \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. For example scml2019 will contain all files related to the 2019’s version of the competition \ref{}.
+There are three main different versions of \gls{scml}, which have different designs. In the following sections, we will introduce the similarities and differences. 
+
 \begin{itemize}
 	\item SCML2020-OneShot
 	\item SCML2020/2021
 	\item SCML2019
 \end{itemize}
 
+\subsubsection{SCML2019}
+
 \subsubsection{\gls{scml} and Concurrent Bilateral Negotiations}
 \gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an independent project to research \gls{scm}. \gls{scml} realized a \gls{scm} World to simulate the \gls{scm} process.  
+
+\subsubsection{SCML2020-OneShot}
+
 
 There are many agents which has same type in the \gls{scm} World. 
 

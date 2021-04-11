@@ -12,11 +12,11 @@ In the environment has just single learnable \gls{drl} negotiator. All \gls{rl} 
 	\item multi-issues, offer startegy
 \end{itemize}
 
-The training logic of DQN is shown in Figure \ref{fig:dqn}, the detailed description of algorithm is shown in appendix \ref{appendix:dqn}.
+The training step of DQN is shown in Figure \ref{fig:dqn}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.30\textwidth]{./images/dqn.png}
-\caption{Training logic of DQN}
+\includegraphics[width=0.40\textwidth]{./images/dqn.png}
+\caption{Training step of DQN}
 \label{fig:dqn}
 \end{figure}
 
@@ -29,14 +29,13 @@ Figure \ref{fig:bilateral-negotiation} diagrams the Game in \gls{sbe}
 \label{fig:bilateral-negotiation}
 \end{figure}
 
+\subsubsection{single issue}
 Negotiation mechanism is \gls{saom}, split the learning strategy as two parts, acceptance strategy and offer strategy, 
 
-\paragraph{Acceptance strategy} actions of agent are \texttt{Accept offer}, \texttt{Wait} and \texttt{Reject offer}. Observation of agent are offer of opponent and current time(running time, or current step of negotiation).
+Acceptance strategy: actions of agent are \texttt{Accept offer}, \texttt{Wait} and \texttt{Reject offer}. Observation of agent are offer of opponent and current time(running time, or current step of negotiation). Algorithms are \gls{dqn} (blue) and \gls{ppo} (red). Mean episode reward is shown in \ref{fig:acceptance-single-issue}
 
-\paragraph{Offer strategy} Actions of negotiator are set of outcome in negotiation mechanism. The observation is same as observation defined in the acceptance strategy. Before training the agent, normalize action and observation.
+Offer strategy: Actions of negotiator are all outcomes set in mechanism. The observation is same as defined in the acceptance strategy. Before training the agent, normalize action and observation. Algorithm is DQN and PPO.
 
-\subsubsection{single issue (\textbf{PRICE: (0, 100)})}
-Algorithms \gls{dqn} (blue) and \gls{ppo} (red) are tested in the cases of single issue . Mean episode reward of case  \textbf{single issue, acceptance strategy} is shown in \ref{fig:acceptance-single-issue}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.80\textwidth]{./images/ac_s_dqn_ppo1_log_EpRe.png}
@@ -74,7 +73,7 @@ The basic concepts of \gls{maddpg} are introduced in chapter background \ref{bac
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1.00\textwidth]{./images/scml-maddpg.png}
+\includegraphics[width=0.80\textwidth]{./images/scml-maddpg.png}
 \caption{\gls{maddpg} used in \gls{mcbe}}
 \label{fig:method-maddpg-scml}
 \end{figure}
@@ -86,7 +85,7 @@ Actors output actions as inputs to related agents interacting with the environme
 
 The world created by \gls{scml-oneshot} is described in detail in chapter background \ref{background-scml}. 
 
-\paragraph{Question: The Offer For Every Step} Unlike in standard scml \textbf{Dynamical Range of Negotiation Issues} is controlled by agents, the system takes over the related control and access authority in scml oneshot. Hence, question 1 in the standard library does not need to be discussed here. Although the design of oneshot world is very different with the standard libray, the key question is also how to find the optimal sequence action(offer for every negotiation step).
+\paragraph{Question: The Offer For Every Step} Unlike in standard scml \textbf{Dynamical Range of Negotiation Issues} is controlled by agents, the system takes over the related control and access authority. Hence, question 1 in the standard library does not need to be discussed in the \gls{scml-oneshot}. Although the design of oneshot world is very different with the standard libray, the key question is also how to find the optimal sequence action(offer for every negotiation step).
 
 In the current version \gls{qmix}, which is used in the experiment, one trainable agent is related to one negotiation session. When the agents are located in different locations in the scml world, the agents have different concurrent negotiation maximums. Since the agent \textbf{A1} shown in Figure \ref{fig:interacting-logic-scml} has three consumers, the maximum value of concurrent negotiations of the agent \textbf{A1} is 3. Based on this value, we need to create three trainable agents in algorithm, and each trainable agent control one negotiation session of interative agent.
 
@@ -115,7 +114,7 @@ Scenario is diagramed in Figure \ref{fig:scenario-standard-scml}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{./images/dynamic_range_issues_maddpg.png}
+\includegraphics[width=0.43\textwidth]{./images/dynamic_range_issues_maddpg.png}
 \caption{Scores of agents running in simulation world after training}
 \label{fig:dynamical-range-issues-maddpg}
 \end{figure}
@@ -160,7 +159,7 @@ Episode mean reward curve is shown in \ref{fig:oneshot-my-vs-greedy}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{./images/oneshot_my_vs_greedy.png}
+\includegraphics[width=0.60\textwidth]{./images/oneshot_my_vs_greedy.png}
 \caption{Episode mean reward of my agent vs GreedyOneShotAgent under SCML OneShot}
 \label{fig:oneshot-my-vs-greedy}
 \end{figure}
