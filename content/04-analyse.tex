@@ -1,4 +1,4 @@
-\chapter{Analyze}
+\chapter{Analysis}
 Two environments are developed for comparing the \gls{drl} algorithms used in this thesis: single-agent bilateral negotiation environment (\gls{sbe}) and multi-agent concurrent bilateral negotiation environment (\gls{mcbe}). The details are described in section \ref{single-agent-env} and \ref{multi-agent-env}. In addition to these environments, some methods have been implemented to make the training logic clearer, such as \texttt{Game} in section \ref{game} and \texttt{Scenario} in section \ref{scenario}.
 
 \section{\gls{negmas} with \gls{openai gym}}
@@ -10,9 +10,12 @@ With the help of \gls{openai gym},  a bilateral negotiation environment can be d
 \subsubsection{Negotiation Issues}
 \gls{negmas} provoides some classes and methods to design issues flexibly. In \gls{sbe} following issues are used:
  
-\paragraph{Price} Integer between two values, such as (10, 20)
-\paragraph{Quantity} Integer between two values, such as (1, 10)
-\paragraph{Time} Relative step between zero and maximal step.
+\begin{itemize}
+	\item \textbf{PRICE:} Integer between two values, such as (10, 20)
+	\item \textbf{QUANTITY:} Integer between two values, such as (1, 10)
+	\item \textbf{TIME:} Relative step between zero and maximal step.
+\end{itemize}
+
 
 In the section \texttt{Experiment} \ref{sbe:experiment} of Chapter \texttt{Methods and Experiments} \ref{methods-and-experiments}, the configuration of the negotiation mechanism will be listed in detail.
  
@@ -23,7 +26,7 @@ Except for the negotiation mechanism mentioned and implemented in sections \ref{
 Entire model is shown in \ref{fig:environment-single-agent}.
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.60\textwidth]{./images/environment-single-agent.png}
+\includegraphics[width=0.80\textwidth]{./images/sbe.png}
 \caption{Model for single agent bilateral negotiation based on NegMAS}
 \label{fig:environment-single-agent}
 \end{figure}

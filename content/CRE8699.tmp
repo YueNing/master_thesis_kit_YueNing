@@ -1,4 +1,4 @@
-\chapter{Background} \label{Chapter:Background}
+\chapter{Background}
 
 \section{Game theory}
 
@@ -71,8 +71,7 @@ Fig. \ref{fig:ai_taxonomy} shows the relationship of artificial intelligence, ma
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.4\textwidth]{./images/ai_taxonomy.png}
-\caption{Sub-areas of artificial intelligence Source: Own illustration based
-on\parencite{Suman2020}}
+\caption{Sub-areas of artificial intelligence \parencite{Suman2020}}
 \label{fig:ai_taxonomy}
 \end{figure}
 
@@ -93,13 +92,10 @@ A few desired outputs are included in the training data.
 \paragraph{Reinforcement Learning}
 Rewards are given after a sequence of actions. In a given case, it is a matter of taking appropriate steps to maximize compensation. It is the most ambitious method of learning in AI.
 
-\subsection{Application Field of Autonomous Negotiation}
-Artificial intelligence (AI) researchers have paid a great deal of attention to automated negotiation over the past decade and a number of prominent models have been proposed in the literature. Autonomous Negotiation is an important concept of AI. It provides support for many practical application scenarios, such as eCommerce, Logistics and Supply Chain and as research tools for computer science.
-
+\subsection{Application Field}
 \subsubsection{eCommerce}
 \subsubsection{Logistics and Supply Chain}
-Artificial intelligence provides contextual intelligence for the supply chain, they can use contextual intelligence to reduce operating costs and manage inventory. Contextual information helps them return to customers quickly.  
-
+Artificial intelligence (AI) researchers have paid a great deal of attention to automated negotiation over the past decade and a number of prominent models have been proposed in the literature.
 \subsubsection{Tools for computer science}
 
 \section{Artificial Neural Network}
@@ -116,8 +112,7 @@ Figure \ref{fig:agent-environment-interaction} diagrams the agent–environment 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{./images/agent-environment-interaction.png}
-\caption{The agent–environment interaction in reinforcement learning, Source: Own illustration based
-on\parencite{Sutton2018}.}
+\caption{The agent–environment interaction in reinforcement learning, diagrammed In \parencite{Sutton2018}.}
 \label{fig:agent-environment-interaction}
 \end{figure}
 
@@ -213,9 +208,9 @@ Loss function is
 \textbf{GENIUS:} An integrated environment for supporting the design of generic automated negotiators \parencite{Lin2014}.
 
 \subsection{\gls{negmas}} \label{background:negmas}
-\gls{negmas} is an opensource automated negotiation platform, which can model situated simultaneous negotiations such as \gls{scm} which will be discussed separately in detail in the next section \ref{background-scml}. The purpose of this section is to provide an overview of the key components(e.g. Mechanism, World) of the platform
+\gls{negmas} can model situated simultaneous negotiations such as \gls{scm} which will be discussed separately in the next section \ref{background-scml}. Nevertheless, it can model simpler bilateral and multi-lateral negotiations.
 
-\gls{negmas} is a python library for developing autonomous negotiation agents embedded in simulation environments. The name negmas stands for either NEGotiation MultiAgent System or NEGotiations Managed by Agent Simulations. The main goal of NegMAS is to advance the state of the art in situated simultaneous negotiations. Nevertheless, it can; and is being used; for modeling simpler bilateral and multi-lateral negotiations, preference elicitation , etc \parencite{Mohammad2019}.
+\gls{negmas} is a python library for developing autonomous negotiation agents embedded in simulation environments. The name negmas stands for either NEGotiation MultiAgent System or NEGotiations Managed by Agent Simulations. The main goal of NegMAS is to advance the state of the art in situated simultaneous negotiations. Nevertheless, it can; and is being used; for modeling simpler bilateral and multi-lateral negotiations, preference elicitation , etc.
 
 \paragraph{\gls{negmas} and Mechanism}
 \gls{negmas} has natively implemented five mechanism, Stacked Algernating Offers Mechanism (\gls{saom}), single-text negotiation mechanisms (st) \ref{}, multi-text mechanisms (mt) \ref{}, GA-based negotiation mechanisms\ref{} and chain negotiations mechasnim\ref{}. Among them, \gls{saom} is the negotiation mechanism that is discussed and used in the experiments of this thesis. It has been introduced in detail in section Autonomous Negotiation \ref{background:saom}. At the same time, in the related negotiatioin mechanism packages, some negotiators, such as AspirationNegotiator in negmas.sao, are developed as key part of the packages. These negotiation negotiator will be used as the baseline negotiators in the following experiments.
@@ -232,18 +227,18 @@ The overview of the main components of a simulation in a \gls{negmas} world is s
 \end{figure}
 
 \subsection{\gls{scml}} \label{background-scml}
-A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of  \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. For example scml2019 will contain all files related to the 2019’s version of the competition \ref{}.
+A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of an opensource automated negotiation platform called \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. For example scml2019 will contain all files related to the 2019’s version of the competition \ref{}.
 There are three main different versions of \gls{scml}, which have different designs. In the following sections, the similarities and differences will be introduced. 
 
 \begin{itemize}
 	\item SCML2020-OneShot: Agent Competition (\gls{anac}) Supply Chain Management League OneShot trace (\gls{scml-oneshot}).
-	\item SCML2020/2021: Standard Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2020/2021.
-	\item SCML2019: Standard Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2019
+	\item SCML2020/2021: Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2020.
+	\item SCML2019: Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2019
 \end{itemize}
 
 \subsubsection{SCML2019}
 
-\subsubsection{\gls{scml}2020/2021}
+\subsubsection{\gls{scml} and Concurrent Bilateral Negotiations}
 \gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an independent project to research \gls{scm}. \gls{scml} realized a \gls{scm} World to simulate the \gls{scm} process.  
 
 \subsubsection{SCML2020-OneShot} 

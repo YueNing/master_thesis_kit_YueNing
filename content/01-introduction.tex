@@ -1,24 +1,34 @@
 \chapter{Introduction}
 Computer software and hardware development leads to the appearance of non-human software agencies. An agent is anything that can be viewed as perceiving its environment through sensors and acting upon that environment through effectors [].
 
-A supply chain is a network of suppliers, factories, warehouses, distribution centers and retailers, through which raw materials are acquired, transformed, produced and delivered to the Customer[]. In the network we could find many entities whose could be considered as agents in the Multi-agent systems (MAS). Multi-agent System(MAS) are suitable the domains that involve interactions between different people
-or organizations with different (possibly conflicting) goals and
-proprietary information, there are many approaches are proposed in order to solve the problem in the supply chain mangement system. Such as negotiation-based Multi-agent System[].
+In economic, autonomous agent can be considered as a specific type of agent, with a focus on generating economic value. This technology will be at the forefront of the next industrial revolution, affecting numerous billion dollar industries such as transportation and mobility, finance, supply chain, energy trading, social networks and Marketplaces and e-commerce. The detail about application field of autonomous agent will be listed in chapter Background \ref{Chapter:Background}. All the work in this article is centered on the application of automatic agents in the supply chain.
 
-The Supply Chain Management (\gls{scm}) world designed in \gls{scml} by \texttt{Yasser Mohammad} simulates a supply chain consisting of multiple factories that buy and sell products from one another. The factories are represented by autonomous agents that act as factory managers. Agents are given some target quantity to either buy or sell and they negotiate with other agents to secure the needed supplies or sales. Their goal is to turn a profit, and the agent with the highest profit (averaged over multiple simulations) wins \parencite{Mohammad2019}. It is characterized by profit-maximizing agents that inhabit a complex, dynamic, negotiation environment[]. There are two games built on the top of NegMAS which is the library for developing autonomous negotiation agents embedded in simulation environments.
+A supply chain is a network of suppliers, factories, warehouses, distribution centers and retailers, through which raw materials are acquired, transformed, produced and delivered to the Customer[]. In the network we could find many entities whose could be considered as agents in the Multi-agent systems (MAS). Multi-agent System(MAS) are suitable the domains that involve interactions between different people or organizations with different (possibly conflicting) goals and proprietary information, there are many approaches are proposed in order to solve the problem in the supply chain mangement system, such as negotiation-based Multi-agent System[].
 
-In economic, autonomous agent can be considered as a specific type of agent, with a focus on generating economic value. This technology will be at the forefront of the next industrial revolution, affecting numerous billion dollar industries such as transportation and mobility, finance, supply chain, energy trading, social networks and Marketplaces and e-commerce.
+The Supply Chain Management (\gls{scm}) world designed in simulator called Supply Chain Management Leagure (\gls{scml}) based on opensource package \gls{negmas} by \texttt{Yasser Mohammad} simulates a supply chain consisting of multiple factories that buy and sell products from one another. The factories are represented by autonomous agents that act as factory managers. Agents are given some target quantity to either buy or sell and they negotiate with other agents to secure the needed supplies or sales. Their goal is to turn a profit, and the agent with the highest profit (averaged over multiple simulations) wins \parencite{Mohammad2019}. It is characterized by profit-maximizing agents that inhabit a complex, dynamic, negotiation environment[]. The introduction of all definitions and the work by \texttt{Yasser Mohammad} will be shown in Background \ref{Chapter:Background}. Because all subsequent work in this thesis will be carried out around this platform. Before discussing the details of the work, we need to talk about the specific motivation of the work.
 
 \subsection{Motivation}
 Negotiation is a complex problem, in which the variety of settings and opponents that may be encountered prohibits the use of a single predefined negotiation strategy. Hence the agent should be able to learn such a strategy autonomously []. By autonomy it means “independent or self-governing”. In the context of an agent, this means it can act without constant interference from its owner []. Autonomous negotiation agent is meaningful in many realistic environment, such as all mentioned economic value in industries. The development of current machine learning algorithms and increased hardware resource make it possible, model the realistic environment to evaluate the problem with computer system. According to the modeled realistic environment, it will be easier to find more possible solutions with the help of machine learning technology.
 
-In this work, we use some modeled negotiation environments, such as single agent environment (bilateral negotiation), and analyze whether deep reinforcement learning can be used to let agent learns some strategies autonomously in these environments. In contrast to single agent environment, in the supply chain environment, there are many agents with the same goal. After analyzing the simple environment, we need to explore whether multi-agent deep reinforcement learning can be used to obtain better results in multi-agent environment.
+In this work, some modeled negotiation environments, such as single agent environment (bilateral negotiation), are developed for analyzing whether deep reinforcement learning can be used to let agent learns some strategies autonomously. In contrast to single agent environment, in the supply chain environment, there are many agents with the same goal. After analyzing the simple environment, the situation is needed to be explored whether multi-agent deep reinforcement learning can be used to obtain better results in multi-agent environment (concurrent bilateral negotiations).
 
-\textbf{How good strategy can be learned by deep reinforcement learning in single agent environment(bilateral negotiation)?}
+\textbf{What is the significance of applying Deep Reinforcement Learning in supply chain management?}
 
-\textbf{How good strategy can be learned by multi-agent deep reinforcement learning in multi-agent environment(concurrent negotiation)?}
+Due to the great success of Alphago Zero\parencite{Silver2017} and OpenAI Five\parencite{OpenAI2019}, reinforcement learning has entered a new historical stage. As a general machine learning method, whether it can be used to improve the management ability of factories in the supply chain world is a very natural idea. However, deep reinforcement learning has many problems. Whether it is effective or not in supply chain needs to be tested through experiments. The supply chain world is a very typical multi-agent environment, and all multi-agent reinforcement learning methods have great practical significance here.
+
+\textbf{How good strategy can be learned by Deep Reinforcement Learning in single agent environment (bilateral negotiation)?}
+
+Before testing deep reinforcement learning in a multi-agent environment, single-agent bilateral negotiation is a better simple test environment. The result will help to analyze the effect of algorithm in autonomous negotiation game. It has a certain practical significance.
+
+\textbf{How good strategy can be learned by multi-agent deep reinforcement learning in multi-agent environment (concurrent negotiation)?}
+
+This is the key question of this thesis. By comparing with other benchmark negotiators or agents, the results can be evaluated.
 
 \textbf{What is the difference between deep reinforcement learning strategies and other heuristic strategies?}
+
+In the evaluation process, it will help to understand the reasons for using deep reinforcement learning.
+
+In order to obtain and analyze the results of the above four questions, it is necessary to understand the simulation logic of the simulator \gls{negmas} and \gls{scml} as a prerequisite for the experiment.
 
 \subsection{Outline of this Work}
 In the following, the other chapters of this work are listed and their content briefly presented.
@@ -29,6 +39,11 @@ This chapter contains basic knowledge and concepts that are necessary to underst
 \paragraph{Chapter 3: Related Works}
 In this chapter, some published matter which technically relates to the proposed work in this thesis will be discussed. These publication will be divided as three categories: Negotiation Strategies for Autonomous Negotiation, Reinforcement Learning used in Autonomous Negotiations and Challenges in Deep Reinforcement Learning. In the section \texttt{Challenges in Deep Reinforcement Learning}, some related algorithms except \gls{rl} will be discussed.
 
-\paragraph{Chapter 4: Analyze}
+\paragraph{Chapter 4: Analysis}
+The task of this thesis is studied in detail in the Analysis chapter. The main content of this chapter is to show how to use the ideas of \gls{openai gym} and related reference materials to develop the two custom training environments. The second part is to analyze the characteristics of the algorithm in advance.
+
 \paragraph{Chapter 5: Methods and Experiments}
+In this chapter, The configuration and parameters of the experimental environment are introduced in detail. The specific hyperparameters and training process of the algorithm will also be explained. At the end, the experimental results are displayed and evaluated, and compared with other algorithms.
+
 \paragraph{Chapter 6: Conclusions and Future Work}
+In the last chapter, the work of this paper will be summarized and the areas for improvement will be pointed out. Finally, it will provide some directions for future work.
