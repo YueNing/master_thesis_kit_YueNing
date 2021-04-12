@@ -3,31 +3,33 @@
 \section{Game Theory}
 
 \subsection{Nash Equilibrium}
-The concept of a Nash Equilibrium plays a central role in game theory. The definition in simple setting of a finite player is described as follow with mathematical form. Form indexes $K$ agents as $k=i, \dots, K$. There are total $N_k$ pure strategies. From $N_k$ agent k choose a strategy called $s_k$. $S_k$ denotes the set of strategies, and $s_k$ as the member of the set. A strategy profile, named $s = (s_1, ..., s_K)$, is a vector of strategies for the individual players. Hence, all strategy profiles can be written as $S$ for $\Pi_{k=1}^{K} S_{k}$. $s \mid s_{k}^{\prime}$ for the strategy $\left(s_{1}, \ldots, s_{k-1}, s_{k+1}^{\prime}, \ldots, s_{K}\right)$ means a strategy of agent $k$ changed from $s_k$ to $s_{k}^{\prime}$, in which a strategy profile $s$ is $s = (s_1, ..., s_K)$ and a strategy of agent $k$ is $s_{k}^{\prime} \in S_{k}$. The excepted utility or payoff of each agent $k$ is formed as $u_k(s)$, when agents select strategy profile $s$.
-
-I players indexed by i=1,...,I. The strategy of agent i is si choosed from Ni pure strategies. A strategy profile of all agents written as s = (s1, s2, sI), si|si' for the strategy profile (s1, ... si-1, si+1, sI), or the s with the part of i changed from si to si'. For each player i and strategy s, ui(s) denotes i's expected utility[]. 
-
+The concept of a Nash Equilibrium plays a central role in game theory. The definition in simple setting of a finite player is described as follow with mathematical form. Form indexes $K$ agents as $k=i, \dots, K$. There are total $N_k$ pure strategies. From $N_k$ agent k choose a strategy called $s_k$. $S_k$ denotes the set of strategies, and $s_k$ as the member of the set. A strategy profile, named $s = (s_1, ..., s_K)$, is a vector of strategies for the individual players. Hence, all strategy profiles can be written as $S$ for $\Pi_{k=1}^{K} S_{k}$. $s \mid s_{k}^{\prime}$ for the strategy $\left(s_{1}, \ldots, s_{k-1}, s_{k+1}^{\prime}, \ldots, s_{K}\right)$ means a strategy of agent $k$ changed from $s_k$ to $s_{k}^{\prime}$, in which a strategy profile $s$ is $s = (s_1, ..., s_K)$ and a strategy of agent $k$ is $s_{k}^{\prime} \in S_{k}$. The excepted utility or payoff of each agent $k$ is formed as $u_k(s)$, when agents select strategy profile $s$\parencite{Kreps1989}.
 \begin{proposition}[Nash Equilibrium]
-For a strategy profile $s$, Nash Equilibrium can be described for each agent $k$ and $s_{k}^{\prime} \in S_{k}$, $u_{k}(s) \geqslant u_{k}\left(s \mid s_{k}^{\prime}\right)$
+For a strategy profile $s$, Nash Equilibrium can be described by a mathematical inequalities: For each agent $k$ and $s_{k}^{\prime} \in S_{k}$, $u_{k}(s) \geqslant u_{k}\left(s \mid s_{k}^{\prime}\right)$.
 \end{proposition}
-
-In terms of words description, the definition of Nash equilibrium is that if other agents do not change its strategy, then no single agent can obtain higher utility. 
+In terms of words description, the definition of Nash Equilibrium is that if other agents do not change its strategy, then no single agent can obtain higher utility. 
 
 The learning process of RL-Agent in this paper can be considered as an incomplete information static non-cooperative game.
  
 \subsection{Pareto Efficient}
+Pareto Efficient is also named as Pareto Optimal which is a state at which resources in a system are optimized in a way that one dimension cannot improve without a second worsening. We can consider an economy scenario, there are N agents and K goods. For an allocation state, formed as $x=\{x_1, \dots, x_n\}$, where $x_i \in \dsR^{K}$. $x_i$ represents the resource set allocated to each agent $i$. The utility of each agent $i$ is formed as $u_i(x_i)$. Therefore, the Pareto optimal allocation is defined as follows.
 
 \begin{proposition}[Pareto Efficient]
-no other feasible allocation $\{x_{1}',...,x_{n}'\}$ where, for 
-utility function $u_i$ for each agent $i$, $u_{i}(x_{i})$ for all $i\in \{1,...,n\}$ with $u_{i}(x_{i}')>u_{i}(x_{i})$ for some $i$[].
+There is no other feasible allocation $\{x_{1}^{\prime},...,x_{n}^{\prime}\}$ where, for 
+utility function $u_i$ for each agent $i$, $u_{i}(x_{i}^{\prime}) \geqslant u_{i}(x_{i})$ for all $i \in \{1,...,n\}$ with $u_{i}(x_{i}^{\prime})>u_{i}(x_{i})$ for some $i$ \parencite{Whinston1989}.
 \end{proposition}
 
-Pareto Efficient is a state at which resources in a system are optimized in a way that one dimension cannot improve without a second worsening. 
+The relationship between Pareto Efficient and Nash Equilibrium has following two points:
+
+\begin{itemize}
+\item A certain Nash Equilibrium will implement a resource allocation, which may or may not be Pareto optimal.
+\item A certain Pareto Optimal resource allocation may or may not be obtained by the execution of the Nash Equilibrium of a completely information static game.
+\end{itemize}
 
 \subsection{Markov Games}
 \paragraph{Finite Markov Decision Processes}
 
-\paragraph{Multi-Agent Markov Decision Processes} Methods mentioned in the paper are based on a multi-agent extension of Markov decision processes(\gls{mdps}) called partially observable Markov games. There are N players indexed by $n=1,2,...,N$.
+\paragraph{Multi-Agent Markov Decision Processes} Methods mentioned in the paper are based on a multi-agent extension of Markov decision processes(\gls{mdps}) called partially observable Markov Games. There are N players indexed by $n=1,2,...,N$.
 
 \section{Autonomous Negotiaion} \label{autonomous-negotiation}
 Negotiation is an important process in coordinating behavior and represents a principal topic in the field of multi-agent system research. There has been extensive research in the area of automated negotiating agents. 
