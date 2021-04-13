@@ -139,21 +139,19 @@ Artificial intelligence is a big concept with a wide range of applications. It p
 \paragraph{Rank in E-Commerce Search Engine} In E-commerce platforms such as Amazon and TaoBao, ranking items in a search session is a typical multi-step decision-making problem. AI can learn the relation between different ranking steps, in the paper
 \parencite{Hu2018} authors use reinforcement learning (RL) to learn an optimal ranking policy which maximizes the expected accumulative rewards in a search session. The more reasonable the ranking of commodities, the more frequent commodity transactions, and the greater the corresponding income.
 
-\paragraph{Business-to-Business Negotiation} Negotiation is an important challenge for B2B e-commerce\parencite{Hans01}. For B2B e-commerce, artificial intelligence is making great strides and is being used in a variety of ways to improve and enhance business. AI-based algorithms and tools can help companies in various ways, from personalizing the shopping experience to improving supply chain management.
+\paragraph{Business-to-Business Negotiation} Negotiation is an important challenge for B2B eCommerce. For B2B e-commerce, artificial intelligence is making great strides and is being used in a variety of ways to improve and enhance business\parencite{Hans01}. AI-based algorithms and tools can help companies in various ways, from personalizing the shopping experience to improving supply chain management.
 
 \subsubsection{Logistics and Supply Chain}
 \paragraph{Contextual Intelligence} Artificial intelligence provides contextual intelligence for the supply chain, and they can use contextual intelligence to reduce operating costs and manage inventory. Contextual information can help them return to customers quickly.   
-\paragraph{Enhancing Productivity and Profits} Artificial intelligence can analyze the performance of the supply chain and propose new factors that affect the same field. It can combine the capabilities of different technologies such as reinforcement learning, unsupervised learning and supervised learning to discover factors and problems that affect the performance of the supply chain and can make better contracts between different suppliers and consumers\parencite{Pndey2019}. It can analyze the data related to the supplier like audits, in-full delivery performance, credit scoring, evaluations and based on that deliver information which can be used to make future decisions. This kind of step helps the company make better decisions as a supplier and work towards improving customer service. Autonomous Negotiation by autonomous agent is an important concept that can be used in this field. 
+\paragraph{Enhancing Productivity and Profits} Artificial intelligence can analyze the performance of the supply chain and propose new factors that affect the same field. It can combine the capabilities of different technologies such as reinforcement learning, unsupervised learning and supervised learning to discover factors and problems that affect the performance of the supply chain and can make better contracts between different suppliers and consumers\parencite{Pndey2019}. It can analyze the data related to the supplier like audits, in-full delivery performance, credit scoring, evaluations and based on that deliver information which can be used to make future decisions. This kind of step helps the company make better decisions as a supplier and work towards improving customer service. Autonomous Negotiation by autonomous agent is an important techonology that can be used in this field. 
 
 \subsubsection{Tools for computer science}
 
-\section{Artificial Neural Network}
-Artificial neural network is a technology based on the study of the brain and nervous system\parencite{WALCZAK2003631}, as shown in Figure \ref{}. ANNs are efficient data-driven modelling tools widely used for nonlinear systems dynamic modelling and identification, due to their universal approximation capabilities and flexible structure that allow to capture complex nonlinear behaviors \parencite{SHOKRY2018265}. 
-
-
+\section{Artificial Neural Network (\gls{ann})}
+Artificial neural network is a technology based on the study of the brain and nervous system\parencite{WALCZAK2003631}. \gls{ann}s are efficient data-driven modelling tools widely used for nonlinear systems dynamic modelling and identification, due to their universal approximation capabilities and flexible structure that allow to capture complex nonlinear behaviors \parencite{SHOKRY2018265}. 
 
 \subsection{Artificial Neuron}
-Artifical neuron is shown in Figure \ref{fig:neuron}
+
 
 \begin{figure}[htbp]
 \centering
@@ -161,25 +159,36 @@ Artifical neuron is shown in Figure \ref{fig:neuron}
 \caption{Aritifical Neuron}
 \label{fig:neuron}
 \end{figure}
+Artificial neuron defines the core module of neural network, in addition to weighted input, it also contains transfer and activation functions. Figure \ref{fig:neuron} diagrams a aritificial neuron. The input and output of neuron are $x_1, x_2, \dots, x_N$ and $o_J$, respectively. The output is obtained by calculation and processing of an activation function and a transfer function. The transfer function usually uses the weighted sum function defined below:
+\begin{equation}
+\text { net }_{j}=\sum_{i=1}^{n} w_{i j} x_{i}
+\end{equation}
 
-\subsection{Multi-Layers Neural Networks}
-Figure \ref{fig:multi-layer-ann} diagrams the multi-layers neural networks.
+Then the result of transfer function inputs to activation function. Based on different goal of application, related activation function will be used to calculate the output $o_j$, the form is shown as follows:
+\begin{equation}
+o_j = f(net_j)
+\end{equation}
+
+There are many diffrent activation functions such as sigmoid, softmax, relu and tanh. The corresponding activation function is used in specific application scenarios(e.g. classification or regression).
+
+\subsection{Multi-Layers Neural Network}
+In addition to the input and output layers, there are intermediate layers that do not interact with the external environment. Therefore, these intermediate layers are called hidden layers, and their nodes are called hidden nodes. The addition of the hidden layers extend the ability of the neural networks to solve nonlinear classification problems\parencite{BASHEER20003}. Figure \ref{fig:multi-layer-ann} diagrams a multi-layers neural network.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{./images/multi-layer-ann.png}
-\caption{Aritifical Multi-Layers Neural Network, Source: Own illustration based
-on\parencite{SAIRAMYA2019253}}
+\caption{Aritifical Multi-Layers Neural Network, x* are inputs. Source: Own illustration based
+on\parencite{SAIRAMYA2019253}.}
 \label{fig:multi-layer-ann}
 \end{figure}
 
 \subsection{Recurrent Neural Networks (RNNS)}
-Figure \ref{fig:recurrent-layer-ann} diagrams the recurrent neural networks.
+In a recurrent neural netowrks, the output of some neurons are fed back to the same neurons or to neurons in preceding layers\parencite{BASHEER20003}. Information flows both forward and backward directions. These networks have an important ability to store information. The special algorithms for training recurrent networks were introduced in the book \parencite{Hassoun1995}. Figure \ref{fig:recurrent-layer-ann} diagrams the recurrent neural networks.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{./images/recurrent-layer-ann.png}
-\caption{Recurrent Neural Network}
+\caption{Recurrent Neural Network where h* are outputs of hidden layers, x* are inputs, y* are outputs of network, w* are the weights corresponding to the layers.}
 \label{fig:recurrent-layer-ann}
 \end{figure}
 
@@ -321,8 +330,6 @@ There are three main different versions of \gls{scml}, which have different desi
 	\item SCML2020/2021: Standard Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2020/2021.
 	\item SCML2019: Standard Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2019
 \end{itemize}
-
-\subsubsection{SCML2019}
 
 \subsubsection{\gls{scml}2020/2021}
 \gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an independent project to research \gls{scm}. \gls{scml} realized a \gls{scm} World to simulate the \gls{scm} process.  
