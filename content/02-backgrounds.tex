@@ -3,7 +3,7 @@
 \section{Game Theory}
 
 \subsection{Nash Equilibrium}
-The concept of a Nash Equilibrium plays a central role in game theory. The definition in simple setting of a finite player is described as follow with mathematical form. Form indexes $K$ agents as $k=i, \dots, K$. There are total $N_k$ pure strategies. From $N_k$ agent k choose a strategy called $s_k$. $S_k$ denotes the set of strategies, and $s_k$ as the member of the set. A strategy profile, named $s = (s_1, ..., s_K)$, is a vector of strategies for the individual players. Hence, all strategy profiles can be written as $S$ for $\Pi_{k=1}^{K} S_{k}$. $s \mid s_{k}^{\prime}$ for the strategy $\left(s_{1}, \ldots, s_{k-1}, s_{k+1}^{\prime}, \ldots, s_{K}\right)$ means a strategy of agent $k$ changed from $s_k$ to $s_{k}^{\prime}$, in which a strategy profile $s$ is $s = (s_1, ..., s_K)$ and a strategy of agent $k$ is $s_{k}^{\prime} \in S_{k}$. The excepted utility or payoff of each agent $k$ is formed as $u_k(s)$, when agents select strategy profile $s$\parencite{Kreps1989}.
+The concept of a Nash Equilibrium plays a central role in game theory. The definition in simple setting of a finite player is described as follow with mathematical form. Form indexes $K$ agents as $k=i, \dots, K$. There are total $N_k$ pure strategies. From $N_k$ agent k choose a strategy called $s_k$. $S_k$ denotes the set of strategies, and $s_k$ as the member of the set. A strategy profile, named $s = (s_1, ..., s_K)$, is a vector of strategies for the individual players. Hence, all strategy profiles can be written as $S$ for $\Pi_{k=1}^{K} S_{k}$. We write $s \mid s_{k}^{\prime}$ for the strategy $\left(s_{1}, \ldots, s_{k-1}, s_{k+1}^{\prime}, \ldots, s_{K}\right)$ means a strategy of agent $k$ changed from $s_k$ to $s_{k}^{\prime}$, in which a strategy profile $s$ is $s = (s_1, ..., s_K)$ and a strategy of agent $k$ is $s_{k}^{\prime} \in S_{k}$. The excepted utility or payoff of each agent $k$ is formed as $u_k(s)$, when agents select strategy profile $s$\parencite{Kreps1989}.
 \begin{proposition}[Nash Equilibrium]
 For a strategy profile $s$, Nash Equilibrium can be described by a mathematical inequalities: For each agent $k$ and $s_{k}^{\prime} \in S_{k}$, $u_{k}(s) \geqslant u_{k}\left(s \mid s_{k}^{\prime}\right)$.
 \end{proposition}
@@ -43,7 +43,7 @@ Markov Decision Processes with finite time horizon will be considered in this se
 
 Next step the definition of strategy or policy is neccessary to be introduced. A policy is a mapping $\pi: S \rightarrow A$, where $\pi(s)$ means the action an agent will perform in state $s$. In the case of a given MDP, the agent should adopt the best strategy, which should maximize the accumulated expected reward when performing the specified action. Hence, how to find the optimal strategy and calculate the accumulated expected reward are important questions in the research field of reinforcement learning. All details will be further introduced in section value functions \ref{background:value-function}.
 
-\paragraph{Multi-Agent Markov Decision Processes} Based on communication ability of agents, Multi-Agent extension of Markov Decision Processes(\gls{mdps}) can be called partially or complete observable Markov Games. There are $N$ players indexed by $n=1,2, \dots ,N$. A Markov Game for $N$ agents is defined by a set of states $S$ describing the possible configuration of all agents. $A_1, \dots, A_N$ and $O_1, \dots, O_N$ are the set of actions and observations of individuale agents, respectively. For each agent, a stochastic strategy $\boldsymbol{\pi}_{\theta_{i}}$ will be used to choose action, the mapping is $\boldsymbol{\pi}_{\theta_{i}}: \mathcal{O}_{i} \times \mathcal{A}_{i} \mapsto[0,1]$. For the multi-agent \gls{mdp}, the trainstion function is defined as following mapping functions $\mathcal{T}: \mathcal{S} \times \mathcal{A}_{1} \times \ldots \times \mathcal{A}_{N} \mapsto \mathcal{S}$, which produces the next state. $r_i(s, a)$ means the reward of agent $i$ if the state is s and action$a$ is taken. The mapping of reward function is described as $r_i: S \times A_i \mapsto \dsR$. Each agent $i$ receives the private obsevation correlated with the state $o_i: S \mapsto O_i$. There are many cases for Multi-Agent \gls{mdp}. Following three items are the typical cases that are introduced by \texttt{Boutilier} in paper\parencite{Boutilier1996PlanningLA, maddpg2017}.
+\paragraph{Multi-Agent Markov Decision Processes} Based on communication ability of agents, Multi-Agent extension of Markov Decision Processes(\gls{mdps}) can be called partially or complete observable Markov Games. There are $N$ players indexed by $n=1,2, \dots ,N$. A Markov Game for $N$ agents is defined by a set of states $S$ describing the possible configuration of all agents. $A_1, \dots, A_N$ and $O_1, \dots, O_N$ are the set of actions and observations of individuale agents, respectively. For each agent, a stochastic strategy $\boldsymbol{\pi}_{\theta_{i}}$ will be used to choose action, the mapping is $\boldsymbol{\pi}_{\theta_{i}}: \mathcal{O}_{i} \times \mathcal{A}_{i} \mapsto[0,1]$. For the multi-agent \gls{mdp}, the trainstion function is defined as following mapping functions $\mathcal{T}: \mathcal{S} \times \mathcal{A}_{1} \times \ldots \times \mathcal{A}_{N} \mapsto \mathcal{S}$, which produces the next state. $r_i(s, a)$ means the reward of agent $i$ if the state is s and action$a$ is taken. The mapping of reward function is described as $r_i: S \times A_i \mapsto \dsR$. Each agent $i$ receives the private obsevation correlated with the state $o_i: S \mapsto O_i$\parencite{maddpg2017}. There are many cases for Multi-Agent \gls{mdp}. Following three items are the typical cases that are introduced by \texttt{Boutilier} in paper\parencite{Boutilier1996PlanningLA}.
 \begin{itemize}
 \item Complete Communication
 \item Communication of actions, but not states 
@@ -53,36 +53,51 @@ Next step the definition of strategy or policy is neccessary to be introduced. A
 \section{Autonomous Negotiaion} \label{autonomous-negotiation}
 Negotiation is an important process in coordinating behavior and represents a principal topic in the field of multi-agent system research. There has been extensive research in the area of automated negotiating agents. 
 
-Automated agents can be used side-by-side with a human negotiator embarking on an important negotiation task. They can alleviate some of the effort required of people during negotiations and also assist people who are less qualified in the negotiation process. There may even be situations in which automated negotiators can replace the human negotiators. Thus, success in developing an automated agent with negotiation capabilities
-has great advantages and implications[].
+Automated agents can be used side-by-side with a human negotiator embarking on an important negotiation task. They can alleviate some of the effort required of people during negotiations and also assist people who are less qualified in the negotiation process. There may even be situations in which automated negotiators can replace the human negotiators. Thus, success in developing an automated agent with negotiation capabilities has great advantages and implications\parencite{Baarslag2012}.
 
-Through the negotiation agents, many problems that arise in real or simulated domain can be solved. 
-In industrial domains, 
-In commerical  domains, the Supply Chain Management System (SCMS)
-functionality is implemented through agent-based negotiation environment, in which contracts can be singed through negotiation between agents. Many papers describe ongoing effort in developing a Multi-agent System (MAS) for supply chain management[\gls{scml}].
+Through the negotiation agents, many problems that arise in real or simulated domain can be solved. In industrial domains and in commerical domains, the Supply Chain Management System (SCMS) functionality is implemented through agent-based negotiation environment, in which contracts can be singed through negotiation between agents. Many papers describe ongoing effort in developing a Multi-agent System (MAS) for supply chain management, such as work in paper \parencite{Lee2004}.
 
 In game domains, bilateral negotiation in [GENIUS]
 
 \subsection{Utility Function}
-Utility function is an important concept in economics. It measures preferences over a set of goods and services. Utility represents the satisfaction that consumers receive for choosing and consuming a product or service[]. In NegMAS and SCML, utility function could measure either single offer or set of offers.
+Utility Function is an important concept in economics. It measures preferences for a set of goods and services. Utility represents the satisfaction that consumers obtain when choosing and consuming products or services\parencite{ANDRIY2019}. Utility Function can measure either single offer or set of offers.
 
-Utility is measured in units called utils, but calculating the benefit or satisfaction that consumers receive from is abstract and difficult to pinpoint[]. In the package NegMAS, SCML are built-in some utility functions, through inheritance of these it is easy to design new Utility function by developer. Such as linear utiliy function and real utility function OneShotUfun designed in SCMLOneShotWorld.
+Utility is measured in units called utils, but calculating the benefit or satisfaction that consumers receive from is abstract and difficult to pinpoint\parencite{ANDRIY2019}. One typical utility function is briefly listed and introduced below:
 
-[1] linear utility function
-[2] real utility function OneShotUfun
+\begin{itemize}
+\item \textbf{linear utility function:} $u\left(x_{1}, x_{2}, \ldots, x_{m}\right)=w_{1} x_{1}+w_{2} x_{2}+\ldots w_{m} x_{m}$ or described as a vector $u(\vec{x})=\vec{w} \cdot \vec{x}$, where $m$ is the number of differen goods in the economy. The element $x$ represents the amount of good $i$. The element $w_i$ represents the relative value that the consumer assigns to good $i$.
+\end{itemize}
 
-It is a important point for designing a new Agent in autonomous negotiation environments. For heuristic agents utility function is a keypoint to measure preferences. For reinforment learning agents utiliy function conducts the behavior of learnable agents, used as a part of reward function, significantly affect the design and evaluation of RL-Agent.
+It is a important point for designing a new Agent in autonomous negotiation environments. For heuristic agents utility function is a keypoint to measure preferences. For reinforment learning agents utiliy function conducts the behavior of learnable agents, it can be used as a part of reward function, significantly affect the design and evaluation of RL-Agent.
 
-\subsection{Rubinstein bargaining mechanism}
-Rubinstein bargaining mechanism is widely cited for multi-round bilateral negotiation \parencite{Rubinstein1982}.
-Two agents in the mechanism which has an infinite time horizon have to reach an agreement. 
+\subsection{Basic Notation in Negotiation Mechanism}
+Before going into the specific negotiation mechanism. We need to understand some basic notations defined in the paper \parencite{Aydoğan2017}.
+Following definitions will be used when discuss the specific negotiation mechanism.
 
-To the state of nash equilibrium.
+\begin{definition}[Round and Phase]
+Round and Phase within rounds are used to structure the negotiation process.
+\end{definition}
 
-\subsection{Stacked alternating offers mechanism(SAOM)} \label{background:saom}
-\gls{saom} is also named as stacked alternating offers protocol. Agents can only take their action when it is their turn. SAOM allows negotiating agents to evaluate only the most recent offer in their turn and accordingly they can either accept offer, make a count offer or walk away.
+\begin{definition}[Turn taking]
+Alternating Offer Protocols assign turns to the negoiating agents. Turns are taken according to a turn-taking sequence.
+\end{definition}
 
-In the SCML OneShotWord, at the first step all of the agents will propose a first offer.
+\subsection{Rubinstein Bargaining Mechanism}
+Rubinstein bargaining mechanism is widely cited for multi-round bilateral negotiation.
+Two agents in the mechanism which has an infinite time horizon and have to reach an agreement. In a turn, one agent propose an offer, the other need to decide either to accept it, or to reject it and continue the bargaining\parencite{Rubinstein1982}. The offer is about how to divide the pie of size 1.
+
+After the two agents have played indefinitely, they may get the corresponding Nash Equilibrium solution.
+
+\subsection{Stacked Alternating Offers Mechanism(\gls{saom})} \label{background:saom}
+In the Alternating Offers Protocol, one of the agent start to proposal an offer. The other can either accept or reject the given offer. If an agreement is reached, the negotiation is successful and ended. When rejecting the offer the other agent can either end the negotiation or give a count offer.
+
+\gls{saom} is also named as stacked alternating offers protocol. Agents can only take their action when it is their turn. \gls{saom} allows negotiating agents to evaluate only the most recent offer in their turn and accordingly they can take the following actions:
+\begin{itemize}
+\item Make a count offer (thus rerejecting and overriding the previous offer)
+\item Accept the offer
+\item Walk away (e.g. ending the negotiation without any agreement)
+\end{itemize}
+This negotiation process is repeated until a termination condition is met. The termination condisiton is met, if an agreement is reached or the deadline is reached. When an agreement is reached, all agents need to accept the offer. If at the deadline no agreement is reached, this negotiation is failed. 
 
 \section{Artificial Intelligence}
 Artificial Intelligence is a broad branch of computer science that is focused on a machine’s capability to produce rational behavior from external inputs. The goal of AI is to create systems that can perform tasks that would otherwise require human intelligence[].
@@ -328,6 +343,9 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World in \gls{scml-oneshot}
 \caption{Main running logic of a simulation in a \gls{scml-oneshot} world, Each red box represents a day. Broken lines represent exogenous contracts while connected lines are negotiations (about the intermediate product). All negotiations conducted in a given day are about deliveries on the same day. Source: Own illustration based on\parencite{Mohammad2021}}
 \label{fig:overview-scml-oneshot}
 \end{figure}
+
+\paragraph{Utiliy Function in \gls{scml-oneshot}} OneShot World has the self defined Utility Function also named OneShotUfun.
+\paragraph{Negotiation Mechanism in \gls{scml-oneshot}} In the SCML OneShotWord, at the first step all of the agents will propose a first offer.
 
 There are many agents which has same type in the \gls{scm} World. 
 
