@@ -221,7 +221,7 @@ Just like the description of Markov games in the chapter background \ref{backgro
 \begin{equation} 
 V_{\pi}(s)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s \right]=\mathbb{E}_{\pi}\left[\sum_{j=0}^{T} \gamma^{j} r_{t+j+1} \mid S_{t}=s\right]
 \end{equation}
-Compared with a infinite \gls{mdp} the time horizon here is set as $T$. The discount is $\gamma$. At the time $t$, $s_t$ denotes the state of agent.
+Compared with a infinite \gls{mdp} the time horizon here is set as $T$. The discount is $\gamma$. At the time $t$, $S_t$ denotes the state of agent.
 
 \textbf{State-Action Value Function($Q$)} which measures the goodness of each pair of state, action. Compared with state value function action is also determined. The meaning of $G$, $S_t$ and $\gamma$ are same as in the state value function. $A_t$ indicates the action of agent at the time $t$.
 \begin{equation}
@@ -234,7 +234,7 @@ In summary, Bellman Functions decomposes the value function into two parts, the 
 \begin{equation} \label{equation:bellman-state-value-function}
 V_{\pi}(s)=\sum_{a} \pi(a \mid s) \cdot \sum_{s \prime} P_{s s^{\prime}}^{a}\left(r(s, a)+\gamma V_{\pi}\left(s^{\prime}\right)\right)
 \end{equation}
-$\pi(a \mid s)$ is the probability that an agent chooses the action $a$ in the state $s$. $P_{s s^{\prime}}^{a}$ is the probability that state of an agent changes from $s$ to $s^{\prime}$ after the agent choose action $a$.
+$\pi(a \mid s)$ is the probability that an agent chooses the action $a$ in the state $s$. $P_{s s^{\prime}}^{a}$ is the probability that state of an agent changes from $s$ to $s^{\prime}$ after the agent chooses action $a$.
 
 As same as Bellman equation for the state value function, equation \ref{equation:bellman-action-value-function} tells us how to find recursively the value of a state-action pair following a policy $\pi$.
 \begin{equation} \label{equation:bellman-action-value-function}
@@ -262,42 +262,46 @@ The derivation process is written in the appendix \ref{derivation-process-gradie
 
 \subsection{Deep Reinforcement Learning (\gls{drl})}
 \subsubsection{Deep Q-Networks}
-The loss function of DQN
+\gls{dqn} use a Q-Netowrk to replace the Q-Table in Q-Learning. In addition, the training process is supervised by the target network, and the target network is updated by duplicating the parameters of the current network after the fixed frequency training step. The target $q$ is formed as $y_{i}=\left\{\begin{array}{cc}r_{i} & \text { if episode terminates at step } \mathrm{i}+1 \\ r_{j}+\gamma \max _{a^{\prime}} \hat{Q}\left(s_{i+1}, a^{\prime} ; \theta^{-}\right) & \text {otherwise }\end{array}\right.$.
+
+The loss function of \gls{dqn} is shown in the following equation:
 
 \begin{equation}
-\mathcal{L}(\theta)=\sum_{i=1}^{b}\left[\left(y_{i}-Q(s, a \mid \theta)\right)^{2}\right]
+\mathcal{L}(\theta)=\sum_{i=1}^{T}\left[\left(y_{i}-Q(s, a \mid \theta)\right)^{2}\right]
 \end{equation}
 
+$\theta^{-}$ and $\theta$ are the parameters of target network and current network, respectively. The details of the algorithm are described in appendix \ref{appendix:dqn}.
+
 \subsubsection{Proximal Policy Optimization (\gls{ppo})}
-Disadvantage: the distrubition of action changed too quickly, when the reward is always positiv or negative, some possible action will be disapper.
-PPO use some contraint tricks to avoid it. such as clip of policy. The loss function based on PPO-clip is as follow.
+During the training process, \gls{pg} will continuously update the probability distribution of actions, but there will be a problem. If the reward is always positive or negative, some possible actions will disappear and it is difficult to sample these actions. \gls{ppo} use some contraint tricks, such as clip of policy, to avoid the problem. It makes the probability distribution of actions more reasonable. The loss function based on PPO-clip is as follow.
 \begin{equation}
 L\left(s, a, \theta_{k}, \theta\right)=\min \left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)} A^{\pi_{\theta_{k}}}(s, a), \quad \operatorname{clip}\left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)}, 1-\epsilon, 1+\epsilon\right) A^{\pi_{\theta_{k}}}(s, a)\right)
 \end{equation} 
 
-\subsubsection{DPG, DDPG, \gls{maddpg}} \label{background:maddpg}
+The details of derivation process and algorithm are introduced in appendix \ref{appendix-derivation-process-loss-ppo} and \ref{appendix-algorithm-ppo}.
 
-DPG: create a $\mu$ function to determine the action instead the sample in PG.
+\subsubsection{\gls{dpg},\gls{ddpg}, \gls{maddpg}} \label{background:maddpg}
 
-DDPG: use Actor-Critic model to create target and execute network. a variant of DPG. policy $\mu$ and critic $Q_\mu$ are approximated with deep neural networks.
+\textbf{\gls{dpg}}: Deterministic policy gradient creates a $\mu$ function to determine the action instead the sample in \gls{pg}.
 
-MADDPG: DDPG used in multi-agents environments.
+\textbf{\gls{ddpg}}: DDPG\parencite{Lillicrap2015}, short for Deep Deterministic Policy Gradient, is a model-free off-policy actor-critic algorithm, combining DPG with DQN. The original DQN works in discrete space, and DDPG extends it to continuous space with the actor-critic framework while learning a deterministic policy. Actor-Critic framework will create two networks named as actor network, which ouputs the action, and critic network, which conducts the training and update of actor network.
 
-MADPG
-\begin{equation}
-\nabla_{\theta_{i}} J\left(\theta_{i}\right)=\mathbb{E}_{s \sim p^{\mu}, a_{i} \sim \pi_{i}}\left[\nabla_{\theta_{i}} \log \pi_{i}\left(a_{i} \mid o_{i}\right) Q_{i}^{\pi}\left(\mathbf{x}, a_{1}, \ldots, a_{N}\right)\right]
-\end{equation}
+\textbf{\gls{maddpg}}: Multi-Agent DDPG\parencite{maddpg2017} extends DDPG to an environment where multiple agents coordinate only local information to complete tasks. From an agent's point of view, the environment is unstable because the policies of other agents will quickly escalate and remain unknown. MADDPG is a critical model of actors, which has been redesigned to deal with this ever-changing environment and the interaction between agents. 
 
-Extension to deterministic policies
+\textbf{Actor update} The gradient of reward of MADDPG is shown below:
 
 \begin{equation}
 \nabla_{\theta_{i}} J\left(\boldsymbol{\mu}_{i}\right)=\mathbb{E}_{\mathbf{x}, a \sim \mathcal{D}}\left[\left.\nabla_{\theta_{i}} \boldsymbol{\mu}_{i}\left(a_{i} \mid o_{i}\right) \nabla_{a_{i}} Q_{i}^{\mu}\left(\mathbf{x}, a_{1}, \ldots, a_{N}\right)\right|_{a_{i}=\boldsymbol{\mu}_{i}\left(o_{i}\right)}\right]
 \end{equation}
+Where $D$ is the memory buffer for experience replay, containing multiple episode samples.
 
-Loss function is 
+\textbf{Critic update} Loss function is used for updating of critic network. The form of loss function is shown as follow:
 \begin{equation}
 \mathcal{L}\left(\theta_{i}\right)=\mathbb{E}_{\mathbf{x}, a, r, \mathbf{x}^{\prime}}\left[\left(Q_{i}^{\boldsymbol{\mu}}\left(\mathbf{x}, a_{1}, \ldots, a_{N}\right)-y\right)^{2}\right], \quad y=r_{i}+\left.\gamma Q_{i}^{\boldsymbol{\mu}^{\prime}}\left(\mathbf{x}^{\prime}, a_{1}^{\prime}, \ldots, a_{N}^{\prime}\right)\right|_{a_{j}^{\prime}=\boldsymbol{\mu}_{j}^{\prime}\left(o_{j}\right)}
 \end{equation}
+Where $\mu^{\prime}$ is are the target networks (target policies) with delayed updated parameters.
+
+Detailed information about the \gls{dpg}, \gls{ddpg} and \gls{maddpg} is introduced in appendix \ref{appendices-algorithms} and \ref{appendices-derivation-process}.
 
 \subsubsection{Value Decomposition Networks}
 
