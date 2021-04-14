@@ -322,14 +322,15 @@ For multi-agent deep reinforcement learning, there is a very natural idea, which
 \gls{negmas} has natively implemented five mechanism, Stacked Algernating Offers Mechanism (\gls{saom}), single-text negotiation mechanisms (st) \ref{}, multi-text mechanisms (mt) \ref{}, GA-based negotiation mechanisms\ref{} and chain negotiations mechasnim\ref{}. Among them, \gls{saom} is the negotiation mechanism that is discussed and used in the experiments of this thesis. It has been introduced in detail in section Autonomous Negotiation \ref{background:saom}. At the same time, in the related negotiatioin mechanism packages, some negotiators, such as AspirationNegotiator in negmas.sao, are developed as key part of the packages. These negotiation negotiator will be used as the baseline negotiators in the following experiments.
 \paragraph{\gls{negmas} and World}
 A simulation is an embedded domain in which agents behave. It is represented in \gls{negmas} by a World. The world in \gls{negmas} was designed to simply the common tasks involved in constructing negotiation driven simulations\parencite{Mohammad2019}. The entire simulation includes multiple simulation steps which is different with the negotiation rounds definied in \ref{background:autonmous-negotiation:basic-notation}. A simulation step can have multiple negotiation rounds. In each step, agents can be allowed to take proactive actions by performing operations worldwide, reading their status from the world, or requesting/operating negotiations with other agents.
-\paragraph{\gls{negmas} and Negotiator} Negotiator is an entity in a negotiation mechanism.
+\paragraph{\gls{negmas} and Negotiator} Negotiator is an entity in a negotiation mechanism. Several negotiators are natively implemented in \gls{negmas}. AspirationNegotiator, SimpleTitForTatNegotiator and PassThroughSAONegotiator are negotiators, which were developed for \gls{saom}.
 
 The overview of the main components of a simulation in a \gls{negmas} world is shown in Figure \ref{fig:overview-negmas}.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{./images/overview-negmas.png}
-\caption{Main components and interactive logic of a simulation in a \gls{negmas} world, Source: Own illustration based on\parencite{Mohammad2019}}
+\caption{Main components and interactive logic of a simulation in a \gls{negmas} world, \\
+Source: Own illustration based on\parencite{Mohammad2019}}
 \label{fig:overview-negmas}
 \end{figure}
 
@@ -365,9 +366,7 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World in \gls{scml-oneshot}
 
 \paragraph{Utiliy Function in \gls{scml-oneshot}} OneShot World has the self defined Utility Function named as OneShotUfun.
 \paragraph{Negotiation Mechanism in \gls{scml-oneshot}} In the SCML OneShotWord, at the first step all of the agents will propose a first offer.
-\paragraph{Agent in \gls{scml-oneshot}} 
-
-There are many agents which has same type in the \gls{scm} World. 
+\paragraph{Agent in \gls{scml-oneshot}} Agent GreedyOneShotAgent and SingleAgreementAspirationAgent were developed as the native part of \gls{scml-oneshot}.
 
 Researchers have also developed many negotiation agents such as Agent1[], Agent2[], Agent3[] in GENIUS, Agent4[], Agent5[], Agent6[] in \gls{negmas}.
 
