@@ -1,6 +1,14 @@
 \begin{appendices}
 In the appendices, many detailed information are listed, such as algortihms of reinforcement learning.
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+	\chapter{Derivation Process}
+	\section{Gradient of Reward of \gls{pg}} \label{derivation-process-gradient-pg}
+	The complete derivation process of gradient of reward of \gls{pg} is step-by-step shown as follows.
+	The reward function is defined as :
+	\begin{equation}
+	J(\theta)=\sum_{s \in \mathcal{S}} d^{\pi}(s) V^{\pi}(s)=\sum_{s \in \mathcal{S}} d^{\pi}(s) \sum_{a \in \mathcal{A}} \pi_{\theta}(a \mid s) Q^{\pi}(s, a)
+\end{equation}
+	
   \chapter{Algorithms}
   \section{Single-Agent Reinforcement Learning}
 	\subsection{DQN} \label{appendix:dqn}

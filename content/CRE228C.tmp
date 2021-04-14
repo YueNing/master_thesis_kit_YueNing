@@ -250,15 +250,13 @@ Q_t(s, a) &= Q_{t-1}(s, a) + \alpha TD_t(s, a) \\
 					&= Q_{t-1}(s, a)+\alpha\left(R(s, a)+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)-Q_{t-1}(s, a)\right)
 \end{aligned}
 \end{equation}
-\gls{td} is the abbreviation of Temporal Error. $R(s, a)+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)$ denotes the \gls{td} target. Current state-action value is fromed as $Q_{t-1}(s, a)$. $Q_t(s, a)$ is updated with the learning rate $\alpha$.
+
+TD: Temporal Error. $R(s, a)+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)$: TD target. $Q_{t-1}(s, a)$: current state-action value. $Q_t(s, a)$: updated state action value. 
 
 \subsection{Policy Gradient \gls{pg}}
-Different from Q-Learning, policy gradient learns the strategy directly based on the gradient of reward function. The policy is usually modeled with a parameterized function respect to $\theta$, $\pi_\theta \left(a \mid s\right)$. The gradient of reward function is shown below:
 \begin{equation}
 \nabla_{\theta} J(\theta)=\mathbb{E}_{s \sim p^{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \boldsymbol{\pi}_{\theta}(a \mid s) Q^{\boldsymbol{\pi}}(s, a)\right]
 \end{equation}
-
-The derivation process is written in the appendix \ref{derivation-process-gradient-pg}.
 
 \subsection{Deep Reinforcement Learning (\gls{drl})}
 \subsubsection{Deep Q-Networks}
