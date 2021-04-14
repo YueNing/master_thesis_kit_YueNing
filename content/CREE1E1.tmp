@@ -303,11 +303,12 @@ Where $\mu^{\prime}$ is are the target networks (target policies) with delayed u
 
 Detailed information about the \gls{dpg}, \gls{ddpg} and \gls{maddpg} is introduced in appendix \ref{appendices-algorithms} and \ref{appendices-derivation-process}.
 
-\subsubsection{Value Decomposition Networks(\gls{vdn})}
-For multi-agent deep reinforcement learning, there is a very natural idea, which is to learn concentrated state action values but perform action through local observations to solve the non-stational environmemt problem which exists in the scneario, where agents use independet learning methods. The key idea of \gls{maddpg} is the same. However, it has been proven that its convergence is problematic, and training is extremely difficult. This requires on policy learning, which is sample inefficiency, and when there are too many agents, it becomes impractical to train fully focused critics. \gls{vdn}\parencite{Sunehag2017} takes an approach, which learn a centralised but factored $Q_{tot}$. Author represents $Q_{tot}$ as a sum of individual value functions $Q_a$. Each agent selected actions greedily with respect to its $Q_a$. However, a simple summation operator limits the representation ability of centralised action-value function. More importantly, extra states of environment are not considered during the training.
+\subsubsection{Value Decomposition Networks(VDN)}
+For multi-agent deep reinforcement learning, there is a very natural idea, which is to learn concentrated state action values but perform action through local observations to solve the non-stational environmemt problem which exists in the scneario, where agents use independet learning methods. The key idea of \gls{maddpg} is the same. However, it has been proven that its convergence is problematic, and training is extremely difficult. This requires on policy learning, which is sample inefficiency, and when there are too many agents, it becomes impractical to train fully focused critics. \gls{vdn}\parencite{Sunehag2017} takes an approach, which learn a centralised but factored $Q_tot$.
+
+\subsubsection{Mixing Network used in \gls{qmix}}
 
 \subsubsection{\gls{qmix}}
-\gls{qmix} is a method first proposed in the paper Monotonic Value Function Factorisation for Deep Multi-Agent Reinforcement Learning\parencite{Rashid2018}. It is used to solve the limitation of \gls{vdn}. \gls{qmix} consists of two networks, one of which is called as agent networks representing each $Q_a$, second network is a mixing network that combines all $Q_a$ into $Q_{tot}$, not as a simple sum as in \gls{vdn}. Mixing network uses complex non-linear way to ensure consistency between centralized and decentralized strategies. The detailed model will be introduced in the experiment when it is combined with the experimental environment \ref{methods:qmix-scml-oneshot}.
 
 \section{Platform and Library}
 \subsection{GENIUS}
