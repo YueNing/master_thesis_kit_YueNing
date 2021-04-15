@@ -61,11 +61,11 @@ on\parencite{Bakker2019RLBOAAM}.}
 \end{figure}
 
 
-\textbf{\gls{anegma}:} Work by \parencite{bagga2020deep}. A novel DRL-inspired agent model called ANEGMA, which allows the buyer to develop an adaptive strategy to effectively use against its opponents (which use fixed-but-unknown strategies) during concurrent negotiations in an environment with incomplete information . The architecture of \gls{anegma} is shown in Figure \ref{fig:anegma}.
+\textbf{\gls{anegma}:} Work by \parencite{bagga2020deep}. A novel DRL-inspired agent model called ANEGMA, which allows the buyer to develop an adaptive strategy to effectively use against its opponents (which use fixed-but-unknown strategies) during concurrent negotiations in an environment with incomplete information . The architecture of \gls{anegma} is shown in Figure \ref{}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{./images/anegma.png}
-\caption{The Architecture of \gls{anegma}. Source: Own illustration based on\parencite{bagga2020deep}.}
+\includegraphics[width=1.0\textwidth]{./images/anegma.png}
+\caption{The Architecture of \gls{anegma]. Source: Own illustration based on\parencite{bagga2020deep}.}
 \label{fig:anegma}
 \end{figure}
 
