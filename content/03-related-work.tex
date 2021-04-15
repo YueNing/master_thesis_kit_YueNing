@@ -73,10 +73,11 @@ on\parencite{Bakker2019RLBOAAM}.}
 \section{Challenges in Deep Reinforcement Learning}
 
 \subsection{Sparse Reward}
-Utility value as part of reward function
-reward shaping
-Curiosity Driven
-Imitation Learning
+For financial problem, the reward is usually profit and an appropriate reinforcement learning signal should be based on it. When an agent learns the strategy just with it, the reward is too sparse. Hence, the reward function is needed to provide more frequent feedback. Methods \textbf{Reward Shaping},\textbf{ Curiosity Driven} and \textbf{Imitation Learning} proposed to solve sparse reward problem, will be introduced in this section.
+
+\paragraph{Reward Shaping\parencite{Wiewiora2010}} Utility value as part of reward function.
+\paragraph{Curiosity Driven \parencite{pathakICMl17curiosity}}
+\paragraph{Imitation Learning\parencite{DBLP:journals/corr/HesterVPLSPSDOA17}} Inverse reinforcement learning (IRL) is a different approach of imitation learning, where the main idea is to learn the reward function of the environment based on the expert’s demonstrations, and then find the optimal policy.
 
 \subsection{Non-stationary environment}
 The strategy of single agent is changed during training
