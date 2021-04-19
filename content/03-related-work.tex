@@ -5,23 +5,30 @@ In this chapter, related work on the relevant topics of this work is presented a
 \subsection{Time-based Strategy (Aspiration Negotiator)}
 Aspirations are the specific goals in a negotiation that a negoitator wishes to achieve as part of an agreement. Empricial evidence has shown that negotiators with higher aspirations tend to achieve better bargaining results. First, aspiration of negotiator can help to determine the outer limit of what negotiator will request. Second, optimistic aspirations can make the negotiators to work harder\parencite{Schneider2004}. Many aspiration negotiators are time dependent, such as Boulware(with concession factor $e=1/2$), Hardliner($e=0$), Conceder Linear($e=1$) and Conceder($e=2$)\parencite{FARATIN1998159}. Boulwarism is the tactic of making a "take-it-or-leave-it" offer in a negotiation, with no further concessions or discussion. It was named after General Electric's former vice president Lemuel Boulware, who promoted the strategy\parencite{William1991}.
 
-The value of issue $j$ as the offer at time $t$ sent by agent a to agent b is modeled as follows:
+At every round, the agent calculates their decision utility which determines whether they accept an offer or not. For time-dependent agents, this is:
+\begin{equation}
+u(t) = P_{min} + (P_{max} - P_{min})(1-\alpha(t))
+\end{equation}
+$P_{max}$ and $P_{min} \in [0, 1]$, Frequently, $\alpha(t)$ is parametrized as a polynomial function: $\alpha(t)=\kappa+\left(1-\kappa\right)\left(\min \left(t, t_{\max }\right) / t_{\max }\right)^{1 / e}$.
+
+Where $e$ is the concession factor. $k$ is often set to 0 for simplicity. Figure \ref{fig:boulware-conceder-combination} diagrams the convexity degree of $\alpha(t)$and utility value $u(t)$ based on the $\alpha(t)$.
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth]{./images/conceder-boulware-combination.png}
+\caption{Convexity degree of $\alpha(t)$(left) and $u(t)$(right) with concession factors $e=[0.1, 0.2, 0.5, 1, 2, 50]$.}
+\label{fig:boulware-conceder-combination}
+\end{figure}
+
+In addition, it is obvious, for single issue, the value of issue $j$ as the offer at time $t$ sent by agent a to agent b can be formed as follows:
 \begin{equation}
 x_{a \rightarrow b}^{t}[j]=\left\{\begin{array}{ll}
-\min _{j}^{a}+\alpha_{j}^{a}(t)\left(\max _{j}^{a}-\min _{j}^{a}\right) & \text { if } V_{j}^{a} \text { is decreasing } \\
-\min _{j}^{a}+\left(1-\alpha_{j}^{a}(t)\right)\left(\max _{j}^{a}-\min _{j}^{a}\right) & \text { if } V_{j}^{a} \text { is increasing. }
+\min _{j}^{a}+\alpha_{j}^{a}(t)\left(\max _{j}^{a}-\min _{j}^{a}\right) & \text { if } u_{j}^{a} \text { is decreasing } \\
+\min _{j}^{a}+\left(1-\alpha_{j}^{a}(t)\right)\left(\max _{j}^{a}-\min _{j}^{a}\right) & \text { if } u_{j}^{a} \text { is increasing. }
 \end{array}\right.
 \end{equation}
-Where $V_{j}$ denotes utility value of issue $j$ set as the offer, $\min _{j}$ and $\max _{j}$ mean the minimum and maximum value of offer $j$, respectively.
+Where $u_{j}$ denotes utility value of issue $j$ set as the offer, $\min _{j}$ and $\max _{j}$ mean the minimum and maximum value of issue $j$, respectively.
 
-Figure \ref{fig:boulware-conceder} diagrams the convexity degree of $\alpha_j(t)$ used in the calcualtion model of offer's value.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.6\textwidth]{./images/boulware-conceder.png}
-\caption{Computation of $\alpha(t)$. Time is presented as relative to $t_{max}$. Polynomial Function: $\alpha_{j}(t)=\kappa_{j}+\left(1-\kappa_{j}\right)\left(\min \left(t, t_{\max }\right) / t_{\max }\right)^{1 / e}$. $\kappa_{j}$ is minimum conceder of negotiator.}
-\label{fig:boulware-conceder}
-\end{figure}
 
 The offer will always between the value range($[min_j, max_j]$), the initial constant will be given at the beginning, and before the deadline is reached, the strategy will suggest to provide a reserved value.
 
@@ -84,7 +91,7 @@ For financial problem, the reward is usually profit and an appropriate reinforce
 
 \subsection{Non-stationary environment}
 The strategy of single agent is changed during training
-Multi-agent environment is non-statinal
+Multi-agent environment is non-stational
 Multi-agent deep reinforcement learning 
 
 \subsection{Huge action space}
