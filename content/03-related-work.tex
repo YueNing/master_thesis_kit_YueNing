@@ -32,7 +32,8 @@ Where $u_{j}$ denotes utility value of issue $j$ set as the offer, $\min _{j}$ a
 
 The offer will always between the value range($[min_j, max_j]$), the initial constant will be given at the beginning, and before the deadline is reached, the strategy will suggest to provide a reserved value.
 
-\subsection{Tit for tat strategies}
+\subsection{Behavior-based Strategies}
+Tit for tat strategies
 
 \subsection{Concurrent Negotiation Strategy (\gls{cns})}
 In a concurrent negotiation environment, an agent will negotiate with many opponents at the same time(one-to-many). One issue is how to coordinate all these negotiations. The author of the paper \parencite{Williams12Concurrent} designed an intuitive model with two key parts, namely the \texttt{Coordinator} and \texttt{Negotiation Thread} to deal with this problem.
@@ -79,7 +80,7 @@ on\parencite{Bakker2019RLBOAAM}.}
 
 \section{Challenges in Deep Reinforcement Learning}
 
-\subsection{Sparse Reward}
+\subsection{Sparse Reward} \label{related-work:sparse-reward}
 For financial problem, the reward is usually profit and an appropriate reinforcement learning signal should be based on it. When an agent learns the strategy just with it, the reward is too sparse. Hence, the reward function is needed to provide more frequent feedback or redesign the learning model. Methods \textbf{Reward Shaping},\textbf{ Curiosity Driven} and \textbf{Imitation Learning} proposed to solve sparse reward problem, will be introduced in this section.
 
 \paragraph{Reward Shaping\parencite{Wiewiora2010}} is a method for engineering a reward function in order to provide more frequent feedback on appropriate behaviors. Providing feedback during early learning is crucial, so try promising behaviors as early as possible. This is necesary in large domains, where reinforcement signals may be few and far apart. If a method added shaping rewards in a way, it need to guarantees the optimal policy maintains its optimality. Ng et al. proposed a method with a new concept potential function $\Phi()$ to guarantee it. Hence, reward shpaing $f$ is described as $f(s, s^{\prime}) = \gamma\Phi(s^{\prime}) - \Phi(s)$ over the stats\parencite{Ng1999PolicyIU}. The form means shaping reward $f$ for transitioning from state $s^{\prime}$ to $s$ is defined as the discounted change in this state potential. Based on the value function mentioned in the section \ref{background:value-function} , the augmented value function is closely related to the original and is described as $V^{\prime}(s) = V(s) - \Phi(s)$. It is obvious to set potential function $\Phi(s) \approx V(s)$. This intuition is strengthened by results presented by Wiewiora in the paper \parencite{Wiewiora2003}. The derivation process can be found in appendix.

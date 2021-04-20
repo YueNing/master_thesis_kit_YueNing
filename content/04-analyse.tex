@@ -23,6 +23,13 @@ In the section \texttt{Experiment} \ref{sbe:experiment} of Chapter \texttt{Metho
 The model consists of five parts, environment \texttt{\gls{sbe}}, negotiation game, negotiation mechanism, negotiator and reinforcement learning algorithms.
 Except for the negotiation mechanism mentioned and implemented in sections \ref{autonomous-negotiation} and \ref{background:negmas}, others parts will be introduced step by step in following sections. 
 
+First, we give the brief introduction of the five parts in this section.
+\textbf{Environment \gls{sbe}} inherits from \texttt{gym.env} and implements the interfaces, mainly the step function. 
+\textbf{Negotiation Game} controls the logic of the negotiation game(e.g. negotiaton issues, type of learning strategies)and provides the functions and parameters required by training algorithms.
+\textbf{Negotiation Mechanism} is realized in the simulator \gls{negmas} and detaily introduced in chapter 2.
+\textbf{Negotiator} is a general class of negotiators that can be run in \gls{sbe}.
+\textbf{Algorithms} are deep reinforcement learning algorithms which receives observation, state from \gls{sbe}, after training and feedward calculation send the action to \gls{sbe}.
+
 Entire model is shown in \ref{fig:environment-single-agent}.
 \begin{figure}[htbp]
 \centering
@@ -133,6 +140,16 @@ Scenario Interface consists three normal functions and four callback functions p
 \subsection{Challenges of the environment}
 \subsubsection{Combination with \gls{scml}}
 Compared with \gls{sbe}, \gls{mcbe} can not directly call the function designed in official \gls{scml}. \texttt{Step} in \gls{scml-oneshot} is one simulation step. In one simulation step, many negotiation steps will be performed. The action of the agent is a \texttt{proposal}, so it needs to be meticulous to control every step of the negotiation mechanism in the simulation world. The class \texttt{TrainWorld} inherited from SCMLOneShotWorld achieves this goal.
+\subsubsection{Design of Reward Function} 
+In \gls{scm} world, the goal of the agent is to maximize profit at the end of the simulation. It is difficult to train an agent based on the reward signal alone. With the concept of reward shape \ref{related-work:sparse-reward} the reward signal can be splited as two parts: utility of agent after every simulated step and profit at the end of simulation. The utility function of agent is defined in the equation \ref{equation:utility-agent}.
+
+\begin{equation} \label{equation:utility-agent}
+\begin{aligned}
+u_{f}\left(C^{i}, C^{o}\right)=&-\sum_{c \in C^{i}}\left(p_{c} q_{c}\right)+\sum_{c \in \bar{C}^{o}}\left(p_{c} q_{c}\right)-\\
+                               &\sum_{c \in C^{i}}\left(p_{c} q_{c}\right)-m_{f} P_{f}-\gamma_{f} \operatorname{tp}\left(p_{f}^{i}, d\right) Q_{f}^{o>i}-\alpha_{f} \operatorname{tp}\left(p_{f}^{o}, d\right) Q_{f}^{i>0}
+\end{aligned}
+\end{equation}
+Where $C^{i}$ denotes the set of input contracts plus the exogenous input contracts. $C^{o}$ denotes the set of output contracts plus the exogenous output contracts. Price and quantity of the contract $c$ are formed by $p_c$ and $q_c$, respectively. Because the agent can only sell what it can produce, the set of satisfiable output contracts can be defined as $\bar{C}^{o}$. $Q^{o>i}$ is simply the quantity to be bought according to $C^{i}$ but is never sold.
 
 \subsection{Analysis of the reinforcement learning algorithms}
 \subsubsection{Independent Learning vs. Centralized Learning}
