@@ -33,7 +33,13 @@ Where $u_{j}$ denotes utility value of issue $j$ set as the offer, $\min _{j}$ a
 The offer will always between the value range($[min_j, max_j]$), the initial constant will be given at the beginning, and before the deadline is reached, the strategy will suggest to provide a reserved value.
 
 \subsection{Behavior-based Strategies}
-Tit for tat strategies
+Behavior-based and imitation bidding strategies observe the opponent's behavior and decide what to offer and accept. The well-known behavior-based strategy is \texttt{tit for tat}. The strategy is to act cooperatively first, and then mirror what other players did in the previous round.
+It is a very robust strategy and has three main following features\parencite{Baarslag2013, chang2020multiissue}:
+\begin{itemize}
+\item It is never the first to defect(i.e. As long as the opponent also plays well, it will play well).
+\item The opponent's defection may lead to retaliation.
+\item It can forgive after retaliation.
+\end{itemize}
 
 \subsection{Concurrent Negotiation Strategy (\gls{cns})}
 In a concurrent negotiation environment, an agent will negotiate with many opponents at the same time(one-to-many). One issue is how to coordinate all these negotiations. The author of the paper \parencite{Williams12Concurrent} designed an intuitive model with two key parts, namely the \texttt{Coordinator} and \texttt{Negotiation Thread} to deal with this problem.
@@ -91,9 +97,9 @@ For financial problem, the reward is usually profit and an appropriate reinforce
 \paragraph{Imitation Learning\parencite{DBLP:journals/corr/HesterVPLSPSDOA17}} Inverse reinforcement learning (IRL) is a different approach of imitation learning, where the main idea is to learn the reward function of the environment based on the expert’s demonstrations, and then find the optimal policy.
 
 \subsection{Non-stationary environment}
-The strategy of single agent is changed during training
-Multi-agent environment is non-stational
-Multi-agent deep reinforcement learning 
+Traditional \gls{rl} research assumes that environment dynamical (i.e., \gls{mdp} parameters) are always fixed (i.e., stationary). However, this assumption is not realistic in many real-world environment. In \gls{scm} world, for instance, factories' can change their negotiaton strategy during the simulation. The difficult question is how to deal with non-stationary rewards and non-stationary transition probabilties between system stats. Centralized training decentralized execution\parencite{maddpg2017} is a method for multi-agent learning under non-stationary environment. Besides, a method called \textbf{Context Q-learning}\parencite{Padakandla_2020} first detects the changes of environment with a detection algorithm. Using the results of the detection, the method can estimate the strategy of the new environment model, or if the environment model has been previously experienced, the learned strategy can be improved.
 
 \subsection{Huge action space}
-Action embedding, discrete action replaced by continious action space. 
+In many real-world environment, the tasks involve large numbers of discrete actions. Traditional \gls{rl} methods are difficult or even often impossible to apply to solve the problem. One proposed approach in the paper \parencite{dulacarnold2016deep} embes the large discrete actions in a continous space with prior information about the actions. Then, the action can be selected using approximate nearest-neighbor method. The lookup complexity is logarithmic-time relative to the number of actions.
+
+Learning algorithms, which used to solve continuous action space do not need to calculate $Q$ value for every state-action pairs. It maintains just a policy $\pi$ and can output continuous action. One method is to replace the large discrete action space by continuous action space. Additionally, discrete actions can be determined based on the results.
