@@ -78,11 +78,16 @@ The second method: Discrete action space replaced by continuous action space. Be
 The reward function is the focus of the implementation of the \gls{rl} algorithm. It is easy to understand, \gls{rl} learns startegies by evaluating the value of actions. Therefore, it is very necessary to design a good reward function. In \gls{sbe}, the utility function defined by \texttt{Negotiator} can be used as a calculation tool to get the current offer reward, which can be intuitively set as part of the reward function.  
 
 \subsection{Analysis of the reinforcement learning algorithms}
-\subsubsection{Policy Optimization vs. Q-Learning}
-PPO vs. DQN
+\subsubsection{Policy-based vs. Value-based}
+Policy-based(e.g., \gls{pg}, \gls{dpg} and \gls{ppo}) methods use a policy $\pi:s \to a$ to output action based on state and keep the parameters in the memory. Value-based(e.g., tabular q-learning, \gls{dqn} and \gls{sarsa}) methods do not explicitly store any policy, only a value function or value tabular. The policy can be implictly derived from the value function(e.g., greedy selection). A well-known \gls{rl} framework a2c combined both policy-based and value-based parts.
+
+\subsubsection{Model-based vs. Model-free}
+One problem when applying the \gls{rl} is whenever you are in state $s$ and make an action $a$ you might not know the next state $s^{\prime}$.
+
+For model-based approach learner has access to the model(i.e., environment or world) and knows some parameters, such as transition probability between states. Generally, if learner can predict the next state $s^{\prime}$ or reward $r$ after learning. The approach of this learner is model-based. In model-free learner will collect some experience and derive optimal policy. It is not given any explicit information of model.
 
 \subsection{Conclusion}
-
+Generally, the design of \gls{sbe} and training of negotiators are not too complex with the help of \gls{openai gym} and \gls{negmas}. The goal of this part is to explore the implementation probability of deep reinforcement learning negotiator. Using the result it can analyse the features of different deep reinforcement learning algorithms used in autonomous negotiation. Although the experiment in this article has achieved negotiators under multiple issues negotiation game, the scale of multiple issues is only 3. First question in this environment is the large scale action space. Second question is the adaptation of strategies when \gls{drl} negotiators facing different type of opponent negotiators. Future work may focus on these. 
 
 \section{\gls{scml} with \gls{openai gym}}
 \subsection{Configuration}
@@ -169,8 +174,11 @@ Where $C^{i}$ denotes the set of input contracts plus the exogenous input contra
 \paragraph{Non-stationary environment}
 Traditional reinforcement learning approaches such as Q-Learning or policy gradient
 are poorly suited to multi-agent environments. One issue is that each agent’s policy is changing as training progresses, and the environment becomes non-stationary from the perspective of any individual agent (in a way that is not explainable by changes in the agent’s own policy).
+Because of non-stationary environment one trick named independent learning insteaded by centralized learning is proposed to train multi-agent.
+\paragraph{Cooperative and Competitive} Independent learning agent consider just the goal of itself and can not deal with the cooperative and competitive problem. The centralized learning framework is an intuitive idea to solve this problem by changing the design of the reward function in different situations.
 
 \subsubsection{\gls{maddpg} vs. \gls{qmix}}
-Centralised learning of joint actions can naturally handle coordination problems and avoids non-stationarity, but is hard to scale, as the joint action space grows exponentially in the number of agents. In \parencite{Rashid2018}, author proposed a neural network to transform the centralised state into the weights of another neural network. This second neural network is constrained to be monotonic with respect to its inputs by keeping its weights positive. This feature makes it possible to learn when there are many agents.
+Centralised learning of joint actions(\textbf{\gls{maddpg}}) can naturally handle coordination problems and avoids non-stationarity, but is hard to scale, as the joint action space grows exponentially in the number of agents. In \parencite{Rashid2018}, author proposed a neural network(\textbf{\gls{qmix}}) to transform the centralised state into the weights of another neural network. This second neural network is constrained to be monotonic with respect to its inputs by keeping its weights positive. This feature makes it possible to learn when there are many agents.
 
 \subsection{Conclusion}
+Compared with \gls{sbe}, \gls{mcbe} consider not just single learnable \gls{rl} agent. Multi-agent is the basic setting of this environment. Hence, the number of agent, the observation space and action space of single agent, the design reward are needed to be considered carefully. With the help of \gls{mcbe} researches just need to focus on the configuration of training scenario. \gls{mcbe} decouples well the training environment and running environment. 
