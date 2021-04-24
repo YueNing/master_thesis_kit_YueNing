@@ -40,15 +40,17 @@ The training environment is based on the \gls{sbe} and sets concrete limits and 
 
 Algorithms \gls{dqn} (blue) and \gls{ppo} (red) are tested in the cases of single issue . Mean episode reward of case  \textbf{single issue, acceptance strategy} is shown in \ref{fig:single-issue}
 
-\begin{figure}
-    \includegraphics[width=.45\textwidth]{./images/ac_s.png}\hfill
-    \includegraphics[width=.45\textwidth]{./images/ac_s_wall.png}
-    \\[\smallskipamount]
-    \includegraphics[width=.45\textwidth]{./images/of_s.png}\hfill
-    \includegraphics[width=.45\textwidth]{./images/of_s_wall.png}
-    \caption{Mean Reward of Acceptance Strategy(top left(step), top right(wall)) and Offer Strategy(bottom left(step), bottom right(wall))}
-		\label{fig:single-issue}
-\end{figure}
+\begin{figure*}
+   \centering
+\begin{tabular}{mean reward of single issue negotiation}
+\includegraphics[width=.45\textwidth]{./images/ac_s.png}&
+\includegraphics[width=.45\textwidth]{./images/ac_s_wall.png}\\
+\includegraphics[width=.45\textwidth]{./images/of_s.png}&
+\includegraphics[width=.45\textwidth]{./images/of_s_wall.png}\\
+\end{tabular}
+    \caption{Mean Reward of Acceptance Strategy and Offer Strategy}
+    \label{fig:single-issue} % I can do without the label too
+\end{figure*}
 
 \subsubsection{multi issues}
 
