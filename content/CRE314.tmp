@@ -98,7 +98,7 @@ The training environment is almost same as the training environment for single i
 \section{Multi-Agent Concurrent Bilateral Negotiation Environment (\gls{mcbe})}
 In this environment, agent represents the factory manager and negotiation controller in standard \gls{scml} and \gls{scml} OneShot, respectively.
 
-The agent interacting with environment may be have many related trainable agents(e.g. one seller, one buyer, named as trainer) as the part of learner in the model. Each seller and buyer controls multiple negotiation sessions. The detail of interactive logic is shown below in \ref{fig:interacting-logic-scml}
+The agent interacting with environment may be have many related trainable agents as the part of learner(e.g. one seller, one buyer) in the model. The detail of interactive logic is shown below in \ref{fig:interacting-logic-scml}
 
 \begin{figure}[htbp]
 \centering
@@ -107,26 +107,16 @@ The agent interacting with environment may be have many related trainable agents
 \label{fig:interacting-logic-scml}
 \end{figure}
 
-Where environment contains six factories and two system entities(SELLER and BUYER). Three RL agents(A1, A2, An) are located at two production positions. Each RL agent contains three parts:
-
-\begin{itemize}
-\item \textbf{Perceptor} Receives state, reward from environment and send these to Learner.
-\item \textbf{Actuator} Receives action from Learner and execute it in the environment.
-\item \textbf{Learner} In addition to connect with \textbf{Perceptor} and \textbf{Actuator}, it manages the multiple trainer.
-\end{itemize}
-
-Based on different algorithms, the internal components of the trainer are different. In general, the trainer will handle the training and execution logic of concurrent negotiation. It will be introduced in the specific algorithm, diagramed in figures \ref{fig:method-maddpg-scml} and \ref{fig:method-qmix-scml}.
-
 \subsection{\gls{maddpg} in \gls{scml}} \label{methods:maddpg}
 In the standard scml environment, two questions are tried to be fixed with maddpg. 
 
 \paragraph{Question 1: Dynamical Range Of Negotiation Issues}At the beginning of every negotiation in simulator, agent will determine the range which constraints value interval for negotiation issues. In the experiment, the negotiation issues are \textbf{QUANTITY}, \textbf{PRICE} and \textbf{TIME}. After creating the simulation world, simulator determines the minimum and maximum values for each negotiation issue taken by the entire simulation episode, such as value of \textbf{QUANTITY} between (1, 10), \textbf{PRICE} between (0, 100) and \textbf{TIME} between (0, 100). However, for every negotiation mechanism created beside the entire simulation episode, it has dynamical range of negotiation issues which affect the negotiation process. This question was raised based on such a situation.
 
-\paragraph{Question 2: The Offer For Every Round}From the description of question 1, we can find, action obtained by algorithm influence only finite the state of environment. Agent(Factory Manager) can not control the function \textbf{proposal} of every negotiation round. Every negotiation round has always been controlled by heuristic negotiation strategy. Intuitively, the main influence comes from the joint action of each round of the negotiation. Hence, question 2 \textbf{The Offer For Every Round} is proposed naturally. After the basic problem is determined, how to design becomes the current problem. 
+\paragraph{Question 2: The Offer For Every Step}From the description of question 1, we can find, action obtained by algorithm influence only finite the state of environment. Agent(Factory Manager) can not control the function \textbf{proposal} of every negotiation step. Every negotiation step has always been controlled by heuristic negotiation strategy. Intuitively, the main influence comes from the joint action of each step of the negotiation. Hence, question 2 \textbf{The Offer For Every Step} is proposed naturally. After the basic problem is determined, how to design becomes the current problem. 
 
 From an algorithm perspective, the data flow of the model is shown in \ref{fig:method-maddpg-scml}. 
-\gls{maddpg} used in \gls{scml}, one trainable agent(trainer) defined in \gls{maddpg} is not equal to the agent defined in \gls{scml}.
-It create $D$ process for action exploration, in this environment, \textbf{Dynamical Range Of Negotiation Issues}(Question 1) and \textbf{The Offer For Every Round}(Question 2) are needed to be explored.
+\gls{maddpg} used in \gls{scml}, one trainable agent defined in \gls{maddpg} is not equal to the agent defined in \gls{scml}.
+It create $D$ process for action exploration, in this environment, dynamical range issues are needed to be explored 
 The basic concepts of \gls{maddpg} are introduced in chapter background \ref{background:maddpg}. 
 
 \begin{figure}[htbp]
@@ -136,13 +126,7 @@ The basic concepts of \gls{maddpg} are introduced in chapter background \ref{bac
 \label{fig:method-maddpg-scml}
 \end{figure}
 
-In the model \ref{fig:method-maddpg-scml}, policy output action as input to related agent interacting with the environment, which outputs the observation and reward as the inputs to related trainer. Two trainers are created in the experiment:
-\begin{itemize}
-\item \textbf{trainer\_seller} controls all sale negotiations, the size of the action space has a linear relationship with the size of the largest concurrent sale negotiations.
-\item \textbf{trainer\_buyer} controls all buy negotiations, the size of the action space has a linear relationship with the size of the largest concurrent purchase negotiations.
-\end{itemize}
-
-Details of the algorithm are described in the appendix \ref{appendix:algorithms:maddpg}.  
+Actors output actions as inputs to related agents interacting with the environment. Agents interacting with environment outputs the observation and reward as the inputs to related agents trained in the model. Details of the algorithm are described in the appendix \ref{appendix:algorithms:maddpg}.  
 
 
 \subsection{\gls{qmix} in \gls{scml-oneshot}} \label{methods:qmix-scml-oneshot}
@@ -153,7 +137,7 @@ The world created by \gls{scml-oneshot} is described in detail in chapter backgr
 
 In the current version \gls{qmix}, which is used in the experiment, one trainable agent is related to one negotiation session. When the agents are located in different locations in the scml world, the agents have different concurrent negotiation maximums. Since the agent \textbf{A1} shown in Figure \ref{fig:interacting-logic-scml} has three consumers, the maximum value of concurrent negotiations of the agent \textbf{A1} is 3. Based on this value, we need to create three trainable agents in algorithm, and each trainable agent control one negotiation session of interative agent.
 
-Data flow is shown in \ref{fig:method-qmix-scml}, the total number of trainers is equal to the sum of the most simultaneous negotiations of all agents. Additionally, unlike in maddpg, in qmix, there is only one global learner, which can control all trainers together.
+Data flow is shown in \ref{fig:method-qmix-scml}
 
 \begin{figure}[htbp]
 \centering
@@ -228,8 +212,8 @@ Episode mean reward curve is shown in \ref{fig:oneshot-my-vs-greedy}
 \label{fig:oneshot-my-vs-greedy}
 \end{figure}
 
-\paragraph{Evaluation} In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned good strategy. It means method \gls{qmix} is valid in \gls{scm} world.
+\paragraph{Evaluation}
 
 
 \section{Conclusion}
-The training effect of single agent(negotiator) is not bad. But for multi-agent concurrent negotiations it is not easy to implemente. The work of this thesis focus on just two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.
+The training effect of single agent(negotiator) is not bad. But for multi-agent concurrent negotiations it is not easy to implemente. The work of this thesis focus on just two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to finish and implement in the environment \gls{mcbe}.

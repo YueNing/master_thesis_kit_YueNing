@@ -345,9 +345,11 @@ There are three main different versions of \gls{scml}, which have different desi
 \end{itemize}
 
 \subsubsection{SCML2020/2021}
-\gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an indepedent project to research \gls{scm}. \gls{scml} realized a \gls{scm} world to simuate the \gls{scm} process.
+\gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an indepedent project to research \gls{scm}. \gls{scml} realized a \gls{scm} world to simuate the \gls{scm} process. In this world, agent needs to buy input material through negotiation, manufacture them, then sell output products through negotiation\parencite{Mohammad2021}. The srategies of agent can be splited as three parts: Trading Strategy, Negotiation Control Strategy, Production Strategy.
 
-\paragraph{Spot Market}
+\paragraph{Trading Strategy} Determine the quantity (and price) bought and sold at each time step.
+\paragraph{Negotiation Control Strategy} This component is responsible for actively requesting negotiation, responding to negotiation requests and actually conducting concurrent negotiation.
+\paragraph{Production Strategy} Decides what to produce at every time-step.
 
 \subsubsection{SCML2020-OneShot} 
 In \gls{scml-oneshot} World, the simulation steps can be referred as days. There are multiple concurrent negotiations going on every day. Difference with the SCML2019 and SCML2020/2021, \gls{scml-oneshot} emphasizes negotiation and de-emphasizes operations (e.g. scheduling) which are also important in standard scml. The simulation in oneshot focuses on the the research of concurrent negotiation. The design of \gls{scml-oneshot} ensures the following points \parencite{Mohammad2021}:
@@ -373,7 +375,7 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World in \gls{scml-oneshot}
 \paragraph{Utiliy Function} The utility function of an agent specifies its preferences over possible outcomes of a negotiation. Utility function is well defined in \gls{scml-oneshot}. It is simply the total money it receives minus the money it pays for buying input product, production cost, storage and garbage collection costs and delivery penalties. It is called OneShotUfun in \gls{scml-oneshot} world.
 \paragraph{Negotiation Mechanism} The negotiation mechanism adopted by SCML2020 is a variant of Rubinstein's alternating offers protocol. It involves two agents, who take turns making offers for a finite number of rounds. One agent open the negotiation with an offer, after which the other agent takes one of the actions(Accepts, Counteroffer, Walks away). All actions are also described in SAOM. This process repeats util an agreement or a deadline is reached. A key difference between the variant of the protocol used in the SCM world and other implementations of the alternating offers protocol is that in the first round of negotiations, both agents propose an offer, and then one of these offers is chosen at random to be the initial offer.
 \paragraph{Bulletin Board} The world contains a world-readable bulletin board. It contains both static and dynamcial information about the game and all factories. The static information includes the game settings, product information, catalog prices and trading prices. The dynamical information includes a breach list and a financial reports.
-\paragraph{Simulation} Each simulation in \gls{scm} world runs for multiple days. Before the first day, each agent is assigned a private production cost $(m_f)$. During each day:
+\paragraph{Simulation World} Each simulation in \gls{scm} world runs for multiple days. Before the first day, each agent is assigned a private production cost $(m_f)$. During each day:
 \begin{itemize}
 \item Agents can engage in multiple rounds of negotiations with their negotiation partners.
 \item All contracts are executed.
