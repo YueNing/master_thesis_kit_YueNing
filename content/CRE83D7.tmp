@@ -12,8 +12,7 @@ In the environment has just single learnable \gls{drl} negotiator. All RL algori
 	\item multi-issues, offer startegy
 \end{itemize}
 
-The training logic of some RL algorithms is shown in the figure \ref{fig:dqn}, and the detailed description of the algorithm is shown in the appendix \ref{appendix:dqn}.
-
+The training logic of DQN is shown in Figure \ref{fig:dqn}, the detailed description of algorithm is shown in appendix \ref{appendix:dqn}.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.30\textwidth]{./images/dqn.png}
@@ -22,9 +21,7 @@ The training logic of some RL algorithms is shown in the figure \ref{fig:dqn}, a
 \end{figure}
 
 \subsection{Experiment} \label{sbe:experiment}
-
-Figure \ref{fig:bilateral-negotiation} diagrams the Game which consistes of two negotiators: RL negotiator and Opponent negotiator(AspirationNegotiator). Opponent Negotiator can be set in the configuration. All negotiators, which inherit the base abstract negotiator class in \gls{negmas} can be configured in the experiment. AspirationNegotiator is selected as the baseline negoitator in this experiment.
-
+Figure \ref{fig:bilateral-negotiation} diagrams the Game in \gls{sbe}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.50\textwidth]{./images/bilateral-negotiation.png}
@@ -32,7 +29,7 @@ Figure \ref{fig:bilateral-negotiation} diagrams the Game which consistes of two 
 \label{fig:bilateral-negotiation}
 \end{figure}
 
-Negotiation mechanism is \gls{saom}, RL negotiator can learn two strategies called \textbf{acceptance strategy} and \textbf{offer strategy}, which will be described in detail in the following paragraphs. 
+Negotiation mechanism is \gls{saom}, split the learning strategy as two parts, acceptance strategy and offer strategy, 
 
 \paragraph{Acceptance strategy} actions of agent are \texttt{Accept offer}, \texttt{Wait} and \texttt{Reject offer}. The variables observed by the agent are current offer of opponent and current time(running time, or relative round of negotiation mechanism).
 
@@ -48,10 +45,9 @@ The training environment is based on the \gls{sbe} and sets concrete limits and 
 \textbf{Name}                    & negotiation\_env\_ac\_s, negotiation\_env\_of\_s \\
 \textbf{Negotiation Mechanism}   & SAOMechanism                                        \\
 \textbf{Max\_Steps}              & 100                                                 \\
-\textbf{Issue}             	     & Price(300, 550)                                     \\
+\textbf{Issue}             	     & Price(300, 550)                                       \\
 \textbf{Competitors}             & [MyDRLNegotiator, AspirationNegotiator]             \\
 \textbf{Utility Functions}       & [LinearUtility(-0.35), LinearUtility(0.25)]         \\
-\textbf{Actions}                 & [ACCEPT, REJCT, WAIT, END], Outcomes\\
 \bottomrule
 \end{tabular}
 \caption{Attributes of the training environment(sbe), single-issue}
@@ -64,17 +60,17 @@ Algorithms \gls{dqn}, \gls{ppo}, ACER\parencite{DBLP:journals/corr/WangBHMMKF16}
 \item wall: split the mean episode reward of all algorithms as horizontal independente figure.
 \end{itemize}
 
+The detailed explanation of the curve is described in section evaluation \ref{sbe-evaluation}.
+
 \begin{figure}
-    \includegraphics[width=.44\textwidth]{./images/ac_s.png}\hfill
-    \includegraphics[width=.44\textwidth]{./images/ac_s_wall.png}
+    \includegraphics[width=.45\textwidth]{./images/ac_s.png}\hfill
+    \includegraphics[width=.45\textwidth]{./images/ac_s_wall.png}
     \\[\smallskipamount]
-    \includegraphics[width=.44\textwidth]{./images/of_s.png}\hfill
-    \includegraphics[width=.44\textwidth]{./images/of_s_wall.png}
+    \includegraphics[width=.45\textwidth]{./images/of_s.png}\hfill
+    \includegraphics[width=.45\textwidth]{./images/of_s_wall.png}
     \caption{Mean reward of \textbf{Acceptance Strategy}(top left(step), top right(wall)) and of \textbf{Offer Strategy}(bottom left(step), bottom right(wall)) under single issue negotiation}
 		\label{fig:single-issue}
 \end{figure}
-
-\paragraph{Evaluation} When training independent negotiator with SAOMechanism in the environment \gls{sbe}, almost all well-known \gls{drl} algorithms have the ability to learn. \gls{acer}, \gls{ppo} and A2C have learned very good acceptance strategy, the mean reward curve converged to around 70(i.e., 68.9). However, the performance of dqn is not particularly good. For learning offer strategy, PPO2(improved version of \gls{ppo}) and A2C perform best. The reward curve converged to around 100. The result of \gls{ddpg} are also valuable. Although the reward curve does not converge, it oscillates around a better strategy. Overall, normal version \gls{ppo} does not perform well here. 
 
 \subsubsection{multi issues}
 The training environment is almost same as the training environment for single issue. It is based on the \gls{sbe} and sets concrete limits and attributes for it, which are defined in table \ref{tab:attributes-sbe-multi-issues}.
@@ -89,25 +85,15 @@ The training environment is almost same as the training environment for single i
 \textbf{Issue}             	     & [Quantity(0, 100), Time(0, 100), Price(10, 100)]                     \\
 \textbf{Competitors}             & [MyDRLNegotiator, AspirationNegotiator]                              \\
 \textbf{Utility Functions}       & [LinearUtility((0, -0.25, -0.6)), LinearUtility((0, 0.25, 1))]       \\
-\textbf{Actions}                 & [ACCEPT, REJCT, WAIT, END], Outcomes                                 \\
 \bottomrule
 \end{tabular}
 \caption{Attributes of the training environment(sbe), multi-issues}
 \label{tab:attributes-sbe-multi-issues}
 \end{table}
 
-As same as under single issue cases, the curve of mean episode reward of case  \textbf{multi-issues, acceptance strategy} and \textbf{multi -issues, offer strategy} are shown in \ref{fig:multi-issues}. 
-\begin{figure}
-    \includegraphics[width=.43\textwidth]{./images/ac_s_multi_issues.png}\hfill
-    \includegraphics[width=.43\textwidth]{./images/ac_s_multi_issues_wall.png}
-    \\[\smallskipamount]
-    \includegraphics[width=.43\textwidth]{./images/of_s.png}\hfill
-    \includegraphics[width=.43\textwidth]{./images/of_s_wall.png}
-    \caption{Mean reward of \textbf{Acceptance Strategy}(top left(step), top right(wall)) and of \textbf{Offer Strategy}(bottom left(step), bottom right(wall)) under multi-issues negotiation}
-		\label{fig:multi-issues}
-\end{figure}
-
-\paragraph{Evaluation} The characteristics of the mean episode reward curve are the same as in single-issue cases. After increasing the action space, the training time increased rapidly. 
+\subsection{Evaluation} \label{sbe-evaluation}
+\paragraph{single-issue}When training independent negotiator with SAOMechanism in the environment \gls{sbe}, almost all well-known \gls{drl} algorithms have the ability to learn. \gls{acer}, \gls{ppo} and A2C have learned very good acceptance strategy, the mean reward curve converged to around 70(i.e., 68.9). However, the performance of dqn is not particularly good. For learning offer strategy, PPO2(improved version of \gls{ppo}) and A2C perform best. The reward curve converged to around 100. The result of \gls{ddpg} are also valuable. Although the reward curve does not converge, it oscillates around a better strategy. Overall, normal version \gls{ppo} does not perform well here. 
+\paragraph{multi-issue}
 
 \section{Multi-Agent Concurrent Bilateral Negotiation Environment (\gls{mcbe})}
 In this environment, agent represents the factory manager and negotiation controller in standard \gls{scml} and \gls{scml} OneShot, respectively.
@@ -134,7 +120,7 @@ Based on different algorithms, the internal components of the trainer are differ
 \subsection{\gls{maddpg} in \gls{scml}} \label{methods:maddpg}
 In the standard scml environment, two questions are tried to be fixed with maddpg. 
 
-\paragraph{Question 1: Dynamical Range Of Negotiation Issues}At the beginning of every negotiation in simulator, agent will determine the range which constraints value interval for negotiation issues. In the experiment, the negotiation issues are \textbf{QUANTITY}, \textbf{PRICE} and \textbf{TIME}. After creating the simulation world, simulator determines the minimum and maximum values for each negotiation issue taken by the entire simulation episode, such as value of \textbf{QUANTITY} between (1, 10), \textbf{PRICE} between (0, 100) and \textbf{TIME} between (0, 100). However, for every negotiation mechanism created inside the entire simulation episode, it has its dynamic range of negotiation issues which affect the negotiation process. This question was raised based on such a situation.
+\paragraph{Question 1: Dynamical Range Of Negotiation Issues}At the beginning of every negotiation in simulator, agent will determine the range which constraints value interval for negotiation issues. In the experiment, the negotiation issues are \textbf{QUANTITY}, \textbf{PRICE} and \textbf{TIME}. After creating the simulation world, simulator determines the minimum and maximum values for each negotiation issue taken by the entire simulation episode, such as value of \textbf{QUANTITY} between (1, 10), \textbf{PRICE} between (0, 100) and \textbf{TIME} between (0, 100). However, for every negotiation mechanism created beside the entire simulation episode, it has dynamical range of negotiation issues which affect the negotiation process. This question was raised based on such a situation.
 
 \paragraph{Question 2: The Offer For Every Round}From the description of question 1, we can find, action obtained by algorithm influence only finite the state of environment. Agent(Factory Manager) can not control the function \textbf{proposal} of every negotiation round. Every negotiation round has always been controlled by heuristic negotiation strategy. Intuitively, the main influence comes from the joint action of each round of the negotiation. Hence, question 2 \textbf{The Offer For Every Round} is proposed naturally. After the basic problem is determined, how to design becomes the current problem. 
 
@@ -178,7 +164,7 @@ Data flow is shown in \ref{fig:method-qmix-scml}, the total number of trainers i
 
 \subsection{Experiment}
 \subsubsection{Concurrent Neogtiations in standard \gls{scml}}
-Standard \gls{scml} is a complex simulation world, which contains various parts with specific functions. The breif description of this simulation is introduced in chapter Background \ref{background-scml}. The experiment of this thesis focus on only the Negotiation Manager(Negotiation Control Strategy) of Decision-Maker Agent. The above mentioned method maddpg \ref{methods:maddpg} is used in this experiment. 
+Standard \gls{scml} is a complex simulation world, which contains various parts with specific functions. The breif description of this simulation is introduced in chapter Background \ref{background-scml}. The experiment of this thesis focus on only the Negotiation Manager of Decision-Maker Agent. The above mentioned method maddpg \ref{methods:maddpg} is used in this experiment. 
 Scenario is diagramed in Figure \ref{fig:scenario-standard-scml}.
 
 \begin{figure}[htbp]
