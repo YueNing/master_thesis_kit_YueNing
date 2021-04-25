@@ -98,11 +98,11 @@ The training environment is almost same as the training environment for single i
 
 As same as under single issue cases, the curve of mean episode reward of case  \textbf{multi-issues, acceptance strategy} and \textbf{multi -issues, offer strategy} are shown in \ref{fig:multi-issues}. 
 \begin{figure}
-    \includegraphics[width=.43\textwidth]{./images/ac_s_multi_issues.png}\hfill
-    \includegraphics[width=.43\textwidth]{./images/ac_s_multi_issues_wall.png}
+    \includegraphics[width=.40\textwidth]{./images/ac_s_multi_issues.png}\hfill
+    \includegraphics[width=.40\textwidth]{./images/ac_s_multi_issues_wall.png}
     \\[\smallskipamount]
-    \includegraphics[width=.43\textwidth]{./images/of_s.png}\hfill
-    \includegraphics[width=.43\textwidth]{./images/of_s_wall.png}
+    \includegraphics[width=.40\textwidth]{./images/of_s_multi_issues.png}\hfill
+    \includegraphics[width=.40\textwidth]{./images/of_s_multi_issues_wall.png}
     \caption{Mean reward of \textbf{Acceptance Strategy}(top left(step), top right(wall)) and of \textbf{Offer Strategy}(bottom left(step), bottom right(wall)) under multi-issues negotiation}
 		\label{fig:multi-issues}
 \end{figure}
@@ -188,15 +188,39 @@ Scenario is diagramed in Figure \ref{fig:scenario-standard-scml}.
 \label{fig:scenario-standard-scml}
 \end{figure}
 
-\paragraph{Evaluation} Before evaluating the result of Question 2 \textbf{The Offer For Every Step} in section \ref{methods:maddpg}. The result of Question 1 \textbf{Dynamical Range Of Negotiation Issues} in section \ref{methods:maddpg} is shown in \ref{fig:dynamical-range-issues-maddpg}.
+The training environment is based on the \gls{mcbe} and sets concrete limits and attributes for it, which are defined in table \ref{tab:attributes-mcbe-dynamical-range-negotiation-issue}.
 
-\begin{figure}[htbp]
+\begin{table}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{./images/dynamic_range_issues_maddpg.png}
-\caption{Scores of agents running in simulation world after training}
-\label{fig:dynamical-range-issues-maddpg}
-\end{figure}
+\begin{tabular}{l l l} \toprule
+\bfseries \textbf{Attributes}    & \bfseries \textbf{Value}                                             \\ \midrule
+\textbf{Name}                    & scml                                                                 \\
+\textbf{World}                   & SCML2020World                                                        \\
+\textbf{Neogitation Mechanism}   & SAOMechanism                                                         \\
+\textbf{Max Negotiation Steps}   & 10                                                                   \\
+\textbf{Max Simulation Steps}    & 10                                                                   \\
+\textbf{Issue}             	     & [Quantity(0, 100), Time(0, 100), Price(10, 100)]                     \\
+\textbf{Competitors}             & [MyBasedAgent, DecentralizingAgent]                                  \\
+\textbf{Negotiated Rate}         &    1                                                                 \\
+\textbf{DNSP}                    &    True                             \\
+\textbf{Actions}                 & Range of Negotiation Issues                                          \\
+\bottomrule
+\end{tabular}
+\caption{Attributes of the training environment(mcbe), DNSP: Disallow Negotiation with Same Partners, standard scml}
+\label{tab:attributes-mcbe-dynamical-range-negotiation-issue}
+\end{table}
 
+\paragraph{Evaluation} \textbf{Question1:} Before evaluating the result of Question 2 \textbf{The Offer For Every Step} in section \ref{methods:maddpg}. The result of Question 1 \textbf{Dynamical Range Of Negotiation Issues} in section \ref{methods:maddpg} is shown in \ref{fig:dynamical-range-issues-maddpg}. \textbf{Question 2:} 
+ 
+Overall, idea from maddpg is very constructive, but it is difficult to learn good strategies using maddpg. Training consumes a lot of time and hardware resources.
+
+
+\begin{figure}
+    \includegraphics[width=.45\textwidth]{./images/dynamic_range_issues_maddpg.png}\hfill
+    \includegraphics[width=.49\textwidth]{./images/dynamical_mean_episode_reward.png}
+    \caption{Scores(left) of agents running in simulation world after training, Mean Episode Reward(right)}
+		\label{fig:dynamical-range-issues-maddpg}
+\end{figure}
 
 \subsubsection{Concurrent Negotiations in OneShot \gls{scml}}
 \gls{scml-oneshot} world is a new simpler world from standard scml. This world only cares about concurrent negotiation in supply chain management, and the agents used in this world can be easily transferred to standard scml. 
@@ -213,6 +237,27 @@ Scenario is diagramed in Figure \ref{fig:scenario-oneshot-scml-self-play}.
 \label{fig:scenario-oneshot-scml-self-play}
 \end{figure}
 
+The training environment is based on the MCBE and sets concrete limits and attributes for it,
+which are defined in table \ref{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l l l} \toprule
+\bfseries \textbf{Attributes}    & \bfseries \textbf{Value}                                             \\ \midrule
+\textbf{Name}                    & scml-oneshot-concurrent-negotiation                                  \\
+\textbf{World}                   & SCML2020OneShotWorld                                                 \\
+\textbf{Neogitation Mechanism}   & SAOMechanism                                                         \\
+\textbf{Max Negotiation Steps}   & 20                                                                  \\
+\textbf{Max Simulation Steps}    & 100                                                                   \\
+\textbf{Issue}             	     & [Quantity(0, 100), Time(0, 100), Price(10, 100)]                     \\
+\textbf{Competitors}             & [MyAgent, MyAgent] (self-play)                                       \\
+\textbf{Actions}                 & Joint-Outcomes                                                             \\
+\bottomrule
+\end{tabular}
+\caption{Attributes of the training environment(mcbe), scml-oneshot, self-play}
+\label{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot}
+\end{table}
+
 Episode mean reward curve is shown in \ref{fig:oneshot-self-play}
 
 \begin{figure}[htbp]
@@ -222,8 +267,7 @@ Episode mean reward curve is shown in \ref{fig:oneshot-self-play}
 \label{fig:oneshot-self-play}
 \end{figure}
 
-\paragraph{play with other agent}
-
+\paragraph{play with other agent} In this scenario, the opponent agent is a heuristic agent from the scml packages, such as GreedyAgent.
 Scenario is diagramed in Figure \ref{fig:scenario-oneshot-scml-play-with-greedy}.
 \begin{figure}[htbp]
 \centering
@@ -232,6 +276,26 @@ Scenario is diagramed in Figure \ref{fig:scenario-oneshot-scml-play-with-greedy}
 \label{fig:scenario-oneshot-scml-play-with-greedy}
 \end{figure}
 
+The training environment is based on the MCBE and sets concrete limits and attributes for it,
+which are defined in table \ref{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot-with-others}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l l l} \toprule
+\bfseries \textbf{Attributes}    & \bfseries \textbf{Value}                                             \\ \midrule
+\textbf{Name}                    & scml-oneshot-concurrent-negotiation                                  \\
+\textbf{World}                   & SCML2020OneShotWorld                                                 \\
+\textbf{Neogitation Mechanism}   & SAOMechanism                                                         \\
+\textbf{Max Negotiation Steps}   & 20                                                                  \\
+\textbf{Max Simulation Steps}    & 100                                                                   \\
+\textbf{Issue}             	     & [Quantity(0, 100), Time(0, 100), Price(10, 100)]                     \\
+\textbf{Competitors}             & [MyAgent, GreedyAgent] (play-with-others)                                       \\
+\textbf{Actions}                 & Joint-Outcomes                                                             \\
+\bottomrule
+\end{tabular}
+\caption{Attributes of the training environment(mcbe), scml-oneshot, play-with-others}
+\label{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot-with-others}
+\end{table}
 
 Episode mean reward curve is shown in \ref{fig:oneshot-my-vs-greedy}
 
