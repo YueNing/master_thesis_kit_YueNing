@@ -126,7 +126,7 @@ Where environment contains six factories and two system entities(SELLER and BUYE
 \begin{itemize}
 \item \textbf{Perceptor} Receives state, reward from environment and send these to Learner.
 \item \textbf{Actuator} Receives action from Learner and execute it in the environment.
-\item \textbf{Learner} In addition to connect with \textbf{Perceptor} and \textbf{Actuator}, it manages the multiple trainer.
+\item \textbf{Learner} In addition to connecting with \textbf{Perceptor} and \textbf{Actuator}, it manages the multiple trainer.
 \end{itemize}
 
 Based on different algorithms, the internal components of the trainer are different. In general, the trainer will handle the training and execution logic of concurrent negotiation. It will be introduced in the specific algorithm, diagramed in figures \ref{fig:method-maddpg-scml} and \ref{fig:method-qmix-scml}.
