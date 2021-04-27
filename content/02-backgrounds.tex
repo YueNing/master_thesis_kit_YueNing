@@ -344,14 +344,14 @@ There are three main different versions of \gls{scml}, which have different desi
 	\item SCML2019: Standard Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2019
 \end{itemize}
 
-\subsubsection{SCML2020/2021}
+\subsubsection{SCML2020/2021} \label{background:scml2020}
 \gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an indepedent project to research \gls{scm}. \gls{scml} realized a \gls{scm} world to simuate the \gls{scm} process. In this world, agent needs to buy input material through negotiation, manufacture them, then sell output products through negotiation\parencite{Mohammad2021}. The srategies of agent can be splited as three parts: Trading Strategy, Negotiation Control Strategy, Production Strategy.
 
 \paragraph{Trading Strategy} Determine the quantity (and price) bought and sold at each time step.
 \paragraph{Negotiation Control Strategy} This component is responsible for actively requesting negotiation, responding to negotiation requests and actually conducting concurrent negotiation.
 \paragraph{Production Strategy} Decides what to produce at every time-step.
 
-\subsubsection{SCML2020-OneShot} 
+\subsubsection{SCML2020-OneShot} \label{background:scml2020-oneshot}
 In \gls{scml-oneshot} World, the simulation steps can be referred as days. There are multiple concurrent negotiations going on every day. Difference with the SCML2019 and SCML2020/2021, \gls{scml-oneshot} emphasizes negotiation and de-emphasizes operations (e.g. scheduling) which are also important in standard scml. The simulation in oneshot focuses on the the research of concurrent negotiation. The design of \gls{scml-oneshot} ensures the following points \parencite{Mohammad2021}:
 
 \begin{itemize}
