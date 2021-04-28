@@ -152,7 +152,7 @@ Scenario Interface consists three normal functions and four callback functions p
 \subsection{Challenges of the environment}
 \subsubsection{Combination with \gls{scml}}
 Compared with \gls{sbe}, \gls{mcbe} can not directly call the function designed in official \gls{scml}. \texttt{Step} in \gls{scml-oneshot} is one simulation step. In one simulation step, many negotiation steps will be performed. The action of the agent is a \texttt{proposal}, so it needs to be meticulous to control every step of the negotiation mechanism in the simulation world. The class \texttt{TrainWorld} inherited from SCMLOneShotWorld achieves this goal.
-\subsubsection{Design of Reward Function} 
+\subsubsection{Design of Reward Function} \label{analysis:scml:design-of-reward-function}
 In \gls{scm} world, the goal of the agent is to maximize profit at the end of the simulation. It is difficult to train an agent based on this reward signal alone. With the concept of reward shape \ref{related-work:sparse-reward} the reward signal can be splited as three parts: utility value of current offer after every negotiation round, utility value of agent after every simulated step and profit at the end of simulation. The utility function of agent is defined in the equation \ref{equation:utility-agent} from \parencite{Mohammad2021}. It represents the \texttt{excepted profit} of a factory.
 
 \begin{equation} \label{equation:utility-agent}

@@ -330,8 +330,7 @@ Source: Own illustration based on\parencite{Mohammad2019}}
 \end{figure}
 
 \subsection{\gls{scml}} \label{background-scml}
-A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of  \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. For example scml2019 will contain all files related to the 2019’s version of the competition \ref{}.
-There are three main different versions of \gls{scml}, which have different designs. In the following sections, the similarities and differences will be introduced. 
+A supply chain is a sequence of processes by which raw materials are converted into finished goods. A supply chain is usually managed by multiple independent entities, whose coordination is called \textbf{supply chain management(\gls{scm})}. SCM exemplifies situated negotiation. The SCM world was built on top of  \gls{negmas} to serve as a common benchmark environment for the study of situated negotiation \parencite{Mohammad2019}. This repository is the official platform for running \gls{anac} Supply Chain Management Leagues. It will contain a package called scmlXXXX for the competition run in year XXXX. So far, there are three main different versions of \gls{scml} with different designs. In the following sections, some of the components of the three versions related to the work of this thesis will be introduced. 
 
 \begin{itemize}
 	\item SCML2020-OneShot: Agent Competition (\gls{anac}) Supply Chain Management League OneShot trace (\gls{scml-oneshot}).
@@ -339,22 +338,22 @@ There are three main different versions of \gls{scml}, which have different desi
 	\item SCML2019: Standard Automated Negotiation Agent Competition (ANAC) Supply Chain Management League (\gls{scml}) 2019
 \end{itemize}
 
-\subsubsection{SCML2020/2021} \label{background:scml2020}
-\gls{scml} was originally developed as a part of \gls{negmas}, from the version ? it was splited as an indepedent project to research \gls{scm}. \gls{scml} realized a \gls{scm} world to simuate the \gls{scm} process. In this world, agent needs to buy input material through negotiation, manufacture them, then sell output products through negotiation\parencite{Mohammad2021}. The srategies of agent can be splited as three parts: \textbf{Trading Strategy}, \textbf{Negotiation Control Strategy}, \textbf{Production Strategy}.
+\subsubsection{SCML2020/2021(standard scml)} \label{background:scml2020}
+\gls{scml} was originally developed as a part of \gls{negmas}, from the version 0.4.0 it was splited as an indepedent project to research \gls{scm}. \gls{scml} realized a \gls{scm} world to simulate the \gls{scm} process. In this world, agent needs to buy input material through negotiation, manufacture them, then sell output products through negotiation\parencite{Mohammad2021}. The strategy of an agent can be splitted as three parts: \textbf{Trading Strategy}, \textbf{Negotiation Control Strategy}, \textbf{Production Strategy}.
 
-\paragraph{Trading Strategy} Determine the quantity (and price) bought and sold at each time step.
-\paragraph{Negotiation Control Strategy} This component is responsible for actively requesting negotiation, responding to negotiation requests and actually conducting concurrent negotiation.
-\paragraph{Production Strategy} Decides what to produce at every time-step.
+\paragraph{Trading Strategy} determines the quantity(and price) bought and sold at each time step.
+\paragraph{Negotiation Control Strategy} this component is responsible for actively requesting negotiation, responding to negotiation requests and actually conducting concurrent negotiation.
+\paragraph{Production Strategy} decides what to produce at every time-step.
 
 \subsubsection{SCML2020-OneShot} \label{background:scml2020-oneshot}
-In \gls{scml-oneshot} World, the simulation steps can be referred as days. There are multiple concurrent negotiations going on every day. Difference with the SCML2019 and SCML2020/2021, \gls{scml-oneshot} emphasizes negotiation and de-emphasizes operations (e.g. scheduling) which are also important in standard scml. The simulation in oneshot focuses on the the research of concurrent negotiation. The design of \gls{scml-oneshot} ensures the following points \parencite{Mohammad2021}:
+In \gls{scml-oneshot} world, the simulation steps can be referred as days. There are multiple concurrent negotiations going on every day. Difference with the SCML2019 and SCML2020/2021, \gls{scml-oneshot} emphasizes negotiation and de-emphasizes operations (e.g. scheduling) which are also important in standard scml. The simulation in oneshot focuses on the research of concurrent negotiation. The design of \gls{scml-oneshot} ensures the following points \parencite{Mohammad2021}:
 
 \begin{itemize}
 	\item Agents (factory managers) consider only the negotiations in the current simulation step. Only the current concurrent negotiations can affect the agent's score. It means, regardless of the result of the negotiations, the concurrent negotiations will be ended at the end of the simulation step. 
 	\item Agents can learn over time about their negotiation partners (i.e. suppliers or consumers).
 \end{itemize} 
 
-Figure \ref{fig:overview-scml-oneshot} diagrams a World in \gls{scml-oneshot}
+Figure \ref{fig:overview-scml-oneshot} diagrams a World created by \gls{scml-oneshot}
 
 \begin{figure}[htbp]
 \centering
@@ -363,19 +362,21 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World in \gls{scml-oneshot}
 \label{fig:overview-scml-oneshot}
 \end{figure}
 
-\paragraph{Production Graph} The production diagram defines the products defined in the world and the process of converting between them. There are three product types: raw-material, intermediate-product and final-product and two manufacting processes for converting the raw materail into the intermediate product and for converting the intermediate product to the final product.
-\paragraph{Factories} is an entity which in the \gls{scm} world convert input products into output products by running manufacturing process on their production lines. All processes take zero-time to complete.
+\paragraph{Production Graph} defines the products defined in the world and the process of converting between them. There are three product types: raw-material, intermediate-product and final-product and two manufacting processes for converting the raw materail into the intermediate product and for converting the intermediate product to the final product.
+\paragraph{Factories} is an entity which in the \gls{scm} world convert input products into output products by running manufacturing process on their production lines. A special point is that all processes require zero time to complete.
 \paragraph{Agents} The agents in the \gls{scm} world function as factory managers controlling the negotiations between factories.
-\paragraph{Conctracts} include normal contracts which are signed agreements bewtween agents or exogenous contracts, which are contracts between agent and system entities(BUYER and SELLER).
-\paragraph{Utiliy Function} The utility function of an agent specifies its preferences over possible outcomes of a negotiation. Utility function is well defined in \gls{scml-oneshot}. It is simply the total money it receives minus the money it pays for buying input product, production cost, storage and garbage collection costs and delivery penalties. It is called OneShotUfun in \gls{scml-oneshot} world.
-\paragraph{Negotiation Mechanism} The negotiation mechanism adopted by SCML2020 is a variant of Rubinstein's alternating offers protocol. It involves two agents, who take turns making offers for a finite number of rounds. One agent open the negotiation with an offer, after which the other agent takes one of the actions(Accepts, Counteroffer, Walks away). All actions are also described in SAOM. This process repeats util an agreement or a deadline is reached. A key difference between the variant of the protocol used in the SCM world and other implementations of the alternating offers protocol is that in the first round of negotiations, both agents propose an offer, and then one of these offers is chosen at random to be the initial offer.
-\paragraph{Bulletin Board} The world contains a world-readable bulletin board. It contains both static and dynamcial information about the game and all factories. The static information includes the game settings, product information, catalog prices and trading prices. The dynamical information includes a breach list and a financial reports.
-\paragraph{Simulation World} Each simulation in \gls{scm} world runs for multiple days. Before the first day, each agent is assigned a private production cost $(m_f)$. During each day:
+\paragraph{Conctracts} include normal contracts which are signed agreements between agents or exogenous contracts, which are contracts signed between agent and system entities(BUYER and SELLER).
+\paragraph{Utiliy Function} The utility function of an agent specifies its preferences over possible outcomes of a negotiation. Utility function is well defined in \gls{scml-oneshot}. It is simply the total money it receives minus the money it pays for buying input product, production cost, storage and garbage collection costs and delivery penalties. It is called OneShotUfun in \gls{scml-oneshot} world. This utility can be set as a part of reward function of RL-agent. The complete information of the utility function will be covered in Chapter 4 "Analysis" \ref{analysis:scml:design-of-reward-function}.
+\paragraph{Negotiation Mechanism} The negotiation mechanism is a variant of Rubinstein's alternating offers protocol. It involves two agents, who take turns making offers for a finite number of rounds. One agent opens the negotiation with an offer, after which the other agent takes one of the actions(Accepts, Counter-offer, Walks away). All actions are also introduced in SAOM \ref{background:saom}. This process repeats until an agreement or a deadline is reached. A key difference between the variant of the protocol used in the SCM world and other implementations of the alternating offers protocol is that in the first round of negotiations, both agents propose an offer, and then one of these offers is chosen at random to be the initial offer.
+\paragraph{Bulletin Board} The world contains a world-readable bulletin board. It contains both static and dynamic information about the game and all factories. The static information includes the game settings, product information, catalog prices and trading prices. The dynamical information includes a breach list and a financial reports.
+\paragraph{Simulation World} Each simulation in \gls{scm} world runs for multiple days. Before the first day, each agent is assigned a private production cost $(m_f)$. During each day\parencite{Mohammad2021}:
 \begin{itemize}
-\item Agents can engage in multiple rounds of negotiations with their negotiation partners.
-\item All contracts are executed.
-\item The bulletin-board is updated to reflects new finacial reports, trading prices, and exogenous contract summaries.
+\item Conduct multiple rounds of negotiations between agents.
+\item Execute all contracts.
+\item Update the bulletin board to reflect new financial reports, transaction prices and external contract summaries.
 \end{itemize}
+
+\subsection{Tensorflow} Tensorflow is an end-to-end open source platform for machine learning. It has a comprehensive and flexible ecosystem of tools, libraries and community resources, allowing researchers to promote the latest developments in ML, and allowing developers to easily build and deploy ML-supported applications\parencite{tensorflow2015-whitepaper}.
 
 \subsection{\gls{pytorch}} PyTorch is an open source machine learning library and framework which performs immediate execution of dynamic tensor computations with automatic differentiation and GPU acceleration, and does so while maintaining performance comparable to the fastest current libraries for deep learning\parencite{NEURIPS2019_bdbca288}. While considering performance, it is also easier to apply and debug.
 
@@ -418,7 +419,7 @@ ob100,rew99,done99,info2=env.step(a99)
 From Listing \ref{lst:openaigym}, user can get the logic of interaction in \gls{openai gym}.
 
 \subsubsection{Stable Baselines} \label{backgrounds:stable-baselines}
-The stable baselines developed in the project stable-baselines \parencite{stable-baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines}.
+The \textbf{Stable Baselines} are developed in the project stable-baselines \parencite{stable-baselines}. The project implemented a set of improved implementations of \gls{rl} algorithms based on OpenAI Baselines\ref{baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines}.
 
 \begin{table}[htbp]
 \centering
@@ -443,7 +444,7 @@ The stable baselines developed in the project stable-baselines \parencite{stable
 \end{table}
 
 \subsection{\gls{ray}}
-Ray is packaged with the following libraries for accelerating machine learning workloads.
+An open source framework that provides a simple, universal API for building distributed applications. Ray is packaged with the following libraries for accelerating machine learning workloads\parencite{DBLP:journals/corr/abs-1712-05889}.
 \begin{itemize}
 	\item Tune: Scalable Hyperparameter Tuning
 	\item RLlib: Scalable Reinforcement Learning
