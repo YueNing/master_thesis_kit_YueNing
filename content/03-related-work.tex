@@ -1,17 +1,21 @@
 \chapter{Related Works}
-In this chapter, related work on the relevant topics of this work is presented and discussed. The topics include autonomous negotiation, multi-agent reinforcement learning. At the last section, the work of reinforcement learning used in autonomous negotiation is presented. 
+In this chapter, the topics related to the work of this thesis are introduced and discussed. The topics include mainly three parts: \textbf{Heuristic Negotiation Strategies for Autonomous Negotiation}, \textbf{Reinforcement Learning used in Autonomous Negotiation} and \textbf{Challenges in Deep Reinforcement Learning}. Several time-based, behavior-based and concurrent negotiation methods are referred in the section heuristic negotiation strategies. The content of the second part is at the frame level, which designs the \gls{rl} framework used in autonomous negotiation. Finally, some frequently appeared challenges when applying deep reinforcement learning are specified in the section challenges in deep reinforcement learning.
 
 \section{Heuristic Negotiation Strategies for Autonomous Negotiation} \label{related-work:heuristic-negotiation}
 \subsection{Time-based Strategy (Aspiration Negotiator)}
-Aspirations are the specific goals in a negotiation that a negoitator wishes to achieve as part of an agreement. Empricial evidence has shown that negotiators with higher aspirations tend to achieve better bargaining results. First, aspiration of negotiator can help to determine the outer limit of what negotiator will request. Second, optimistic aspirations can make the negotiators to work harder\parencite{Schneider2004}. Many aspiration negotiators are time dependent, such as Boulware(with concession factor $e=1/2$), Hardliner($e=0$), Conceder Linear($e=1$) and Conceder($e=2$)\parencite{FARATIN1998159}. Boulwarism is the tactic of making a "take-it-or-leave-it" offer in a negotiation, with no further concessions or discussion. It was named after General Electric's former vice president Lemuel Boulware, who promoted the strategy\parencite{William1991}.
+Aspirations are the specific goals in a negotiation that a negotiator wishes to achieve as part of an agreement. Empirical evidence has shown that negotiators with higher aspirations tend to achieve better bargaining results.. First, aspiration of negotiator can help to determine the outer limit of what negotiator will request. Second, optimistic aspirations can make the negotiators to work harder\parencite{Schneider2004}. Many aspiration negotiators are time dependent, such as \textbf{Boulware}(with concession factor $e=1/2$), \textbf{Hardliner}($e=0$), \textbf{Conceder Linear}($e=1$) and \textbf{Conceder}($e=2$)\parencite{FARATIN1998159}. Boulwarism is the tactic of making a "take-it-or-leave-it" offer in a negotiation, with no further concessions or discussion. It was named after General Electric's former vice president Lemuel Boulware, who promoted the strategy\parencite{William1991}.
 
-At every round, the agent calculates their decision utility which determines whether they accept an offer or not. For time-dependent agents, this is:
+At every round, the agent(negotiator) calculates their decision utility which determines whether they accept an offer or not. For time-dependent agent, the utility is:
 \begin{equation}
 u(t) = P_{min} + (P_{max} - P_{min})(1-\alpha(t))
 \end{equation}
-$P_{max}$ and $P_{min} \in [0, 1]$, Frequently, $\alpha(t)$ is parametrized as a polynomial function: $\alpha(t)=\kappa+\left(1-\kappa\right)\left(\min \left(t, t_{\max }\right) / t_{\max }\right)^{1 / e}$.
+$P_{max}$ and $P_{min} \in [0, 1]$ means the minimum utility and the maximum utility, respectively. Frequently, $\alpha(t)$ is parametrized as time-depedent a polynomial function: 
 
-Where $e$ is the concession factor. $k$ is often set to 0 for simplicity. Figure \ref{fig:boulware-conceder-combination} diagrams the convexity degree of $\alpha(t)$and utility value $u(t)$ based on the $\alpha(t)$.
+\begin{equation}
+\alpha(t)=\kappa+\left(1-\kappa\right)\left(\min \left(t, t_{\max }\right) / t_{\max }\right)^{1 / e}
+\end{equation}
+
+Where $e$ is the concession factor. For simplicity, $k$ is often set to $0$. Figure \ref{fig:boulware-conceder-combination} diagrams the convexity degree of $\alpha(t)$and utility value $u(t)$ based on the $\alpha(t)$.
 
 \begin{figure}
 \centering
@@ -27,13 +31,12 @@ x_{a \rightarrow b}^{t}[j]=\left\{\begin{array}{ll}
 \min _{j}^{a}+\left(1-\alpha_{j}^{a}(t)\right)\left(\max _{j}^{a}-\min _{j}^{a}\right) & \text { if } u_{j}^{a} \text { is increasing. }
 \end{array}\right.
 \end{equation}
-Where $u_{j}$ denotes utility value of issue $j$ set as the offer, $\min _{j}$ and $\max _{j}$ mean the minimum and maximum value of issue $j$, respectively.
+Where $u_{j}$ denotes utility value of issue $j$. The minimum and maximum value of issue $j$ are represented by $\min _{j}$ and $\max _{j}$ , respectively.
 
-
-The offer will always between the value range($[min_j, max_j]$), the initial constant will be given at the beginning, and before the deadline is reached, the strategy will suggest to provide a reserved value.
+The offer will always between the value range($[min_j, max_j]$), the initial constant will be given at the beginning, and before the deadline is reached, the strategy will suggest to provide a reserved value, which is usually the value with minimum utility.
 
 \subsection{Behavior-based Strategies}
-Behavior-based and imitation bidding strategies observe the opponent's behavior and decide what to offer and accept. The well-known behavior-based strategy is \texttt{tit for tat}. The strategy is to act cooperatively first, and then mirror what other players did in the previous round.
+Behavior-based and imitation bidding strategies observe the opponent's behavior and decide what to offer and accept. The well-known behavior-based strategy is \textbf{tit-for-tat}. This strategy is to act cooperatively first, and then mirrors what other players did in the previous round.
 It is a very robust strategy and has three main following features\parencite{Baarslag2013, chang2020multiissue}:
 \begin{itemize}
 \item It is never the first to defect(i.e. As long as the opponent also plays well, it will play well).
@@ -42,29 +45,29 @@ It is a very robust strategy and has three main following features\parencite{Baa
 \end{itemize}
 
 \subsection{Concurrent Negotiation Strategy (\gls{cns})}
-In a concurrent negotiation environment, an agent will negotiate with many opponents at the same time(one-to-many). One issue is how to coordinate all these negotiations. The author of the paper \parencite{Williams12Concurrent} designed an intuitive model with two key parts, namely the \texttt{Coordinator} and \texttt{Negotiation Thread} to deal with this problem.
+In a concurrent negotiation environment, an agent will negotiate with many opponents at the same time(one-to-many). One issue is how to coordinate all these negotiations. The author of the paper \parencite{Williams12Concurrent} designed an intuitive model with two key parts, namely the \textbf{Coordinator} and \textbf{Negotiation Thread} to deal with this problem.
 
+\paragraph{Negotiation Threads} The strategy of each negotiation thread is an extension of a recently published, principled, adaptive bilateral negotiation agent. This agent was designed to be used in a similarly complex environment, but only for negotiations against a single opponent.
+
+\paragraph{Coordinator} The role of the coordinator is to calculate the best time, $t_i$ and utility value, $u_i$ at that time, for each thread. To do so, it uses the probability distributions received from the individual threads, which predict future utilities offered by the opponents.
+
+Related components and data flow are diagrammed in the figure \ref{fig:heuristic-concurrent-negotiation}.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{./images/heuristic_concurrent_negotiation.png}
-\caption{Architecture of the concurrent negotiation agent, best time: $t_i$ and utility value: $u_i$, probability distributions: $P$ \parencite{Williams12Concurrent}.}
+\caption{Architecture of the concurrent negotiation agent, best time: $t_i$ and utility value: $u_i$, probability distributions: $P$. Own illustration based on\parencite{Williams12Concurrent}.}
 \label{fig:heuristic-concurrent-negotiation}
 \end{figure}
 
-\textbf{Negotiation Threads:}The strategy of each negotiation thread is an extension of a recently published, principled, adaptive bilateral negotiation agent. This agent was designed to be used in a similarly complex environment, but only for negotiations against a single opponent.
-
-\textbf{Coordinator:}The role of the coordinator is to calculate the best time, $t_i$ and utility value, $u_i$ at that time, for each thread. To do so, it uses the probability distributions received from the individual threads, which predict future utilities offered by the opponents.
-
 %\subsection{Optimal Negotiation Strategies}
 \subsection{Conclusion}
-From the analysis of the heuristic negotiation strategy in a specific field, We can get some important parameters, such as time, the opponent's offer, these parameters can be regarded as important information that affects the negotiation process.
+From the analysis of the heuristic negotiation strategy in a specific field, we can extract some important parameters, such as time and the opponent's offer, these parameters can be regarded as important information that affects the negotiation process. One question is proposed here: Is it possible to use some methods to predict the opponent’s offer? Based on the predicted opponent's offer will significantly speed up the development of better strategy.
 
 \section{Reinforcement Learning used in Autonomous Negotiation}
-\textbf{\gls{negosi}:} A novel algorithm named negotiation-based MARL
+\paragraph{\gls{negosi}} A novel algorithm named negotiation-based MARL
 with sparse interactions (NegoSI) is presented by \texttt{Luowei Zhou}. In contrast to traditional sparse-interaction based MARL algorithms, NegoSI adopts the equilibrium concept and makes it possible for agents to select the non-strict Equilibrium Dominating Strategy Profile (non-strict EDSP) or Meta equilibrium for their joint actions \parencite{L2017NegoSI}.
 
-
-\textbf{\gls{rlboa}:} From the paper \parencite{Bakker2019RLBOAAM} A Modular Reinforcement Learning Framework for Autonomous Negotiating Agents. This framwork implemented an agent that used tabular Q-Learning on the compressed state and action space to learning bidding strategy which is one of modules \gls{boa} proposed in the paper \parencite{Baarslag2014}. Negotiation strategy was split into three modules: bidding strategy, the opponent model, and the acceptance strategy. \gls{rlboa} maps the multi-dimensional contract space to the utility axis, which enables compact and universal descriptions of states and actions. Hence, the action space of this framework is discrete. The model is diagrammed in the Figure \ref{fig:rlboa}.
+\paragraph{\gls{rlboa}} From the paper \parencite{Bakker2019RLBOAAM}, a modular reinforcement learning framework for autonomous negotiating agents. This framwork implemented an agent that used tabular Q-Learning on the compressed state and action space to learning bidding strategy which is one of modules \gls{boa} proposed in the paper \parencite{Baarslag2014}. Negotiation strategy was split into three modules: \textbf{bidding strategy}, \textbf{opponent model}, and \textbf{acceptance strategy}. \gls{rlboa} maps the multi-dimensional contract space to the utility axis, which enables compact and universal descriptions of states and actions. Hence, the action space of this framework is discrete. The model is diagrammed in the figure \ref{fig:rlboa}.
 
 \begin{figure}[htbp]
 \centering
@@ -75,7 +78,7 @@ on\parencite{Bakker2019RLBOAAM}.}
 \end{figure}
 
 
-\textbf{\gls{anegma}:} Work by \parencite{bagga2020deep}. A novel DRL-inspired agent model called ANEGMA, which allows the buyer to develop an adaptive strategy to effectively use against its opponents (which use fixed-but-unknown strategies) during concurrent negotiations in an environment with incomplete information . The architecture of \gls{anegma} is shown in Figure \ref{fig:anegma}.
+\paragraph{\gls{anegma}:} is work in \parencite{bagga2020deep}. A novel DRL-inspired agent model called ANEGMA, which allows the buyer to develop an adaptive strategy to effectively use against its opponents(which use fixed-but-unknown strategies) during concurrent negotiations in an environment with incomplete information. The architecture of \gls{anegma} is shown in Figure \ref{fig:anegma}.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.6\textwidth]{./images/anegma.png}
@@ -83,13 +86,15 @@ on\parencite{Bakker2019RLBOAAM}.}
 \label{fig:anegma}
 \end{figure}
 
+\subsection{Conclusion}
+A lot of work has focused on the application of \gls{rl} in autonomous negotiation. Regardless of whether it is through decoupling strategies or fixed opponent strategies to conduct research on reinforcement learning algorithms in automatic negotiation, they have some obvious simplified conditions. However, the importance of these studies is also obvious.
 
 \section{Challenges in Deep Reinforcement Learning}
 
 \subsection{Sparse Reward} \label{related-work:sparse-reward}
-For financial problem, the reward is usually profit and an appropriate reinforcement learning signal should be based on it. When an agent learns the strategy just with it, the reward is too sparse. Hence, the reward function is needed to provide more frequent feedback or redesign the learning model. Methods \textbf{Reward Shaping},\textbf{ Curiosity Driven} and \textbf{Imitation Learning} proposed to solve sparse reward problem, will be introduced in this section.
+For financial problem, the reward is usually profit and an appropriate reinforcement learning signal should be based on it. However, when an agent learns the strategy just based on profit, the reward is too sparse. Hence, the reward function is needed to provide more frequent feedback. Methods \textbf{Reward Shaping},\textbf{ Curiosity Driven} and \textbf{Imitation Learning} proposed to solve sparse reward problem, will be introduced in this section.
 
-\paragraph{Reward Shaping\parencite{Wiewiora2010}} is a method for engineering a reward function in order to provide more frequent feedback on appropriate behaviors. Providing feedback during early learning is crucial, so try promising behaviors as early as possible. This is necesary in large domains, where reinforcement signals may be few and far apart. If a method added shaping rewards in a way, it need to guarantees the optimal policy maintains its optimality. Ng et al. proposed a method with a new concept potential function $\Phi()$ to guarantee it. Hence, reward shpaing $f$ is described as $f(s, s^{\prime}) = \gamma\Phi(s^{\prime}) - \Phi(s)$ over the stats\parencite{Ng1999PolicyIU}. The form means shaping reward $f$ for transitioning from state $s^{\prime}$ to $s$ is defined as the discounted change in this state potential. Based on the value function mentioned in the section \ref{background:value-function} , the augmented value function is closely related to the original and is described as $V^{\prime}(s) = V(s) - \Phi(s)$. It is obvious to set potential function $\Phi(s) \approx V(s)$. This intuition is strengthened by results presented by Wiewiora in the paper \parencite{Wiewiora2003}. The derivation process can be found in appendix.
+\paragraph{Reward Shaping\parencite{Wiewiora2010}} is a method for engineering a reward function in order to provide more frequent feedback on appropriate behaviors. Providing feedback during early learning is crucial, so try promising behaviors as early as possible. This is necessary in large domains, where reinforcement signals may be few and far apart. If a method added shaping rewards in a way, it need to guarantees the optimal policy maintains its optimality. Ng et al. proposed a method with a new concept potential function $\Phi()$ to guarantee it. Hence, reward shpaing $f$ is described as $f(s, s^{\prime}) = \gamma\Phi(s^{\prime}) - \Phi(s)$ over the stats\parencite{Ng1999PolicyIU}. The form means shaping reward $f$ for transitioning from state $s^{\prime}$ to $s$ is defined as the discounted change in this state potential. Based on the value function mentioned in the section \ref{background:value-function}, the augmented value function is closely related to the original and is described as $V^{\prime}(s) = V(s) - \Phi(s)$. It is obvious to set potential function $\Phi(s) \approx V(s)$. This intuition is strengthened by results presented by Wiewiora in the paper \parencite{Wiewiora2003}. The derivation process can be found in appendix.
 
  
 \paragraph{Curiosity Driven \parencite{pathakICMl17curiosity}} The author designed a new intrinsic reward signal that describes the agent’s familiarity with the environment. The policy outputs a sequence of actions to maximize that intrinsic reward signal. In addition to intrinsic rewards, the agent optionally may also receive some extrinsic reward from the environment. Intrinsic rewards encourage agents to actively explore the environment, instead of staying in place due to lack of reward signals.
@@ -97,9 +102,12 @@ For financial problem, the reward is usually profit and an appropriate reinforce
 \paragraph{Imitation Learning\parencite{DBLP:journals/corr/HesterVPLSPSDOA17}} Inverse reinforcement learning (IRL) is a different approach of imitation learning, where the main idea is to learn the reward function of the environment based on the expert’s demonstrations, and then find the optimal policy.
 
 \subsection{Non-stationary environment}
-Traditional \gls{rl} research assumes that environment dynamical (i.e., \gls{mdp} parameters) are always fixed (i.e., stationary). However, this assumption is not realistic in many real-world environment. In \gls{scm} world, for instance, factories' can change their negotiaton strategy during the simulation. The difficult question is how to deal with non-stationary rewards and non-stationary transition probabilties between system stats. Centralized training decentralized execution\parencite{maddpg2017} is a method for multi-agent learning under non-stationary environment. Besides, a method called \textbf{Context Q-learning}\parencite{Padakandla_2020} first detects the changes of environment with a detection algorithm. Using the results of the detection, the method can estimate the strategy of the new environment model, or if the environment model has been previously experienced, the learned strategy can be improved.
+Traditional \gls{rl} research assumes that environment dynamical(i.e., \gls{mdp} parameters) are always fixed(i.e., stationary). However, this assumption is not realistic in many real-world environment. In \gls{scm} world, for instance, factories' can change their negotiation strategy during the simulation. The difficult question is how to deal with non-stationary rewards and non-stationary transition probabilities between system stats. Centralized training decentralized execution\parencite{maddpg2017} is a method for multi-agent learning under non-stationary environment. Besides, a method called \textbf{Context Q-learning}\parencite{Padakandla_2020} first detects the changes of environment with a detection algorithm. Using the results of the detection, this method can estimate the strategy of the new environment model, or if the environment model has been previously experienced, the learned strategy can be improved.
 
-\subsection{Huge action space}
-In many real-world environment, the tasks involve large numbers of discrete actions. Traditional \gls{rl} methods are difficult or even often impossible to apply to solve the problem. One proposed approach in the paper \parencite{dulacarnold2016deep} embes the large discrete actions in a continous space with prior information about the actions. Then, the action can be selected using approximate nearest-neighbor method. The lookup complexity is logarithmic-time relative to the number of actions.
+\subsection{Huge size of action space}
+In many real-world environment, the tasks involve large numbers of discrete actions. Traditional \gls{rl} methods are difficult or even often impossible to apply to solve the problem. One proposed approach in the paper \parencite{dulacarnold2016deep} embed the large discrete actions in a continous space with prior information about the actions. Then, the action can be selected using approximate nearest-neighbor method. The lookup complexity is logarithmic-time relative to the number of actions.
 
 Learning algorithms, which used to solve continuous action space do not need to calculate $Q$ value for every state-action pairs. It maintains just a policy $\pi$ and can output continuous action. One method is to replace the large discrete action space by continuous action space. Additionally, discrete actions can be determined based on the results.
+
+\subsection{Conclusion}
+There are many challenges in deep reinforcement learning. Although many solutions have been proposed, they are still difficult to apply, but they still have certain experimental significance. In this section, the work related to the three typical challenges helped understand and solve many of the problems in the work of this thesis.
