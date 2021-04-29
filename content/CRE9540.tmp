@@ -338,7 +338,7 @@ Mean episode reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the r
 \label{fig:oneshot-my-vs-greedy}
 \end{figure}
 
-In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means, method \gls{qmix} is valid in scml-oneshot world.
+In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means method \gls{qmix} is valid in scml-oneshot world.
 
 \section{Conclusion}
-The result of training of single agent(negotiator) is not bad. For multi-agent concurrent negotiations, it is not easy to implemente. The work of this thesis focuses on two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.
+The training effect of single agent(negotiator) is not bad. But for multi-agent concurrent negotiations it is not easy to implemente. The work of this thesis focus on just two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.

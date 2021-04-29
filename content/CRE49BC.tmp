@@ -315,30 +315,30 @@ All parameters are defined in table \ref{tab:attributes-mcbe-concurrent-negotiat
 \label{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot-with-others}
 \end{table}
 
-In the following paragraphs the results will be evaulate based on the two scenarios \textbf{self-paly},\textbf{ play-with-others} and method qmix raised in section \ref{methods:qmix-scml-oneshot}.
+In the following paragraphs the results will be evaulate  based on the two scenarios \textbf{self-paly},\textbf{ play-with-others} and method qmix raised in section \ref{methods:qmix-scml-oneshot}.
 
 \paragraph{Evaluation of self-play} 
-Curve of mean episode reward is shown in the figure \ref{fig:oneshot-self-play}. After 5 thousands time steps, the curve converges around 0. In the self-play scenario, the definition of reward is the sum reward of each agent. Therefore, while one agent gains more profits, the other agent loses more. The reward will eventually converge to a certain value, and it can be seen that the value is close to zero. The interpretation of the final convergence value will be discussed in future work. The most important question is whether this state is pareto optimal. The second question is whether RL agents can evolve on their own when the reward function is designed according to the competitive situation. This situation is very useful for training general RL agents. It means that the agent can learn more unpredictable excellent strategies through self-play.
+Episode mean reward curve is shown in \ref{fig:oneshot-self-play}. After 5000 time steps, the curve converges around 0. In the self-play scenario, the definition of reward is the sum reward of each agent. Therefore, one agent will make more profits, and the other agent will lose more. The reward will eventually converge to a certain value, and it can be seen that the value is close to zero. The explanation of this value will be discussed in the future work. The most important question is whether this state is pareto optimal. The second question is whether RL agents can evolve on their own when the reward function is designed according to the competitive situation. This is very useful for training general RL agents. It means that the agent can learn more unpredictable excellent strategies through self-game.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{./images/oneshot_self_play.png}
-\caption{Mean episode reward of self-play in SCML OneShot}
+\caption{Episode mean reward of self paly under SCML OneShot}
 \label{fig:oneshot-self-play}
 \end{figure}
 
 \paragraph{Evaluation of play-with-others}
 
-Mean episode reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the reward is only minus 400 at the beginning(random strategy), the reward curve finally converges to around 300. Obviously, RL agents have learned a good strategy. In addition, the training time is also very short. Thus, the results are very meaningful.
+Episode mean reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the reward is only minus 400 at the beginning, the reward curve converges to around 300. Obviously, RL agents have learned a good strategy. In addition, the training time is also very short. The results are very meaningful.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{./images/oneshot_my_vs_greedy.png}
-\caption{Mean episode reward of my agent vs GreedyOneShotAgent under SCML OneShot}
+\caption{Episode mean reward of my agent vs GreedyOneShotAgent under SCML OneShot}
 \label{fig:oneshot-my-vs-greedy}
 \end{figure}
 
-In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means, method \gls{qmix} is valid in scml-oneshot world.
+In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means method \gls{qmix} is valid in scml-oneshot world.
 
 \section{Conclusion}
-The result of training of single agent(negotiator) is not bad. For multi-agent concurrent negotiations, it is not easy to implemente. The work of this thesis focuses on two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.
+The training effect of single agent(negotiator) is not bad. But for multi-agent concurrent negotiations it is not easy to implemente. The work of this thesis focus on just two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.

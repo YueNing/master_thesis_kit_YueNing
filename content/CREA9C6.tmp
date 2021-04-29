@@ -291,10 +291,10 @@ Scenario is diagrammed in Figure \ref{fig:scenario-oneshot-scml-play-with-greedy
 
 Two different categories of agents are used for the experiments:
 
-\paragraph{RL agents} The key parts is same as RL agents mentioned in self-play. In addition to the normal negotiating ability, the agent can also determine whether the negotiator is his teammate. RL agents were trained with 10 thousands time steps in the training environment for algorithm qmix. The RL-agents are named as M* in the scenario image \ref{fig:scenario-oneshot-scml-play-with-greedy}.
+\paragraph{RL agents} The key parts is same as RL agents mentioned in self-play. In addition to the normal negotiating ability, the agent can also determine whether the negotiator is his teammate. RL agents were trained with 10000 time steps in the training environment for algorithm qmix. The RL-agents are named as M* in the scenario image \ref{fig:scenario-oneshot-scml-play-with-greedy}.
 \paragraph{Baseline agents} There are many baseline agents realized in scml-oneshot package, such as GreedyAgent, which uses the greedy strategy to act the negotiation action. Overall, it is a simple strategy. In the future, in order to evaluate the performance of this algorithm, more sophisticated agents will need to be tested in this environment. 
 
-The setting of this scenario is same as in the scenario self-play. Only the competitors are changed as MyAgent vs. GreedyAgent. The negotiation mechanism is an alternative rubinstein negotiation mechanism. Negotiation issues are Quantity and Price. Based on the characteristic(all negotiations finished in each world step) of the world, time is not necessary to be considered here(i.e., set the issue time equal to the simulation step in the offer). This characteristic is briefly introduced in the section \ref{background:scml2020-oneshot}. 
+The setting of this scenario is same as in self-play scenario. Only the competitors are changed as MyAgent vs. GreedyAgent. The negotiation mechanism is a alternative rubinstein negotiation mechanism. Negotiation issues are Quantity and Price. Based on the characteristic(all negotiations finished in each world step) of the world, time is not necessary to be considered here. This characteristic is briefly introduced in the section \ref{background:scml2020-oneshot}. 
 All parameters are defined in table \ref{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot-with-others}.
 
 \begin{table}[htbp]
@@ -315,30 +315,30 @@ All parameters are defined in table \ref{tab:attributes-mcbe-concurrent-negotiat
 \label{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot-with-others}
 \end{table}
 
-In the following paragraphs the results will be evaulate based on the two scenarios \textbf{self-paly},\textbf{ play-with-others} and method qmix raised in section \ref{methods:qmix-scml-oneshot}.
+The following paragraphs will evaulate the results based on the two scenarios \textbf{self-paly},\textbf{ play-with-others} and method qmix raised in section \ref{methods:qmix-scml-oneshot}.
 
 \paragraph{Evaluation of self-play} 
-Curve of mean episode reward is shown in the figure \ref{fig:oneshot-self-play}. After 5 thousands time steps, the curve converges around 0. In the self-play scenario, the definition of reward is the sum reward of each agent. Therefore, while one agent gains more profits, the other agent loses more. The reward will eventually converge to a certain value, and it can be seen that the value is close to zero. The interpretation of the final convergence value will be discussed in future work. The most important question is whether this state is pareto optimal. The second question is whether RL agents can evolve on their own when the reward function is designed according to the competitive situation. This situation is very useful for training general RL agents. It means that the agent can learn more unpredictable excellent strategies through self-play.
+Episode mean reward curve is shown in \ref{fig:oneshot-self-play}. After 5000 time steps, the curve converges around 0. In the self-play scenario, the definition of reward is the sum reward of each agent. Therefore, one agent will make more profits, and the other agent will lose more. The reward will eventually converge to a certain value, and it can be seen that the value is close to zero. The explanation of this value will be discussed in the future work. The most important question is whether this state is pareto optimal. The second question is whether RL agents can evolve on their own when the reward function is designed according to the competitive situation. This is very useful for training general RL agents. It means that the agent can learn more unpredictable excellent strategies through self-game.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{./images/oneshot_self_play.png}
-\caption{Mean episode reward of self-play in SCML OneShot}
+\caption{Episode mean reward of self paly under SCML OneShot}
 \label{fig:oneshot-self-play}
 \end{figure}
 
 \paragraph{Evaluation of play-with-others}
 
-Mean episode reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the reward is only minus 400 at the beginning(random strategy), the reward curve finally converges to around 300. Obviously, RL agents have learned a good strategy. In addition, the training time is also very short. Thus, the results are very meaningful.
+Episode mean reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the reward is only minus 400 at the beginning, the reward curve converges to around 300. Obviously, RL agents have learned a good strategy. In addition, the training time is also very short. The results are very meaningful.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{./images/oneshot_my_vs_greedy.png}
-\caption{Mean episode reward of my agent vs GreedyOneShotAgent under SCML OneShot}
+\caption{Episode mean reward of my agent vs GreedyOneShotAgent under SCML OneShot}
 \label{fig:oneshot-my-vs-greedy}
 \end{figure}
 
-In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means, method \gls{qmix} is valid in scml-oneshot world.
+In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means method \gls{qmix} is valid in scml-oneshot world.
 
 \section{Conclusion}
-The result of training of single agent(negotiator) is not bad. For multi-agent concurrent negotiations, it is not easy to implemente. The work of this thesis focuses on two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.
+The training effect of single agent(negotiator) is not bad. But for multi-agent concurrent negotiations it is not easy to implemente. The work of this thesis focus on just two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.
