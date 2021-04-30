@@ -1,0 +1,89 @@
+\addchap*{Summary of Notation}
+\markboth{Notation}{}
+Lower case letters are used for the values of random variables and for scalar functions. Capital ltters are used for random variables and major algorithms variables.
+\addsec*{General identifier}
+
+\begin{tabular}{p{1.5cm} p{12cm}}
+$\alpha$, \dots, $\omega$ & Skalare \\
+$\veca$, \dots, $\vecz$ & Skalar, Vektor, Funktionssymbol (oder Realisierung einer Zufallsvariablen) \\
+$\rdveca$, \dots, $\rdvecz$ & Zufallsvariable (skalar bzw. vektoriell) \\
+$\rdesveca$, \dots, $\rdesvecz$ & Schätzer für jeweilige Variable als Zufallsgröße \\
+$\esveca$, \dots, $\esvecz$ & Realisierter Schätzer für jeweilige Variable \\
+$\mA$, \dots, $\mZ$ & Matrix \\
+$\rdmA$, \dots, $\rdmZ$ & Matrix als Zufallsgröße\\
+$\sA$, \dots, $\sZ$ & Menge \\
+$\ssA$, \dots, $\ssZ$ & Mengensystem \\
+\end{tabular}
+
+\addsec*{Special identifier}
+
+\begin{tabular}{p{1.5cm} p{12cm}}
+$s$ & State \\
+$a$ & action(RL) or agent(autonomous negotiation)\\
+$\sS$ & set of nonterminal states \\
+$\sA(s)$ & set of actions possible in state $s$ \\
+$\sR$ & set of possible rewards \\
+
+$t$ & discrete time step \\
+$\mT$ & final time step of an episode \\
+$\mS_t$ & state at $t$ \\
+$\mA_t$ & action at $t$ \\
+$\mR_t$ & reward at $t$ \\
+$\mG_t$ & return (cumulative discounted reward) following $t$ \\
+$\pi$ & policy, decision-making rule \\
+$\pi(s)$ & action taken in state $s$ under \texttt{deterministic} policy $\pi$ \\
+$\pi(a|s)$ & probability of taking action $a$ in state $s$ under stochastic policy $\pi$ \\
+$p(s',r|s, a)$ & probability of transitioning to state $s'$, with reward $r$, from $s$, $a$ \\
+
+$v_\pi(s)$ & value of state $s$ under policy $\pi$ (except return) \\
+$v_*(s)$ & value of state $s$ under the optimal policy \\
+$q_{\pi}(s, a)$ & value of taking action $a$ in the state $s$ under policy $\pi$ \\
+$q_{*}(s, a)$ & value of taking action $a$ in the state $s$ under optimal policy \\
+$\mV_{t}(s)$ & estimate (a random variable) of $v_{\pi}(s)$ or $v_{*}(s)$ \\ 
+$\mQ_{t}(s, a)$ & estimate (a random variable) of $q_{\pi}(s, a)$ or $q_{*}(s, a)$
+$\mathbf{w}, \mathbf{W}_{t}$ & vector of (possibly learned) weights
+$\gamma$ & discount-rate parameter
+$\varepsilon$ & probability of random action in $\varepsilon$-greedy policy
+$\mu$ & utility of contract(offer), utility of agent, expected profit of a factory
+$C$ & set of contracts(i.e., agreements signed by agent)
+$p$ & price
+$q$ & quantity
+$m$ & cost of production
+$P$ & total producible quantity
+$s$ &step of simulation
+$\alpha$ $ 33
+$\gamma$ $ 33
+
+
+\begin{equation} \label{equation:utility-agent}
+\begin{aligned}
+u_{a}\left(C^{i}, C^{o}\right)=\sum_{c \in \bar{C}^{o}}\left(p_{c} q_{c}\right)-\sum_{c \in C^{i}}\left(p_{c} q_{c}\right)-m_{a} P_{a}-\gamma_{a} \mathrm{t} \mathrm{p}\left(p_{a}^{i}, s\right) Q_{a}^{i+}-\alpha_{a} \mathrm{tp}\left(p_{a}^{o}, s\right) Q_{a}^{o+}
+\end{aligned}
+\end{equation}
+
+
+\end{tabular}
+
+\addsec*{General quantities}
+
+\begin{tabular}{p{1.5cm} p{12cm}}
+$\dsC$ & Menge der komplexen Zahlen \\
+$\dsH$ & Poincaré Halbebene\\
+$\dsN$ & Menge der natürliche Zahlen (ohne Null) \\
+$\dsN_0$ & Menge der natürliche Zahlen mit Null \\
+$\dsQ$ & Menge der rationalen Zahlen \\
+$\dsQ^{>0}$, $\dsQ^{<0}$ & Menge der positiven bzw. negative rationalen Zahlen \\
+$\dsR$ & Menge der reellen Zahlen \\
+$\dsR^{>0}$, $\dsR^{<0}$ & Menge der positiven bzw. negative reellen Zahlen \\
+$\dsZ$ & Menge der ganzen Zahlen \\
+\end{tabular}
+
+\addsec*{Special symbols}
+
+\begin{tabular}{p{1.5cm} p{12cm}}
+$\normDist( \mu, \sigma^2 )$ & Normalverteilung mit Erwartungswert $\mu$ und Varianz $\sigma$ \\
+$\fisherDist_{r,s}$ & Fisher-Verteilung mir $r$ Zähler- und $s$ Nennerfreiheitsgraden\\
+$\studentDist_s$ & Student-$t$-Verteilung mit $s$ Freiheitsgraden \\
+$\diracDist_\xi$ & Ein-Punkt-Maß an der Stelle $\xi$ \\
+$\chiSqDist_s$ & $\chiSqDist$-Verteilung mit $s$ Freiheitsgraden \\
+\end{tabular}

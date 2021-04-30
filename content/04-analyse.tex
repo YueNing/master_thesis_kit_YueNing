@@ -153,7 +153,7 @@ In \gls{scm} world, the goal of the agent is to maximize profit at the end of th
 
 \begin{equation} \label{equation:utility-agent}
 \begin{aligned}
-u_{a}\left(C^{i}, C^{o}\right)=\sum_{c \in \bar{C}^{o}}\left(p_{c} q_{c}\right)-\sum_{c \in C^{i}}\left(p_{c} q_{c}\right)-m_{a} P_{a}-\gamma_{a} \mathrm{t} \mathrm{p}\left(p_{a}^{i}, s\right) Q_{a}^{i+}-\alpha_{a} \mathrm{tp}\left(p_{a}^{o}, s\right) Q_{a}^{o+}
+u_{a}\left(C^{i}, C^{o}\right)=\sum_{c \in \bar{C}^{o}}\left(p_{c} q_{c}\right)-\sum_{c \in C^{i}}\left(p_{c} q_{c}\right)-m_{a} P_{a}-\gamma_{a} \mathrm{t} \mathrm{p}\left(p_{a}^{i}, d\right) Q_{a}^{i+}-\alpha_{a} \mathrm{tp}\left(p_{a}^{o}, d\right) Q_{a}^{o+}
 \end{aligned}
 \end{equation}
 Where $C^{i}$ denotes the set of input contracts plus the exogenous input contracts. $C^{o}$ denotes the set of output contracts plus the exogenous output contracts. Price and quantity of the contract $c$ are formed by $p_c$ and $q_c$, respectively. Because the agent can only sell what it can produce, the set of satisfiable output contracts can be defined as $\bar{C}^{o}$. $Q^{i+}$ is simply the quantity to be bought  according to $C^{i}$ but is never sold. $p_{a}^{i}$ and $p_{a}^{o}$ are the input and output products, and $tp(p, s)$ is the current trading price of product $p$ at step $s$. The meaning of each term is listed below:
