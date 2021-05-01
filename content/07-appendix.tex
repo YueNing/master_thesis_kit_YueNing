@@ -1,13 +1,46 @@
 \begin{appendices}
-In the appendices, many detailed information are listed, such as algortihms of reinforcement learning.
+In order to keep clean, some derivation processes were moved to the appendix. Nevertheless, for completeness, detailed algorithms training pseudo-code were provided after the derivation.
 	\chapter{Derivation Process} \label{appendices-derivation-process}
-	\section{Gradient of Reward of \gls{pg}} \label{derivation-process-gradient-pg}
-	The complete derivation process of gradient of reward of \gls{pg} is step-by-step shown as follows.
-	The reward function is defined as :
+	\section{Proof of Policy Gradient Theorem} \label{derivation-process-gradient-pg}
+	The policy is usually modeled with a parameterized function respect to $\theta$, $\pi_{\theta}(a|s)$. The value of the reward(objective) function depends on this policy. The reward function is defined as:
 	\begin{equation}
 	J(\theta)=\sum_{s \in \mathcal{S}} d^{\pi}(s) V^{\pi}(s)=\sum_{s \in \mathcal{S}} d^{\pi}(s) \sum_{a \in \mathcal{A}} \pi_{\theta}(a \mid s) Q^{\pi}(s, a)
 \end{equation}
-
+	
+	We first start with the derivative of the state value function:
+	\begin{equation}
+	\begin{aligned}
+	 &\nabla_{\theta} V^{\pi}(s) \\
+	=&\nabla_{\theta}(\sum_{a \in \mathcal{A}} \pi_{\theta}(a \mid s) Q^{\pi}(s,a)) \\
+	=&\sum_{a \in \mathcal{A}}\left(\nabla_{\theta} \pi_{\theta}(a \mid s) Q^{\pi}(s, a)+\pi_{\theta}(a \mid s) \nabla_{\theta} Q^{\pi}(s, a)\right) \\
+	=&\sum_{a \in \mathcal{A}}(\nabla_{\theta} \pi_{\theta}(a \mid s) Q^{\pi}(s, a)+\pi_{\theta}(a \mid s) \nabla_{\theta} \sum_{s^{\prime}, r} P\left(s^{\prime}, r \mid s, a\right)\left(r+V^{\pi}\left(s^{\prime}\right)\right)) \\
+	=& \sum_{a \in \mathcal{A}}(\nabla_{\theta} \pi_{\theta}(a \mid s) Q^{\pi}(s, a)+\pi_{\theta}(a \mid s) \sum_{s^{\prime}} P\left(s^{\prime} \mid s, a\right) \nabla_{\theta} V^{\pi}\left(s^{\prime}\right)) \\
+	=& \phi(s)+\sum_{s^{\prime}} \sum_{a} \pi_{\theta}(a \mid s) P\left(s^{\prime} \mid s, a\right) \nabla_{\theta} V^{\pi}\left(s^{\prime}\right) \\
+	=& \phi(s)+\sum \rho^{\pi}\left(s \rightarrow s^{\prime}, 1\right) \nabla_{\theta} V^{\pi}\left(s^{\prime}\right) \\
+	=& \phi(s)+\sum \rho^{\pi}\left(s \rightarrow s^{\prime}, 1\right)\left[\phi\left(s^{\prime}\right)+\sum \rho^{\pi}\left(s^{\prime} \rightarrow s^{\prime \prime}, 1\right) \nabla_{\theta} V^{\pi}\left(s^{\prime \prime}\right)\right] \\
+	=& \phi(s)+\sum_{1} \rho^{\pi}\left(s \rightarrow s^{\prime}, 1\right) \phi\left(s^{\prime}\right)+\sum_{1 \prime} \rho^{\pi}\left(s \rightarrow s^{\prime \prime}, 2\right) \nabla_{\theta} V^{\pi}\left(s^{\prime \prime}\right) \\
+	=& \text{- .; Repeatedly unrolling the part of} \nabla_{\theta} V^{\pi}(.) \\
+	=& \sum_{x \in \mathcal{S}} \sum_{k=0}^{\infty} \rho^{\pi}(s \rightarrow x, k) \phi(x)
+	\end{aligned}
+	\end{equation}
+	
+	By plugging above into the objective function $J(\theta)$, we are getting the following:
+	
+	\begin{equation}
+	\begin{aligned}
+	\nabla_{\theta} J(\theta)=&\nabla_{\theta} V^{\pi}\left(s_{0}\right) \\
+	=& \sum_{s} \sum_{k=0}^{\infty} \rho^{\pi}\left(s_{0} \rightarrow s, k\right) \phi(s) \\
+	=& \sum_{s} \eta(s) \phi(s) \\
+	=& \left(\sum_{s} \eta(s)\right) \sum_{s} \frac{\eta(s)}{\sum_{s} \eta(s)} \phi(s) \\
+	\propto&  \sum_{s} \frac{\eta(s)}{\sum_{s} \eta(s)} \phi(s) \\
+	=& \sum_{s} d^{\pi}(s) \sum_{a} \nabla_{\theta} \pi_{\theta}(a \mid s) Q^{\pi}(s, a) \\
+	=& \sum_{s \in \mathcal{S}} d^{\pi}(s) \sum_{a \in \mathcal{A}} \pi_{\theta}(a \mid s) Q^{\pi}(s, a) \frac{\nabla_{\theta} \pi_{\theta}(a \mid s)}{\pi_{\theta}(a \mid s)} \\
+	=& \mathbb{E}_{s \sim d^{\pi}, a \sim \pi_{\theta}}\left[Q^{\pi}(s, a) \nabla_{\theta} \log \pi_{\theta}(a \mid s)\right]
+	\end{aligned}
+	\end{equation}
+	
+	Where $d^{\pi}(s)=\frac{\eta(s)}{\sum_{s} \eta(s)}$ is stationary distribution. $\sum_{s} \eta(s)$ is a constant. 
+	
 	\section{Loss Function of \gls{ppo}} \label{appendix-derivation-process-loss-ppo}
 	
   \chapter{Algorithms} \label{appendices-algorithms}

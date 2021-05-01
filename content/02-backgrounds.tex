@@ -250,7 +250,7 @@ Q_t(s, a) &= Q_{t-1}(s, a) + \alpha TD_t(s, a) \\
 \subsection{Policy Gradient \gls{pg}}
 Different from Q-Learning, policy gradient learns the strategy directly based on the gradient of reward function. The policy is usually modeled with a parameterized function respect to $\theta$, $\pi_\theta \left(a \mid s\right)$. The gradient of reward function is shown below:
 \begin{equation}
-\nabla_{\theta} J(\theta)=\mathbb{E}_{s \sim p^{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \boldsymbol{\pi}_{\theta}(a \mid s) Q^{\boldsymbol{\pi}}(s, a)\right]
+\nabla_{\theta} J(\theta)=\mathbb{E}_{s \sim d^{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \boldsymbol{\pi}_{\theta}(a \mid s) Q^{\boldsymbol{\pi}}(s, a)\right]
 \end{equation}
 
 The derivation process is written in the appendix \ref{derivation-process-gradient-pg}.
