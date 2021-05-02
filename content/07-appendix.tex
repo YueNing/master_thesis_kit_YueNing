@@ -142,6 +142,39 @@ In order to keep clean, some derivation processes were moved to the appendix. Ne
   \caption{Multi-Agent Deep Deterministic Policy Gradient for N agents}
 \end{algorithm}
 
-	\subsection{\gls{qmix}}
+	\subsection{\gls{qmix}}	
+	\begin{algorithm}[H]
+	Initialise $\theta$, the parameters of mixing network, agent networks and hypernetwork\;
+	Set the learning rate $\alpha$ and replay buffer $\mathcal{D}$\;
+	step = 0, $\theta^{-}=\theta$\;
+	\For{step = 0 to $step_{max}$}{
+		$s_{0}=\text{initial state}$
+		\While{$s_{t} \neq \text { terminal }$ and $t<\text { episode limit }$}{
+			\For{each agent $a$}{
+			$\tau_{t}^{a}=\tau_{t-1}^{a} \cup\left\{\left(o_{t}, u_{t-1}\right)\right\}$ \;
+			$\epsilon=\text { epsilon-schedule }(\text { step })$ \;
+			$u_{t}^{a}=\left\{\begin{array}{ll}\operatorname{argmax}_{u_{t}^{a}} Q\left(\tau_{t}^{a}, u_{t}^{a}\right) & \text { with probability } 1-\epsilon \\ \operatorname{randint}(1,|U|) & \text { with probability } \epsilon\end{array}\right.$ \;
+			}
+			Get reward $r_t$ and next state $s_{t+1}$ \;
+			$\mathcal{D}=\mathcal{D} \cup\left\{\left(s_{t}, \mathbf{u}_{t}, r_{t}, s_{t+1}\right)\right\}$ \;
+			$t=t+1, step=step+1$\;
+		}
+		\If{$|\mathcal{D}|$>\text { batch-size }}{
+			$\mathrm{b} \leftarrow \text { random batch of episodes from } \mathcal{D}$ \;
+			\For{each timestep $t$ in each episode in batch $b$}{
+				$Q_{t o t}=\text { Mixing-network }\left(Q_{1}\left(\tau_{t}^{1}, u_{t}^{1}\right), \ldots, Q_{n}\left(\tau_{t}^{n}, u_{t}^{n}\right) ; \text { Hypernetwork }\left(s_{t} ; \theta\right)\right)$ \;
+				Calculate target $Q_{tot}$ using Mixing-network with Hypernetwork$\left.\left(s_{t} ; \theta^{-}\right)\right)$ \;
+		}
+			$\Delta Q_{tot} = y^{tot} - Q_{tot} $ \;
+			$\Delta \theta = \nabla_{\theta}(\Delta Q_{tot})^{2}$ \;
+			$\theta = \theta - \alpha \Delta \theta$ \;
+		}
+		\If{update-interval steps have passed}{
+			$\theta^{-} = \theta$\;
+		}
+	}
+	
+	\caption{QMIX Algorithm\parencite{DBLP:journals/corr/abs-2003-08839}}
+	\end{algorithm}
 	
 \end{appendices}
