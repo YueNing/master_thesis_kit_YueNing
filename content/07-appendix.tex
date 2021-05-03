@@ -41,16 +41,10 @@ In order to keep clean, some derivation processes were moved to the appendix. Ne
 	
 	Where $d^{\pi}(s)=\frac{\eta(s)}{\sum_{s} \eta(s)}$ is stationary distribution. $\sum_{s} \eta(s)$ is a constant. The derivation process is carried out through the proof in the book \parencite{Sutton2018}, from which we can understand why the policy gradient theorem is correct. 
 	
-	\section{Loss Function of \gls{ppo}} \label{appendix-derivation-process-loss-ppo}
-	PPO uses a clipped surrogate objective. First, it denotes the probability rataio between old and new policies as:
-	
-	\begin{equation}
-	r(\theta)=\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{\text {old }}}(a \mid s)}
-	\end{equation}
-	
-	Then, the objective function of 
-	
-  \chapter{Algorithms} \label{appendices-algorithms}
+	\section{Advatage Function}
+	$\hat{A}_t = - V(s_t) + r_t + \gamma r_{t+1} + \dots + \gamma^{T-t+1}r_{T-1} + \gamma^{T-t}V(s_T)$
+  
+	\chapter{Algorithms} \label{appendices-algorithms}
   \section{Single-Agent Reinforcement Learning}
 	\subsection{DQN} \label{appendix:dqn}
 	For completeness, the DQN algorithm used in single-agent bilateral negotiation
@@ -77,6 +71,19 @@ In order to keep clean, some derivation processes were moved to the appendix. Ne
 	\caption{Deep Q-learning with experience replay}
 	\end{algorithm}
 	\subsection{PPO} \label{appendix-algorithm-ppo}
+	\begin{algorithm}[H]
+	\For{iteration = 1 to $N$}{
+		\For{actor = 1 to $N$}{
+			Run policy $\pi_{\theta_{\text {old}}}$ in evironment for $T$ timesteps \;
+			Compute advantage estimates $\hat{A}_1 \dots \hat{A}_T$ \;
+		}
+		Optimize surrogate $L$ wrt $\theta$, with $K$ epochs and minibatch size $M \leq NT$ \;
+		$\theta_{\text{old}} \leftarrow \theta$ \;
+	}
+	
+	\caption{PPO, Actor-Critic Style []}
+	\end{algorithm}
+	
 	\subsection{DDPG}
 	\begin{algorithm}[H]
   \SetAlgoLined

@@ -7,10 +7,19 @@ Lower case letters are used for the values of random variables and for scalar fu
 $s$ & state \\
 $a$ & action(RL) or agent(autonomous negotiation)\\
 $t$ & discrete time step \\
+$o$ & observation \\
 $\mT$ & final time step of an episode \\
 $\pi$ & policy, decision-making rule \\
-$\gamma$ & discount-rate parameter \\
+$\mu$ & policy, determinstic policy \\
+$\gamma$ & discount-rate parameter or multiplication factor in utility function of an agent\\
+$\alpha$ & learning rate or multiplication factor in utility function of an agent\\
 $\varepsilon$ & probability of random action in $\varepsilon$-greedy policy \\
+$\theta$ & parameters of policy(i.g., network) \\
+$\omega$ & parameters of network \\
+$\phi$ & preprocessing function for state \\
+$Q$ & Q value in reinforcement learning \\
+$V$ & V value in reinforcement learning \\
+$J$ & objective function \\
 \\
 $\mu$ & utility of contract(offer), utility of agent, expected profit of a factory \\
 $p$ & price \\
@@ -18,8 +27,6 @@ $q$ & quantity \\
 $m$ & cost of production \\
 $P$ & total producible quantity \\
 $d$ & step(day) of simulation \\
-$\alpha$ & 33 \\
-$\gamma$ & 33 \\
 \end{tabular}
 
 \addsec*{Special identifier}
@@ -29,8 +36,12 @@ $\mS_t$  & state at $t$ \\
 $\mA_t$  & action at $t$ \\
 $\mR_t$  & reward at $t$ \\
 $\mG_t$  & return (cumulative discounted reward) following $t$ \\
+$\theta_{k}$ & parameters of old policy, in page 21 \\
+$\hat{A}$ & advantage function, used in ppo, 21\\
+
 \\
 $\pi(s)$  & action taken in state $s$ under \texttt{deterministic} policy $\pi$ \\
+$\pi_{\theta_{k}}$ & old policy in ppo, in page 21 \\
 $\pi(a|s)$  & probability of taking action $a$ in state $s$ under stochastic policy $\pi$ \\
 $p(s^{\prime},r|s,a)$  & probability of transitioning to state $s'$, with reward $r$, from $s$, $a$ \\
 \\
@@ -40,6 +51,7 @@ $q_{\pi}(s, a)$ & value of taking action $a$ in the state $s$ under policy $\pi$
 $q_{*}(s, a)$ & value of taking action $a$ in the state $s$ under optimal policy \\
 $\mV_{t}(s)$ & estimate (a random variable) of $v_{\pi}(s)$ or $v_{*}(s)$ \\ 
 $\mQ_{t}(s, a)$ & estimate (a random variable) of $q_{\pi}(s, a)$ or $q_{*}(s, a)$ \\
+$Q_{tot}$ &  centralised action-value function \\
 \\
 $\mathbf{w}, \mathbf{w}_{t}$ & vector of (possibly learned) weights \\
 
@@ -53,14 +65,4 @@ $\sS$ & set of nonterminal states \\
 $\sA(s)$ & set of actions possible in state $s$ \\
 $\sR$ & set of possible rewards \\
 $\sC$ & set of contracts(i.e., agreements signed by agent) \\
-\end{tabular}
-
-\addsec*{Special symbols}
-
-\begin{tabular}{p{1.5cm} p{12cm}}
-$\normDist( \mu, \sigma^2 )$ & Normalverteilung mit Erwartungswert $\mu$ und Varianz $\sigma$ \\
-$\fisherDist_{r,s}$ & Fisher-Verteilung mir $r$ Zähler- und $s$ Nennerfreiheitsgraden\\
-$\studentDist_s$ & Student-$t$-Verteilung mit $s$ Freiheitsgraden \\
-$\diracDist_\xi$ & Ein-Punkt-Maß an der Stelle $\xi$ \\
-$\chiSqDist_s$ & $\chiSqDist$-Verteilung mit $s$ Freiheitsgraden \\
 \end{tabular}

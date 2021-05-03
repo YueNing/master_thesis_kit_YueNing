@@ -270,10 +270,10 @@ $\theta^{-}$ and $\theta$ are the parameters of target network and current netwo
 \subsubsection{Proximal Policy Optimization (\gls{ppo})}
 During the training process, \gls{pg} will continuously update the probability distribution of actions. However, there is a problem: if the reward is always positive or negative, some possible actions will disappear and it is difficult to sample these actions. \gls{ppo} uses some constraint tricks, such as clip of policy, to avoid this problem. It makes the probability distribution of actions more reasonable. The loss function based on PPO-clip is as follows:
 \begin{equation}
-L\left(s, a, \theta_{k}, \theta\right)=\min \left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)} A^{\pi_{\theta_{k}}}(s, a), \quad \operatorname{clip}\left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)}, 1-\epsilon, 1+\epsilon\right) A^{\pi_{\theta_{k}}}(s, a)\right)
+L\left(s, a, \theta_{k}, \theta\right)=\min \left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)} \hat{A}^{\pi_{\theta_{k}}}(s, a), \quad \operatorname{clip}\left(\frac{\pi_{\theta}(a \mid s)}{\pi_{\theta_{k}}(a \mid s)}, 1-\epsilon, 1+\epsilon\right) \hat{A}^{\pi_{\theta_{k}}}(s, a)\right)
 \end{equation} 
 
-The details of derivation process and algorithm are introduced in appendix \ref{appendix-derivation-process-loss-ppo} and \ref{appendix-algorithm-ppo}.
+The details of algorithm is introduced in appendix \ref{appendix-algorithm-ppo}.
 
 \subsubsection{\gls{dpg},\gls{ddpg}, \gls{maddpg}} \label{background:maddpg}
 
