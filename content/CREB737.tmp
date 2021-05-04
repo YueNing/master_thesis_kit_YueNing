@@ -369,8 +369,8 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World created by \gls{scml-one
 \paragraph{Agents} The agents in the \gls{scm} world function as factory managers controlling the negotiations between factories.
 \paragraph{Conctracts} include normal contracts which are signed agreements between agents or exogenous contracts, which are contracts signed between agent and system entities(BUYER and SELLER).
 \paragraph{Utiliy Function} The utility function of an agent specifies its preferences over possible outcomes of a negotiation. The utility function is well defined in \gls{scml-oneshot}. It is simply the total money it receives minus the money it pays for buying input product, production cost, storage and garbage collection costs and delivery penalties. It is called OneShotUfun in \gls{scml-oneshot} world. This utility can be set as a part of reward function of RL-agent. The complete information of the utility function will be covered in Chapter 4 "Analysis" \ref{analysis:scml:design-of-reward-function}.
-\paragraph{Negotiation Mechanism} The negotiation mechanism is a variant of the alternating offers protocol. It involves two agents, who take turns making offers for a finite number of rounds. One agent opens the negotiation with an offer, after which the other agent takes one of the actions(Accepts, Counter-offer, Walks away). All actions are also introduced in SAOM \ref{background:saom}. This process repeats until an agreement or a deadline is reached. A key difference between the variant of the protocol used in the SCM world and other implementations of the alternating offers protocol is that in the first round of negotiations, both agents propose an offer, and then one of these offers is chosen at random to be the initial offer. This trick was designed to prevent the mechanism from degenerating into an ultimatum game.
-\paragraph{Bulletin Board} The world contains a public bulletin board. It contains both static and dynamic information about the game and all factories. The static information includes the game settings, product information, catalog prices and trading prices. The dynamical information includes a breach list and financial reports.
+\paragraph{Negotiation Mechanism} The negotiation mechanism is a variant of the alternating offers protocol. It involves two agents, who take turns making offers for a finite number of rounds. One agent opens the negotiation with an offer, after which the other agent takes one of the actions(Accepts, Counter-offer, Walks away). All actions are also introduced in SAOM \ref{background:saom}. This process repeats until an agreement or a deadline is reached. A key difference between the variant of the protocol used in the SCM world and other implementations of the alternating offers protocol is that in the first round of negotiations, both agents propose an offer, and then one of these offers is chosen at random to be the initial offer. This trick was designed to prevent the mechanism from degenerating into an ultimatum game\parencite{GUTH1982367}.
+\paragraph{Bulletin Board} The world contains a public bulletin board. It contains both static and dynamic information about the game and all factories. The static information includes the game settings, product information, catalog prices and trading prices. The dynamical information includes a breach list and a financial reports.
 \paragraph{Simulation World} Each simulation in \gls{scm} world runs for multiple days. Before the first day, each agent is assigned a private production cost $(m_f)$. During each day\parencite{Mohammad2021}:
 \begin{itemize}
 \item Conduct multiple rounds of negotiations between agents.
@@ -378,12 +378,12 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World created by \gls{scml-one
 \item Update the bulletin board to reflect new financial reports, transaction prices and external contract summaries.
 \end{itemize}
 
-\subsection{Tensorflow} Tensorflow is an end-to-end open source platform for machine learning. It has a comprehensive and flexible ecosystem of tools, libraries and community resources, allowing researchers to promote the latest developments in ML, and allowing developers to easily build and deploy ML-supported applications\parencite{tensorflow2015-whitepaper}. In this thesis, it is used for creating neural networks(in MADDPG and stable-baselines) and summarizing the results.
+\subsection{Tensorflow} Tensorflow is an end-to-end open source platform for machine learning. It has a comprehensive and flexible ecosystem of tools, libraries and community resources, allowing researchers to promote the latest developments in ML, and allowing developers to easily build and deploy ML-supported applications\parencite{tensorflow2015-whitepaper}.
 
-\subsection{\gls{pytorch}} PyTorch is an open source machine learning library and framework which performs immediate execution of dynamic tensor computations with automatic differentiation and GPU acceleration, and does so while maintaining performance comparable to the fastest current libraries for deep learning\parencite{NEURIPS2019_bdbca288}. While considering performance, it is also easier to apply and debug. In this thesis, it is used for creating an easy-to-understand network(in QMIX).
+\subsection{\gls{pytorch}} PyTorch is an open source machine learning library and framework which performs immediate execution of dynamic tensor computations with automatic differentiation and GPU acceleration, and does so while maintaining performance comparable to the fastest current libraries for deep learning\parencite{NEURIPS2019_bdbca288}. While considering performance, it is also easier to apply and debug.
 
 \subsection{\gls{openai gym}}
-\gls{openai gym} is a toolkit for developing and comparing reinforcement learning algorithms \parencite{brockman2016openai}. To create custom environments, they just need to follow its interface.
+\gls{openai gym} is a toolkit for developing and comparing reinforcement learning algorithms \parencite{brockman2016openai}.
 \subsubsection{Environment}
 The core gym interface is \texttt{Env}, which is the unified environment interface. The following are the Env methods that developers should implement \parencite{brockman2016openai}.
 
@@ -421,7 +421,7 @@ ob100,rew99,done99,info2=env.step(a99)
 From Listing \ref{lst:openaigym}, user can get the logic of interaction in \gls{openai gym}.
 
 \subsubsection{Stable Baselines} \label{backgrounds:stable-baselines}
-The \textbf{Stable Baselines} are developed in the project stable-baselines\parencite{stable-baselines}. The project implemented a set of improved implementations of \gls{rl} algorithms based on OpenAI Baselines\parencite{baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines} and would be tested on the experiments.
+The \textbf{Stable Baselines} are developed in the project stable-baselines\parencite{stable-baselines}. The project implemented a set of improved implementations of \gls{rl} algorithms based on OpenAI Baselines\parencite{baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines}.
 
 \begin{table}[htbp]
 \centering
@@ -446,8 +446,7 @@ The \textbf{Stable Baselines} are developed in the project stable-baselines\pare
 \end{table}
 
 \subsection{\gls{ray}}
-An open source framework that provides a simple, universal API for building distributed applications. Ray is packaged with the following libraries for accelerating machine learning workloads\parencite{DBLP:journals/corr/abs-1712-05889}. Due to the complexity of training, use it to build a distributed training environment for parallel distributed training. 
-
+An open source framework that provides a simple, universal API for building distributed applications. Ray is packaged with the following libraries for accelerating machine learning workloads\parencite{DBLP:journals/corr/abs-1712-05889}.
 \begin{itemize}
 	\item Tune: Scalable Hyperparameter Tuning
 	\item RLlib: Scalable Reinforcement Learning

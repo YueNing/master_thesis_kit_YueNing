@@ -42,7 +42,7 @@ means \gls{mdp} with finite time horizon. An MDP is fully characterised by its s
 
 Next, the definition of strategy(policy) will be introduced. A strategy is a mapping $\pi: S \rightarrow A$, where $\pi(s)$ is the action an agent will perform in state $s$. In the case of a given MDP, the agent should adopt the best strategy, which should maximize the accumulated expected reward when performing the specified action. Since \gls{rl} is based on the \gls{mdp} process, how to find the optimal strategy and calculate the accumulated expected reward are important questions in the research field of \gls{rl}. This will be discussed further introduced in section value functions \ref{background:value-function}.
 
-\paragraph{Multi-Agent Markov Decision Processes(\gls{mdps})} Based on communication ability of agents, multi-agent extension of \gls{mdps} can be called partially or completely observable markov games. There are $N$ players indexed by $n=1,2, \dots ,N$. A markov game for $N$ agents is defined by a set of states $S$ describing the possible configuration of all agents. $A_1, \dots, A_N$ and $O_1, \dots, O_N$ are the set of actions and observations of individual agents, respectively. For each agent, a stochastic strategy $\boldsymbol{\pi}_{\theta_{i}}$ will be used to choose action, the mapping is $\boldsymbol{\pi}_{\theta_{i}}: \mathcal{O}_{i} \times \mathcal{A}_{i} \mapsto[0,1]$. For the multi-agent \gls{mdps}, the transition function is defined as following mapping functions $\mathcal{T}: {S} \times {A}_{1} \times \ldots \times {A}_{N} \mapsto \mathcal{S}$, which produces the next state. The term $r_i(s, a)$ means the reward of agent $i$ if the state is $s$ and action $a$ is taken. The mapping of reward function is described as $r_i: S \times A_i \mapsto \dsR$. Each agent $i$ receives the private observation correlated with the state $o_i: S \mapsto O_i$\parencite{maddpg2017}. There are many cases for multi-agent \gls{mdps}. The following three cases are the typical cases that are introduced by \texttt{Boutilier} in \parencite{Boutilier1996PlanningLA}.
+\paragraph{Multi-Agent Markov Decision Processes(\gls{mdps})} Based on communication ability of agents, multi-agent extension of \gls{mdps} can be called partially or completely observable markov games. There are $N$ players indexed by $n=1,2, \dots ,N$. A markov game for $N$ agents is defined by a set of states $S$ describing the possible configuration of all agents. $A_1, \dots, A_N$ and $O_1, \dots, O_N$ are the set of actions and observations of individual agents, respectively. For each agent, a stochastic strategy $\boldsymbol{\pi}_{\theta_{i}}$ will be used to choose action, the mapping is $\boldsymbol{\pi}_{\theta_{i}}: \mathcal{O}_{i} \times \mathcal{A}_{i} \mapsto[0,1]$. For the multi-agent \gls{mdps}, the transition function is defined as following mapping functions $\mathcal{T}: {S} \times {A}_{1} \times \ldots \times {A}_{N} \mapsto \mathcal{S}$, which produces the next state. The term $r_i(s, a)$ means the reward of agent $i$ if the state is $s$ and action $a$ is taken. The mapping of reward function is described as $r_i: S \times A_i \mapsto \dsR$. Each agent $i$ receives the private observation correlated with the state $o_i: S \mapsto O_i$\parencite{maddpg2017}. There are many cases for multi-agent \gls{mdps}. The following three cases are the typical cases that are introduced by \texttt{Boutilier} in the paper\parencite{Boutilier1996PlanningLA}.
 \begin{itemize}
 \item Complete communication
 \item Communication of actions, but not states 
@@ -50,22 +50,22 @@ Next, the definition of strategy(policy) will be introduced. A strategy is a map
 \end{itemize}
 
 \section{Autonomous Negotiaion} \label{autonomous-negotiation}
-Negotiation is an important process in coordinating behavior and represents a principal topic in the field of multi-agent system research. Extensive research has been conducted in the field of autonomous negotiation\parencite{FARATIN1998159, Darja2011, Baarslag2013, L2017NegoSI, Aydoğan2017, Lee2004, Lin2014}.
+Negotiation is an important process in coordinating behavior and represents a principal topic in the field of multi-agent system research. Extensive research has been conducted in the field of autonomous negotiation agent.
 
 Automated agents can be used side-by-side with a human negotiator embarking on an important negotiation task. They can alleviate some of the effort required of people during negotiations and also assist people who are less qualified in the negotiation process. There may even be situations in which automated negotiators can replace the human negotiators. Thus, success in developing an automated agent with negotiation capabilities has great advantages and implications\parencite{Baarslag2012}.
 
-The perfection of information is an important notion in game theory when considering sequential and simultaneous games. It refers to the fact that each player has the same information that would be available at the end of the game. This means, each palyer knows other player's information. Imperfect information appears when decisions have to be made simultaneously, and players need to balance all possible outcomes when making a decision. A good example of imperfect information games is autonomous negotiation game where each player (negotiator)'s utility function are hidden from the rest of the palyers (negotiators).
+Through the negotiation agents, many problems that arise in real or simulated domain can be solved. In industrial domains and in commerical domains, the supply chain management(\gls{scm}) system functionality is implemented through agent-based negotiation environment, in which contracts can be singed through negotiation between agents. Many papers describe ongoing effort in developing a Multi-agent System(\gls{mas}) for supply chain management, such as work in paper \parencite{Lee2004, Lin2014}.
 
-\subsection{Utility Function (ufun)}
+\subsection{Utility Function}
 \textbf{Utility Function} is an important concept in economics. It measures preferences for a set of goods and services. Utility Function can measure either single offer or set of offers.
 
-Utility represents the satisfaction that consumers obtain when choosing and consuming products or services and is measured in units called utils, but calculating the benefit or satisfaction that consumers receive from is abstract and difficult to pinpoint\parencite{ANDRIY2019}. One typical utility function is the linear ufun:
+Utility represents the satisfaction that consumers obtain when choosing and consuming products or services and is measured in units called utils, but calculating the benefit or satisfaction that consumers receive from is abstract and difficult to pinpoint\parencite{ANDRIY2019}. One typical utility function is briefly listed and introduced below:
 
 \begin{itemize}
 \item \textbf{linear utility function:} $u\left(x_{1}, x_{2}, \ldots, x_{m}\right)=w_{1} x_{1}+w_{2} x_{2}+\ldots w_{m} x_{m}$ or described as a vector $u(\vec{x})=\vec{w} \cdot \vec{x}$, where $m$ is the number of differen goods in the economy. The element $x$ represents the amount of good $i$. The element $w_i$ represents the relative value that the consumer assigns to good $i$.
 \end{itemize}
 
-For heuristic agents, the utility function is a keypoint to measure preferences. For reinforcement learning agents utility function conducts the behavior of learnable agents, and it represents the reward function, which significantly affects the design and evaluation of RL-agent.
+It is a important point for designing a new agent in autonomous negotiation environment. For heuristic agents utility function is a keypoint to measure preferences. For reinforcement learning agents utility function conducts the behavior of learnable agents, and it can be used as a part of reward function, which significantly affects the design and evaluation of RL-agent.
 
 \subsection{Basic Notation in Negotiation Mechanism} \label{background:autonmous-negotiation:basic-notation}
 Before introducing a specific negotiation mechanism, it is necessary to understand some basic symbols defined in the paper \parencite{Aydoğan2017}.
@@ -79,24 +79,24 @@ Protocols assign turns to the negotiating agents. Turns are taken according to a
 \end{definition}
 
 \subsection{Rubinstein Bargaining Mechanism}
-Rubinstein bargaining mechanism is widely cited for multi-round bilateral negotiation\parencite{Baarslag2014, Mohammad2021, 10.1007/3-540-45448-9_28}.
-Two agents join the mechanism which has an infinite time horizon and have to reach an agreement. In a turn, one agent proposes an offer, the other needs to decide either to accept it, or to reject it and continue the bargaining\parencite{Rubinstein1982}. The offer is about how to divide a pie of size 1. After the two agents have played indefinitely, they may get the corresponding nash equilibrium solution. The both ufuns are common knowledges that the Nash equilibrium is achievable in a single round when the two players have possibly different time pressures (***).
+Rubinstein bargaining mechanism is widely cited for multi-round bilateral negotiation.
+Two agents in the mechanism which has an infinite time horizon and have to reach an agreement. In a turn, one agent propose an offer, the other need to decide either to accept it, or to reject it and continue the bargaining\parencite{Rubinstein1982}. The offer is about how to divide the pie of size 1. After the two agents have played indefinitely, they may get the corresponding nash equilibrium solution.
 
 \subsection{Stacked Alternating Offers Mechanism(\gls{saom})} \label{background:saom}
-In the alternating offers protocol also called AOM, one of the agents start to propose an offer. The other can either accept or reject the given offer. If an agreement is reached, the negotiation is successful and ended. When rejecting the offers the other agent can either end the negotiation or give a counter offer.
+In the alternating offers protocol, one of the agent start to proposal an offer. The other can either accept or reject the given offer. If an agreement is reached, the negotiation is successful and ended. When rejecting the offer the other agent can either end the negotiation or give a count offer.
 
-\gls{saom} is also named the stacked alternating offers protocol (SAOP)\parencite{Aydoğan2017}. Agents can only take their action when it is their turn. \gls{saom} allows negotiating agents to evaluate only the most recent offer in their turn and accordingly they can take the following actions:
+\gls{saom} is also named as stacked alternating offers protocol. Agents can only take their action when it is their turn. \gls{saom} allows negotiating agents to evaluate only the most recent offer in their turn and accordingly they can take the following actions:
 \begin{itemize}
 \item Make a count offer (thus rerejecting and overriding the previous offer)
 \item Accept the offer
 \item Walk away (e.g. ending the negotiation without any agreement)
 \end{itemize}
-This negotiation process is repeated until a termination condition is met. The termination condition is met, if an agreement is reached, the deadline is reached or one agent walks away. When an agreement is reached, all agents need to accept the offer. If the deadline is reached with no agreement or any agent walks away, this negotiation is failed. 
+This negotiation process is repeated until a termination condition is met. The termination condition is met, if an agreement is reached or the deadline is reached. When an agreement is reached, all agents need to accept the offer. If at the deadline no agreement is reached, this negotiation is failed. 
 
 \section{Artificial Intelligence}
 Artificial intelligence is a broad branch of computer science that is focused on a machine’s capability to produce rational behavior from external inputs. The goal of AI is to create systems that can perform tasks that would otherwise require human intelligence. It is generally believed that the field of artificial intelligence began at a conference held at Dartmouth College in July 1956, when the term "artificial intelligence" was first used\parencite{Brunette2009}.
 
-There is a set of three related terms that sometimes are erroneously used interchangeably, namely artificial intelligence, machine learning, and deep learning. According to Encyclopaedia Britannica, AI defines the ability of a digital computer or computer-controlled robot to perform tasks commonly associated with intelligent beings. On the other hand, according to Arthur Samuel, one of the pioneers of the field, machine learning is a “field of study that gives computers the ability to learn without being explicitly programmed”\parencite{Samuel1959, Bhavsar2017}.
+There is a set of three related items that sometimes are erroneously used interchangeably, namely artificial intelligence, machine learning, and neural networks. According to Encyclopaedia Britannica, AI defines the ability of a digital computer or computer-controlled robot to perform tasks commonly associated with intelligent beings. On the other hand, according to Arthur Samuel, one of the pioneers of the field, machine learning is a “field of study that gives computers the ability to learn without being explicitly programmed”\parencite{Samuel1959, Bhavsar2017}.
 
 \subsection{Sub-areas}
 Fig. \ref{fig:ai_taxonomy} shows the relationship of artificial intelligence, machine learning and deep learning. AI is a program that can sense, reason, act and adapt. Machine learning is a set of methods, whose performance improve as they are exposed to more data over time.	Deep learning is a subset of machine learning, in which multi-layered neural networks learn from vast amount of data.
@@ -110,26 +110,25 @@ on\parencite{Suman2020}}
 \end{figure}
 
 \subsubsection{Artificial Intelligence}
-Artificial intelligence (also called machine intelligence) can be understood as a type of intelligence, which is different from the natural intelligence displayed by humans and animals, which can be demonstrated by machines. It looks at methods for designing smart devices and systems that can creatively solve problems that are usually regarded as human privileges. Hence, AI means that the machine imitates human behavior in some way. 
-\subsubsection{Machine Learning (ML)} 
-Machine learning is an AI subset and consists of techniques that enable computers to improve their performance using data and supply AI applications. Different algorithms (e.g., neural networks) contribute to problem resolution in ML.
+Artificial intelligence (also called machine intelligence) can be understood through a type of intelligence, which is different from the natural intelligence displayed by humans and animals, which can be demonstrated by machines. It looks at methods for designing smart devices and systems that can creatively solve problems that are usually regarded as human privileges. Hence, AI means that the machine imitates human behavior in some way. 
+\subsubsection{Machine Learning} 
+Machine learning is an AI subset and consists of techniques that enable computers to recognize data and supply AI applications. Different algorithms (e.g., neural networks) contribute to problem resolution in ML.
 
-\subsubsection{Deep Learning (DL)}
-Deep learning, often called deep neural learning or deep neural network, is a subset of machine learning that uses neural networks to evaluate various factors with a similar framework to a human neural system. The defining characteristic of the DL system is the use of a "deep" architecture with many sequential structural layers or equivalent structures. It has networks that can learn from unstructured or unlabeled data without supervision and has a powerful ability to extract complex features. DL has been successfully applied in many field: self-driving-cars, natrual language processing, visual recognition, automatic game playing, etc.
+\subsubsection{Deep Learning}
+Deep learning, often called deep neural learning or deep neural network, is a subset of machine learning that uses neural networks to evaluate various factors with a similar framework to a human neural system. It has networks that can learn from unstructured or unlabeled data without supervision.
 
-\subsection{Types of ML problems}
+\subsection{Methods}
 \paragraph{Supervised Learning}
 Training data contains optimal outcomes (also known as inductive learning). Learning is tracked in this method. Some famous examples of supervised machine learning algorithms are Linear regression for regression problems. 
 \paragraph{Unsupervised Learning} 
-Training data contains no labels. Clustering is an example. It is impossible to know what is and what is not good learning. Recently, self-supervised DL was introduced as a way to extend existing SL methods\parencite{caron2021emerging}.
-
+There are not the desired outputs in the training results. Clustering is an example. It is impossible to know what is and what is not good learning.
 \paragraph{Semi-supervised Learning}
-A few labels are included in the training data.
+A few desired outputs are included in the training data.
 \paragraph{Reinforcement Learning}
-Rewards are given after a sequence of actions. In a given case, it is a matter of taking appropriate steps to maximize compensation.
+Rewards are given after a sequence of actions. In a given case, it is a matter of taking appropriate steps to maximize compensation. It is the most ambitious method of learning in AI.
 
 \subsection{Application Field}
-AI researchers have paid a great deal of attention to automated negotiation over the past decade and a number of prominent models have been proposed in the literature. AI was applied in many scenarios, such as eCommerce, Logistics and Supply Chain and as research tools for computer science. In this section, some applications of autonomous negotiation based on AI will be introduced.
+AI researchers have paid a great deal of attention to automated negotiation over the past decade and a number of prominent models have been proposed in the literature. Autonomous agent is an important concept of AI. AI is a big concept with a wide range of applications. It provides support for many scenarios, such as eCommerce, Logistics and Supply Chain and as research tools for computer science. In this section, some applications of autonomous negotiation based on AI will be introduced.
 
 \subsubsection{eCommerce}
 \paragraph{Rank in E-Commerce Search Engine} In E-commerce platforms such as Amazon and TaoBao, ranking items in a search session is a typical multi-step decision-making problem. AI can learn the relation between different ranking steps, in the paper
@@ -138,8 +137,8 @@ AI researchers have paid a great deal of attention to automated negotiation over
 \paragraph{Business-to-Business Negotiation} Negotiation is an important challenge for B2B eCommerce. For B2B e-commerce, AI is making great strides and is being used in a variety of ways to improve and enhance business\parencite{Hans01}. AI-based algorithms and tools can help companies in various ways, from personalizing the shopping experience to improving supply chain management.
 
 \subsubsection{Logistics and Supply Chain}
-\paragraph{Contextual Intelligence} has the ability to understand the limits of our knowledge and to adapt that knowledge to an environment different from the one in which it was developed. AI provides contextual intelligence for the supply chain, and they can use contextual intelligence to reduce operating costs and manage inventory. Contextual information can help them return to customers quickly.   
-\paragraph{Enhancing Productivity and Profits} AI can analyze the performance of the supply chain and propose new factors that affect the same field. It can combine the capabilities of different technologies such as reinforcement learning, unsupervised learning and supervised learning to discover factors and problems that affect the performance of the supply chain and can make better contracts between different suppliers and consumers\parencite{Pndey2019}. It can analyze the data related to the supplier like audits, in-full delivery performance, credit scoring, evaluations and based on that deliver information which can be used to make future decisions. This kind of step helps the company make better decisions as a supplier and work towards improving customer service. Autonomous negotiation by autonomous agent is an important technology that can be used in this field. Pactum, a successful platform that leverages AI to automatically negotiate supplier contracts for enterprises. Pocket negotiator is a negotiation support system, which contains 4 sub-projects: qualitative negotiation models, emotion and interaction in negotiation, man machine interaction and negotiation and negotiation strategies. 
+\paragraph{Contextual Intelligence} AI provides contextual intelligence for the supply chain, and they can use contextual intelligence to reduce operating costs and manage inventory. Contextual information can help them return to customers quickly.   
+\paragraph{Enhancing Productivity and Profits} AI can analyze the performance of the supply chain and propose new factors that affect the same field. It can combine the capabilities of different technologies such as reinforcement learning, unsupervised learning and supervised learning to discover factors and problems that affect the performance of the supply chain and can make better contracts between different suppliers and consumers\parencite{Pndey2019}. It can analyze the data related to the supplier like audits, in-full delivery performance, credit scoring, evaluations and based on that deliver information which can be used to make future decisions. This kind of step helps the company make better decisions as a supplier and work towards improving customer service. Autonomous negotiation by autonomous agent is an important technology that can be used in this field.
 
 \section{Artificial Neural Network (\gls{ann})}
 Artificial neural network is a technology based on the study of the brain and nervous system\parencite{WALCZAK2003631}. \gls{ann}s are efficient data-driven modelling tools widely used for nonlinear systems dynamic modelling and identification, due to their universal approximation capabilities and flexible structure that allow to capture complex nonlinear behaviors \parencite{SHOKRY2018265}. 
@@ -198,7 +197,7 @@ on\parencite{Sutton2018}.}
 \label{fig:agent-environment-interaction}
 \end{figure}
 
-The process is a typical single-agent interaction process. Single-agent reinforcement learning algorithms are based on this process. By extending this interactive process, multi-agent interactive process can be intuitively diagrammed In \ref{fig:multi-agent-environment-interaction}. The case based on multi-agent interaction process is called multi-agent reinforcement learning \gls{marl}. In the figure \ref{fig:multi-agent-environment-interaction}, an agent is splited as two parts: \textbf{perceptor} and \textbf{learner}. \textbf{Perceptor} observes the environment and sends the state to learner. \textbf{Learner} learns strategies based on the states, rewards and actions. There are many methods proposed over the past decade. Some \gls{madrl} methods(e.g., \gls{maddpg}) will be discussed in the following sections. According to the design requirements of the training environment, the structure of the interaction process is flexible.
+Above process is a typical single-agent interaction process. Single-agent reinforcement learning algorithms are based on this process. By extending this interactive process, multi-agent interactive process can be intuitively diagrammed In \ref{fig:multi-agent-environment-interaction}. The case based on multi-agent interaction process is called multi-agent reinforcement learning \gls{marl}. In the figure \ref{fig:multi-agent-environment-interaction}, an agent is splited as two parts: \textbf{perceptor} and \textbf{learner}. \textbf{Perceptor} observes the environment and sends the state to learner. \textbf{Learner} learns strategies based on the states, rewards and actions. There are many methods proposed over the past decade. Some \gls{madrl} methods(e.g., \gls{maddpg}) will be discussed in the following sections. According to the design requirements of the training environment, the structure of the interaction process is flexible.
 
 \begin{figure}[htbp]
 \centering
@@ -308,7 +307,7 @@ For multi-agent deep reinforcement learning, there is a very natural idea, which
 
 \section{Platform and Library}
 \subsection{GENIUS}
-\textbf{GENIUS:} An integrated environment for supporting the design of generic automated negotiators \parencite{Lin2014}. It is considered the defacto standard of AN.
+\textbf{GENIUS:} An integrated environment for supporting the design of generic automated negotiators \parencite{Lin2014}.
 
 \subsection{\gls{negmas}} \label{background:negmas}
 \gls{negmas} is an opensource automated negotiation platform, which can model situated simultaneous negotiations such as \gls{scm} which will be discussed separately in detail in the next section \ref{background-scml}. The purpose of this section is to provide an overview of the key components(e.g. Mechanism, World) of this platform.
@@ -316,12 +315,12 @@ For multi-agent deep reinforcement learning, there is a very natural idea, which
 \gls{negmas} is a python library for developing autonomous negotiation agents embedded in simulation environments. The name negmas stands for either \textbf{NEGotiation MultiAgent System} or \textbf{NEGotiations Managed by Agent Simulations}. The main goal of NegMAS is to advance the state of the art in situated simultaneous negotiations. Nevertheless, it can; and is being used; for modeling simpler bilateral and multi-lateral negotiations, preference elicitation , etc \parencite{Mohammad2019}.
 
 \paragraph{\gls{negmas} and Mechanism}
-\gls{negmas} has natively implemented five mechanisms, Stacked Algernating Offers Mechanism (\gls{saom}), single-text negotiation mechanisms(st) \parencite{raiffa1982art}, multi-text mechanisms(mt), GA-based negotiation mechanisms\parencite{2015effects} and chain negotiations mechasnim(chain of bilateral negotiations). Among them, \gls{saom} is the negotiation mechanism that is discussed and used in the experiments of this thesis. It has been introduced in detail in section Autonomous Negotiation \ref{background:saom}. At the same time, in the related negotiation mechanism packages, some negotiators, such as AspirationNegotiator in negmas.sao, are developed as key part of the packages. These negotiation negotiator will be used as the baseline negotiators in the following experiments.
+\gls{negmas} has natively implemented five mechanism, Stacked Algernating Offers Mechanism (\gls{saom}), single-text negotiation mechanisms(st) \parencite{raiffa1982art}, multi-text mechanisms(mt)\ref{}, GA-based negotiation mechanisms\parencite{2015effects} and chain negotiations mechasnim(chain of bilateral negotiations). Among them, \gls{saom} is the negotiation mechanism that is discussed and used in the experiments of this thesis. It has been introduced in detail in section Autonomous Negotiation \ref{background:saom}. At the same time, in the related negotiation mechanism packages, some negotiators, such as AspirationNegotiator in negmas.sao, are developed as key part of the packages. These negotiation negotiator will be used as the baseline negotiators in the following experiments.
 \paragraph{\gls{negmas} and World}
-A simulation is an embedded domain in which agents behave. It is represented in \gls{negmas} by a \textbf{World}. The world in \gls{negmas} was designed to simplify the common tasks involved in constructing negotiation driven simulations\parencite{Mohammad2019}. The entire simulation includes multiple simulation steps which is different from the negotiation rounds definied in \ref{background:autonmous-negotiation:basic-notation}. A simulation step can have multiple negotiation rounds. In each step, agents can be allowed to take proactive actions by performing operations worldwide, reading their status from the world, or requesting/operating negotiations with other agents.
-\paragraph{\gls{negmas} and Negotiator} Negotiator is NegMAS's way to represent automated negotiation agent in a negotiation mechanism. Several negotiators are natively implemented in \gls{negmas}. AspirationNegotiator, SimpleTitForTatNegotiator and PassThroughSAONegotiator are negotiators, which are developed for \gls{saom}. However, most Genius agents are available in NegMAS.
+A simulation is an embedded domain in which agents behave. It is represented in \gls{negmas} by a \textbf{World}. The world in \gls{negmas} was designed to simply the common tasks involved in constructing negotiation driven simulations\parencite{Mohammad2019}. The entire simulation includes multiple simulation steps which is different with the negotiation rounds definied in \ref{background:autonmous-negotiation:basic-notation}. A simulation step can have multiple negotiation rounds. In each step, agents can be allowed to take proactive actions by performing operations worldwide, reading their status from the world, or requesting/operating negotiations with other agents.
+\paragraph{\gls{negmas} and Negotiator} Negotiator is an entity in a negotiation mechanism. Several negotiators are natively implemented in \gls{negmas}. AspirationNegotiator, SimpleTitForTatNegotiator and PassThroughSAONegotiator are negotiators, which are developed for \gls{saom}.
 
-An overview of the main components of a simulation in a \gls{negmas} world is shown in Figure \ref{fig:overview-negmas}.
+The overview of the main components of a simulation in a \gls{negmas} world is shown in Figure \ref{fig:overview-negmas}.
 
 \begin{figure}[htbp]
 \centering
@@ -364,13 +363,13 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World created by \gls{scml-one
 \label{fig:overview-scml-oneshot}
 \end{figure}
 
-\paragraph{Production Graph} represents the products defined in the world and the process of converting between them. There are three product types: raw-material, intermediate-product and final-product and two manufacting processes for converting the raw materail into the intermediate product and for converting the intermediate product to the final product.
-\paragraph{Factories} are entities which in the \gls{scm} world convert input products into output products by running manufacturing process on their production lines. A special point is that all processes require zero time to complete.
+\paragraph{Production Graph} defines the products defined in the world and the process of converting between them. There are three product types: raw-material, intermediate-product and final-product and two manufacting processes for converting the raw materail into the intermediate product and for converting the intermediate product to the final product.
+\paragraph{Factories} is an entity which in the \gls{scm} world convert input products into output products by running manufacturing process on their production lines. A special point is that all processes require zero time to complete.
 \paragraph{Agents} The agents in the \gls{scm} world function as factory managers controlling the negotiations between factories.
 \paragraph{Conctracts} include normal contracts which are signed agreements between agents or exogenous contracts, which are contracts signed between agent and system entities(BUYER and SELLER).
-\paragraph{Utiliy Function} The utility function of an agent specifies its preferences over possible outcomes of a negotiation. The utility function is well defined in \gls{scml-oneshot}. It is simply the total money it receives minus the money it pays for buying input product, production cost, storage and garbage collection costs and delivery penalties. It is called OneShotUfun in \gls{scml-oneshot} world. This utility can be set as a part of reward function of RL-agent. The complete information of the utility function will be covered in Chapter 4 "Analysis" \ref{analysis:scml:design-of-reward-function}.
-\paragraph{Negotiation Mechanism} The negotiation mechanism is a variant of the alternating offers protocol. It involves two agents, who take turns making offers for a finite number of rounds. One agent opens the negotiation with an offer, after which the other agent takes one of the actions(Accepts, Counter-offer, Walks away). All actions are also introduced in SAOM \ref{background:saom}. This process repeats until an agreement or a deadline is reached. A key difference between the variant of the protocol used in the SCM world and other implementations of the alternating offers protocol is that in the first round of negotiations, both agents propose an offer, and then one of these offers is chosen at random to be the initial offer. This trick was designed to prevent the mechanism from degenerating into an ultimatum game.
-\paragraph{Bulletin Board} The world contains a public bulletin board. It contains both static and dynamic information about the game and all factories. The static information includes the game settings, product information, catalog prices and trading prices. The dynamical information includes a breach list and financial reports.
+\paragraph{Utiliy Function} The utility function of an agent specifies its preferences over possible outcomes of a negotiation. Utility function is well defined in \gls{scml-oneshot}. It is simply the total money it receives minus the money it pays for buying input product, production cost, storage and garbage collection costs and delivery penalties. It is called OneShotUfun in \gls{scml-oneshot} world. This utility can be set as a part of reward function of RL-agent. The complete information of the utility function will be covered in Chapter 4 "Analysis" \ref{analysis:scml:design-of-reward-function}.
+\paragraph{Negotiation Mechanism} The negotiation mechanism is a variant of Rubinstein's alternating offers protocol. It involves two agents, who take turns making offers for a finite number of rounds. One agent opens the negotiation with an offer, after which the other agent takes one of the actions(Accepts, Counter-offer, Walks away). All actions are also introduced in SAOM \ref{background:saom}. This process repeats until an agreement or a deadline is reached. A key difference between the variant of the protocol used in the SCM world and other implementations of the alternating offers protocol is that in the first round of negotiations, both agents propose an offer, and then one of these offers is chosen at random to be the initial offer.
+\paragraph{Bulletin Board} The world contains a world-readable bulletin board. It contains both static and dynamic information about the game and all factories. The static information includes the game settings, product information, catalog prices and trading prices. The dynamical information includes a breach list and a financial reports.
 \paragraph{Simulation World} Each simulation in \gls{scm} world runs for multiple days. Before the first day, each agent is assigned a private production cost $(m_f)$. During each day\parencite{Mohammad2021}:
 \begin{itemize}
 \item Conduct multiple rounds of negotiations between agents.
@@ -378,12 +377,12 @@ Figure \ref{fig:overview-scml-oneshot} diagrams a World created by \gls{scml-one
 \item Update the bulletin board to reflect new financial reports, transaction prices and external contract summaries.
 \end{itemize}
 
-\subsection{Tensorflow} Tensorflow is an end-to-end open source platform for machine learning. It has a comprehensive and flexible ecosystem of tools, libraries and community resources, allowing researchers to promote the latest developments in ML, and allowing developers to easily build and deploy ML-supported applications\parencite{tensorflow2015-whitepaper}. In this thesis, it is used for creating neural networks(in MADDPG and stable-baselines) and summarizing the results.
+\subsection{Tensorflow} Tensorflow is an end-to-end open source platform for machine learning. It has a comprehensive and flexible ecosystem of tools, libraries and community resources, allowing researchers to promote the latest developments in ML, and allowing developers to easily build and deploy ML-supported applications\parencite{tensorflow2015-whitepaper}.
 
-\subsection{\gls{pytorch}} PyTorch is an open source machine learning library and framework which performs immediate execution of dynamic tensor computations with automatic differentiation and GPU acceleration, and does so while maintaining performance comparable to the fastest current libraries for deep learning\parencite{NEURIPS2019_bdbca288}. While considering performance, it is also easier to apply and debug. In this thesis, it is used for creating an easy-to-understand network(in QMIX).
+\subsection{\gls{pytorch}} PyTorch is an open source machine learning library and framework which performs immediate execution of dynamic tensor computations with automatic differentiation and GPU acceleration, and does so while maintaining performance comparable to the fastest current libraries for deep learning\parencite{NEURIPS2019_bdbca288}. While considering performance, it is also easier to apply and debug.
 
 \subsection{\gls{openai gym}}
-\gls{openai gym} is a toolkit for developing and comparing reinforcement learning algorithms \parencite{brockman2016openai}. To create custom environments, they just need to follow its interface.
+\gls{openai gym} is a toolkit for developing and comparing reinforcement learning algorithms \parencite{brockman2016openai}.
 \subsubsection{Environment}
 The core gym interface is \texttt{Env}, which is the unified environment interface. The following are the Env methods that developers should implement \parencite{brockman2016openai}.
 
@@ -421,7 +420,7 @@ ob100,rew99,done99,info2=env.step(a99)
 From Listing \ref{lst:openaigym}, user can get the logic of interaction in \gls{openai gym}.
 
 \subsubsection{Stable Baselines} \label{backgrounds:stable-baselines}
-The \textbf{Stable Baselines} are developed in the project stable-baselines\parencite{stable-baselines}. The project implemented a set of improved implementations of \gls{rl} algorithms based on OpenAI Baselines\parencite{baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines} and would be tested on the experiments.
+The \textbf{Stable Baselines} are developed in the project stable-baselines\parencite{stable-baselines}. The project implemented a set of improved implementations of \gls{rl} algorithms based on OpenAI Baselines\parencite{baselines}. All implemented algorithms with characteristic discrete/continuous actions are shown in \ref{tab:stable-baselines}.
 
 \begin{table}[htbp]
 \centering
@@ -446,8 +445,7 @@ The \textbf{Stable Baselines} are developed in the project stable-baselines\pare
 \end{table}
 
 \subsection{\gls{ray}}
-An open source framework that provides a simple, universal API for building distributed applications. Ray is packaged with the following libraries for accelerating machine learning workloads\parencite{DBLP:journals/corr/abs-1712-05889}. Due to the complexity of training, use it to build a distributed training environment for parallel distributed training. 
-
+An open source framework that provides a simple, universal API for building distributed applications. Ray is packaged with the following libraries for accelerating machine learning workloads\parencite{DBLP:journals/corr/abs-1712-05889}.
 \begin{itemize}
 	\item Tune: Scalable Hyperparameter Tuning
 	\item RLlib: Scalable Reinforcement Learning
