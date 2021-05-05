@@ -160,16 +160,16 @@ Interface of \textbf{Scenario}contains three normal functions and four callback 
 \subsubsection{Combination with \gls{scml}}
 Compared with \gls{sbe}, \gls{mcbe} can not directly call the functions designed in official \gls{scml}. \texttt{Step} in \gls{scml-oneshot} means one simulation step. In one simulation step, many negotiation rounds will be performed. The action of the agent is a \texttt{proposal}, so it needs to be meticulous to control every round of the negotiation mechanism in the simulation world. The class \texttt{TrainWorld} inherited from SCMLOneShotWorld achieves this goal.
 \subsubsection{Design of Reward Function} \label{analysis:scml:design-of-reward-function}
-In \gls{scm} world, the goal of the agent is to maximize profit at the end of the simulation. It is difficult to train an agent based on this reward signal alone. With the concept of reward shape \ref{related-work:sparse-reward} the reward signal can be split as three parts: utility value of current offer after every negotiation round, utility value of agent after every simulated step and profit at the end of simulation. The reward function of single agent $a_i$ is defined as follows:
+In \gls{scm} world, the goal of the agent is to maximize profit at the end of the simulation. It is difficult to train an agent based on this reward signal alone. With the concept of reward shape \ref{related-work:sparse-reward} the reward signal can be split as three parts: utility value of current offer after every negotiation round, utility value of agent after every simulated step and profit at the end of simulation. The reward function of single agent $a_k$ is defined as follows:
 \begin{equation}
-R_{t}^{a_i}=\left\{\begin{array}{ll}
+R_{t}^{a_k}=\left\{\begin{array}{ll}
 \sum_{j=0}^{N}\left({1-d_{n_j}(u(p), u(o))}\right) & \text {in negotiation}\\
 u_{a_i}\left(C^{i}, C^{o}\right) & \text {end of one negotiation} \\
-p_{a_i} & \text{end of simulation}
+p_{a_k} & \text{end of simulation, profit}
 \end{array}\right.
 \end{equation}
 
-Where, for negotiation $n_j$, $d_{n_j}(u(p), u(o))$ denotes the distance between utility of proposal offer($u(p)$) and utility of optimal offer($u(p)$). $N$ means the number of maximal concurrent negotiation of agent $a_i$. The utility function of agent ($u_{a}\left(C^{i}, C^{o}\right)$) is defined in the equation \ref{equation:utility-agent} from \parencite{Mohammad2021}. It represents the \textbf{expected profit} of a factory.
+Where, for negotiation $n_j$, $d_{n_j}(u(p), u(o))$ denotes the distance between utility of proposal offer($u(p)$) and utility of optimal offer($u(p)$). $N$ represents the maximum number of concurrent negotiations of the agent $a_k$. The utility function of agent ($u_{a}\left(C^{i}, C^{o}\right)$) is defined in the equation \ref{equation:utility-agent} from \parencite{Mohammad2021}. It represents the \textbf{expected profit} of a factory.
 
 \begin{equation} \label{equation:utility-agent}
 \begin{aligned}
