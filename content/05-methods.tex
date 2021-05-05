@@ -129,7 +129,7 @@ Where environment contains six factories and two system entities(SELLER and BUYE
 \begin{itemize}
 \item \textbf{Perceptor} Receives state, reward from environment and send these to Learner.
 \item \textbf{Actuator} Receives action from Learner and execute it in the environment.
-\item \textbf{Learner} In addition to connecting with \textbf{Perceptor} and \textbf{Actuator}, it manage the multiple trainers. Because for an agent, there are many concurrent negotiation sessions. A trainer is responsible for part of the simultaneous negotiations.
+\item \textbf{Learner} In addition to connecting with \textbf{Perceptor} and \textbf{Actuator}, it manages the multiple trainers. Because for an agent, there are many concurrent negotiation sessions. A trainer is responsible for the part of the concurrent negotiations.
 \end{itemize}
 
 Based on different algorithms, the internal components of the trainer are different. In general, the trainer will handle the training logic of concurrent negotiation. It will be introduced in the specific algorithm, diagramed in figures \ref{fig:method-maddpg-scml} and \ref{fig:method-qmix-scml}.
@@ -166,7 +166,7 @@ a_{trainer\_seller} & = \prod_{i=0}^{N_{sell}}[p_{i, l}, p_{i, r}, q_{i, l}, q_{
 a_{trainer\_buyer} & = \prod_{i=0}^{N_{buy}}[p_{i, l}, p_{i, r}, q_{i, l}, q_{i, r}, t_{i, l}, t_{i, r}]
 \end{aligned}
 \end{equation}
-Where the $p_{i, l}$, $q_{i, l}$ and $t_{i, l}$ denote the left boundary value of negotiation issues (\textbf{PRICE}, \textbf{QUANTITY}, \textbf{TIME}) of agent $i$. $p_{i, r}$, $q_{i, r}$ and $t_{i, r}$ represent the right boundary value of negotiation issues of agent $i$. Details of the algorithm are described in the appendix \ref{appendix:algorithms:maddpg}.  
+Where the $p_{i, l}$, $q_{i, l}$ and $t_{i, l}$ denote the left boundary value of negotiation issues (\textbf{PRICE}, \textbf{QUANTITY}, \textbf{TIME}) of agent $i$. $p_{i, r}$, $q_{i, r}$ and $t_{i, r}$ represent the right boundary value of negotiation issues of agent $i$. $N_{*}$ denotes the number of negotiations. Details of the algorithm are described in the appendix \ref{appendix:algorithms:maddpg}.  
 
 \begin{equation} \label{observation-maddpg}
 \begin{aligned}
@@ -175,7 +175,7 @@ o_{trainer\_buyer} &= \prod_{i=0}^{N_{buy}}[e_{i}, m_{i}, c_{i}, n_{i, buy}, t_{
 \end{aligned} 
 \end{equation}
 
-Where $e_{i}$ denotes the economic profit of agent $i$, $m_{i}$ represents the production costs, catalog prices of products are denoted by $c_{i}$, $n_{i, sell}$ and $n_{i, buy}$ mean the number of running negotiations of sell and buy of agent $i$, respectively. Time is represented by $t_{i}$.
+Where $e_{i}$ denotes the economic profit of agent $i$, $m_{i}$ represents the production costs, catalog prices of products are denoted by $c_{i}$. $n_{i, sell}$ and $n_{i, buy}$ represent the number of ongoing buying and selling negotiations of the agent $i$, respectively. Time is represented by $t_{i}$. 
 
 \subsubsection{Experiment}
 Standard \gls{scml} is a complex simulation world, which contains various parts with specific functions. The brief description of this simulation is introduced in chapter Background \ref{background-scml}. The experiment of this thesis focus on only the Negotiation Manager(Negotiation Control Strategy) of Decision-Maker Agent. The above mentioned method maddpg \ref{methods:maddpg} is used in this experiment. 
