@@ -72,7 +72,7 @@ The first method: The output size of neural network is directly related to the s
 
 The second method: Discrete action space is replaced by continuous action space. Before applying the action, filter invalid actions and scale valid actions.
 
-The state in this experiment is opponent offer(PRICE, QUANTITY, TIME). When learning different strategies, the actions are different. For acceptance strategy, actions are $ACCEPT\_OFFER$, $REJECT\_OFFER$, $END\_NEGOTIATION$ and $NO\_RESPONSE$. For offer strategy, actions are outcomes.
+The state in this experiment is opponent's offer (PRICE, QUANTITY, TIME). When learning different strategies, the actions are different. For acceptance strategy, actions are ACCEPT OFFER, REJECT OFFER, END NEGOTIATION and NO RESPONSE. For offer strategy, actions are outcomes.
 
 \subsubsection{Design of Reward Function}
 The design of the reward function is the key point in the realization of \gls{rl} algorithm. This is very easy to understand, learners learn by evaluating the value of actions. Therefore, the reward function will directly affect the learning effect, and it is very necessary to design a good reward function. In \gls{sbe}, the utility function defined by \texttt{Negotiator} can be used as a calculation tool for obtaining the current offer reward, which can be intuitively set as part of the reward function. In order to encourage negotiators to sign the contract, an extra reward will be given when the contract is successfully signed. Hence, the reward function is defined as follows:
@@ -101,8 +101,8 @@ With the help of \gls{openai gym} and \gls{negmas}, the design of \gls{sbe} and 
 \section{\gls{scml} with \gls{openai gym}}
 \subsection{Configuration}
 \subsubsection{Negotiation Issues}
-\paragraph{Standard \gls{scml}} Negotiation issues are multi-issues, \textbf{QUANTITY}, \textbf{TIME} and \textbf{PRICE}. 
-\paragraph{\gls{scml-oneshot}} Negotiation issues are multi-issues, \textbf{QUANTITY} and \textbf{PRICE}. Time is not important in this simulated world. All contracts will be executed at the same step in which agents reach agreements.
+\paragraph{Standard \gls{scml}} Negotiation issues are multi-issues, QUANTITY, TIME and PRICE. 
+\paragraph{\gls{scml-oneshot}} Negotiation issues are multi-issues, QUANTITY and PRICE. Time is not important in this simulated world. All contracts will be executed at the same step in which agents reach agreements.
 
 \subsection{Model}
 The model consists of six parts: environment \texttt{\gls{mcbe}}, Scenario, World, Agent, Interfaces and \gls{madrl} algorithms(trainer).

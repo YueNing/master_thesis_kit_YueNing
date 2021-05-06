@@ -31,15 +31,22 @@ Figure \ref{fig:bilateral-negotiation} depicts a game composed of two negotiator
 \label{fig:bilateral-negotiation}
 \end{figure}
 
-The negotiation mechanism is \gls{saom}, RL negotiator can learn two strategies called \textbf{acceptance strategy} and \textbf{offer strategy}, which will be described in detail in the following paragraphs. 
+The negotiation mechanism is \gls{saom}, the RL negotiator can learn two strategies called \textbf{acceptance strategy} and \textbf{offer strategy}, which will be described in detail in the following paragraphs. 
 
 \paragraph{Acceptance strategy} The variables observed by the agent are current offer of opponent and current time(running time, or relative round of negotiation mechanism).
 
-\paragraph{Offer strategy} Actions of the negotiator are the set of outcomes in the outcome space. The observation space is the same as in the acceptance strategy. There is a special requirement when learning this strategy: Before feeding variables into the algorithm, action and observations are normalized. The equation of normalization is defined as follows:
+\paragraph{Offer strategy} Actions of the negotiator are the set of outcomes in the outcome space. The observation space is the same as in the acceptance strategy. There is a special requirement when learning this strategy: Before feeding variables into the algorithm, observation is normalized. The equation of normalization is defined as follows:
+\begin{equation}
+\begin{aligned}
+o^{\prime} = (rng_{max} - rng_{min}) \frac{o - o_{min}}{o_{max} - o_{min}} + rng_{min}
+\end{aligned}
+\end{equation}
+
+Where $rng_{max}$ (1) and $rng_{min}$ (-1) are the boundary value of normalization. $o_{min}$ and $o_{max}$ represent the boundary value of the observation value. $o^{\prime}$ and $o$ are the normalized observation value and original observation value, respectively. 
 
 Two different categories of agents are used for the experiments.
 
-\paragraph{RL agent} was trained in the training environment for acceptance strategy and for offer strategy. Each strategy was learned under single issue(Table \ref{tab:attributes-sbe}) and under multi-issues(Table \ref{tab:attributes-sbe-multi-issues}) cases.
+\paragraph{RL agent} was trained in the training environment for acceptance strategy and for offer strategy. Each strategy was learned under single issue(Table \ref{tab:attributes-sbe}) and under multi-issues(Table \ref{tab:attributes-sbe-multi-issues}) cases. 
 
 \paragraph{Heuristic agents(e.g., AspirationNegotiator)} Negotiators were implemented in the package scml. In this experiment, the baseline negotiator is \textbf{ApsirationNegotiator} \ref{related-work:heuristic-negotiation}, which is a time-based heuristic negotiator.
 
@@ -112,7 +119,7 @@ In the single issue cases, the curve of mean episode reward of \textbf{multi-iss
 		\label{fig:multi-issues}
 \end{figure}
 
-\paragraph{Evaluation} The characteristics of the mean episode reward curve are the same as in single-issue cases. After increasing the action space, the training time increased rapidly. 
+\paragraph{Evaluation} The most characteristics of the mean episode reward curve are the same as in single-issue cases. All algoritms (DQN, ACER, PPO1, PPO2, A2C) can learn better acceptance strategy than random (best reward of around 70). It's just that the performance of DQN is not as good as others. For learning the offer strategy, DDPG and PPO2 converged to about 80 and 100, respectively. After increasing the action space, the training time increased rapidly. From the figure, we can find the curve of A2C is very strange, after 28 thousand time steps, the mean episode reward is suddenly decreasing to zero. The reason needs to be analyzed, not particularly clear.
 
 \section{Multi-Agent Concurrent Bilateral Negotiation Environment (\gls{mcbe})} 
 The agent interacting with environment have many related trainable agents(e.g. one seller, one buyer, named as trainer) as the part of learner in the model. Each seller and buyer control multiple negotiation sessions. The detail of interactive logic is shown below in \ref{fig:interacting-logic-scml}
@@ -124,7 +131,7 @@ The agent interacting with environment have many related trainable agents(e.g. o
 \label{fig:interacting-logic-scml}
 \end{figure}
 
-Where environment contains six factories and two system entities(SELLER and BUYER). Three RL agents(A1, A2, An) are located at two production positions. Each RL agent contains three parts:
+Where environment contains six factories and two system entities (SELLER and BUYER). Three RL agents(A1, A2, An) are located at two production positions. Each RL agent contains three parts:
 
 \begin{itemize}
 \item \textbf{Perceptor} Receives state, reward from environment and send these to Learner.
@@ -189,7 +196,7 @@ Scenario is diagrammed in Figure \ref{fig:scenario-standard-scml}.
 \end{figure}
 
 Two different categories of agents are used for the experiments:
-\paragraph{RL agents} were trained with 25000 time episodes in the training environment for the algorithms maddpg. The Rl-Agents are titled as M* in the scenario image \ref{fig:scenario-standard-scml}. All RL agents have been trained together. After training, they reload the strategy from disk and run it in the standard scml world.
+\paragraph{RL agents} were trained with twenty-five thousand time episodes in the training environment for the algorithms maddpg. The Rl-Agents are titled as M* in the scenario image \ref{fig:scenario-standard-scml}. All RL agents have been trained together. After training, they reload the strategy from disk and run it in the standard scml world.
 
 \paragraph{Heuristic agent(e.g., IndDecentralizingAgent)} acts according to the strategy implemented in the scml package. The heuristic agent is named as C* in the scenario image \ref{fig:scenario-standard-scml}. There are many heuristic agents, such as IndDecentralzingAgent, BuyCheapSellExpensiveAgent, MarketAwareBuyCheapSellExpensiveAgent, etc. In this experiment, IndDecentralizingAgent is used for baseline agent.
 
@@ -352,4 +359,4 @@ Mean episode reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the r
 In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means, method \gls{qmix} is valid in scml-oneshot world.
 
 \section{Conclusion}
-The result of training of single agent(negotiator) is not bad. For multi-agent concurrent negotiations, it is not easy to implemente. The work of this thesis focuses on two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}.
+The result of training of single agent(negotiator) is not bad. For multi-agent concurrent negotiations, it is not easy to implemente. The work of this thesis focuses on two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}. In the future, one more experiment will be needed: In order to check generalization ability, trained RL agent against strategies it was not trained.
