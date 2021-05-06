@@ -66,10 +66,8 @@ Related components and data flow are diagrammed in the figure \ref{fig:heuristic
 From the analysis of the heuristic negotiation strategy in automated negotiation, we can extract some important parameters, such as time and the opponent's offer, these parameters can be regarded as important information that affects the negotiation process.
 
 \section{Reinforcement Learning used in Autonomous Negotiation}
-\paragraph{\gls{negosi}} A novel algorithm named negotiation-based MARL
-with sparse interactions (NegoSI) is presented by \texttt{Luowei Zhou}. In contrast to traditional sparse-interaction based MARL algorithms, NegoSI adopts the equilibrium concept and makes it possible for agents to select the non-strict Equilibrium Dominating Strategy Profile (non-strict EDSP) or Meta equilibrium for their joint actions \parencite{L2017NegoSI}.
 
-\paragraph{\gls{rlboa}} Bak et. al. proposed \parencite{Bakker2019RLBOAAM}, a modular reinforcement learning framework for autonomous negotiating agents. This framwork implemented an agent that used tabular Q-Learning on the compressed state and action space to learning bidding strategy which is one of modules \gls{boa} proposed in the paper \parencite{Baarslag2014}. Negotiation strategy was split into three modules: \textbf{bidding strategy}, \textbf{opponent model}, and \textbf{acceptance strategy}. \gls{rlboa} maps the multi-dimensional contract space to the utility axis, which enables compact and universal descriptions of states and actions. Hence, the action space of this framework is discrete. The model is diagrammed in the figure \ref{fig:rlboa}.
+\paragraph{\gls{rlboa}} Bak et. al. proposed \parencite{Bakker2019RLBOAAM}, a modular reinforcement learning framework for autonomous negotiating agents. This framwork implemented an agent that used tabular Q-Learning on the compressed state and action space to learning bidding strategy which is one of modules \gls{boa} proposed in the paper \parencite{Baarslag2014}. According the utility function of agent, the outcome space is discretized into evenly spaced bins. The utility bin can be described as part of the state (i.e., state $s_t = \{ ub(w_{A}^t), ub(w_{B}^t), ub(w_{A}^{t-1}, ub(w_{B}^{t-1}), t\}$, $ub(w_{A}$ denotes the utility bin of agent for its own bid, $ub(w_{B}$ denotes the utility bin of agent for the opponent's bid). Negotiation strategy was split into three modules: \textbf{bidding strategy}, \textbf{opponent model}, and \textbf{acceptance strategy}. \gls{rlboa} maps the multi-dimensional contract space to the utility axis, which enables compact and universal descriptions of states and actions. Hence, the action space of this framework is discrete. The model is diagrammed in the figure \ref{fig:rlboa}.
 
 \begin{figure}[htbp]
 \centering
@@ -80,16 +78,17 @@ on\parencite{Bakker2019RLBOAAM}.}
 \end{figure}
 
 
-\paragraph{\gls{anegma}:} is work in \parencite{bagga2020deep}. A novel DRL-inspired agent model called ANEGMA, which allows the buyer to develop an adaptive strategy to effectively use against its opponents(which use fixed-but-unknown strategies) during concurrent negotiations in an environment with incomplete information. The architecture of \gls{anegma} is shown in Figure \ref{fig:anegma}.
+\paragraph{\gls{anegma}\parencite{bagga2020deep}:} Bag et. al. proposed a novel DRL-inspired agent model called ANEGMA, which allows the buyer to develop an adaptive strategy to effectively use against its opponents(which use fixed-but-unknown strategies) during concurrent negotiations in an environment with incomplete information. The architecture of \gls{anegma} is shown in Figure \ref{fig:anegma}. The agent uses an actor-critic architecture with model-free reinforcement learning. The method supervision from synthetic market data is adopted to pre-train the strategy. Especially, the proposed automated agents that can adapt to different settings without the need to be pre-programmed.
+
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{./images/anegma.png}
+\includegraphics[width=0.8\textwidth]{./images/anegma.png}
 \caption{The Architecture of \gls{anegma}. Source: Own illustration based on\parencite{bagga2020deep}.}
 \label{fig:anegma}
 \end{figure}
 
 \subsection{Conclusion}
-A lot of work has focused on the application of \gls{rl} in autonomous negotiation. Regardless of whether it is through decoupling strategies or fixed opponent strategies to conduct research on reinforcement learning algorithms in automatic negotiation, they have some obvious simplified conditions. However, the importance of these studies is also obvious.
+A lot of work has focused on the application of \gls{rl} in autonomous negotiation. The method of \textbf{decoupling strategy} can simplify the training process and make the behavior of the agent more clearly analyzed. The method \textbf{supervision from synthetic market data} is an impressive idea that can speed up the training of agents and reduce the exploration time required for learning during the negotiation process.
 
 \section{Challenges in Deep Reinforcement Learning}
 

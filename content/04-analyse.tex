@@ -50,7 +50,7 @@ Since the default interface of the \gls{openai gym} environment was designed for
 
 \paragraph{RESET} resets the environment to an initial state and returns an initial observation, which contains negotiators' initial observation and other information relative to the design of the training environment. It will reset some environmental parameters at the same time, such as time and current step and creates a new negotiation mechanism session.
 \paragraph{RENDER} This application is not required because there is no visual output.
-\paragraph{CLOSE}  This application is not needed because there is no need to save the data created by the environment.
+\paragraph{CLOSE} Save debugging information (such as historical offer) about the training process.
 \paragraph{SEED} Sets the seed for the env's random number generator(s), such as random generator in negotiation mechanism.
 
 \subsection{Game} \label{game}
@@ -101,8 +101,8 @@ With the help of \gls{openai gym} and \gls{negmas}, the design of \gls{sbe} and 
 \section{\gls{scml} with \gls{openai gym}}
 \subsection{Configuration}
 \subsubsection{Negotiation Issues}
-\paragraph{Standard \gls{scml}} Negotiation issues are multi-issues, Quantity, Time and Price. 
-\paragraph{\gls{scml-oneshot}} Negotiation issues are multi-issues, Quantity and Price. Time is not important in this simulated world. All contracts will be executed at the same step in which agents reach agreements.
+\paragraph{Standard \gls{scml}} Negotiation issues are multi-issues, \textbf{QUANTITY}, \textbf{TIME} and \textbf{PRICE}. 
+\paragraph{\gls{scml-oneshot}} Negotiation issues are multi-issues, \textbf{QUANTITY} and \textbf{PRICE}. Time is not important in this simulated world. All contracts will be executed at the same step in which agents reach agreements.
 
 \subsection{Model}
 The model consists of six parts: environment \texttt{\gls{mcbe}}, Scenario, World, Agent, Interfaces and \gls{madrl} algorithms(trainer).
@@ -169,7 +169,7 @@ p_{a_k} & \text{end of simulation, profit}
 \end{array}\right.
 \end{equation}
 
-Where, for negotiation $n_j$, $d_{n_j}(u(p), u(o))$ denotes the distance between utility of proposal offer($u(p)$) and utility of optimal offer($u(p)$). $N$ represents the maximum number of concurrent negotiations of the agent $a_k$. The utility function of agent ($u_{a}\left(C^{i}, C^{o}\right)$) is defined in the equation \ref{equation:utility-agent} from \parencite{Mohammad2021}. It represents the \textbf{expected profit} of a factory.
+Where, for negotiation $n_j$, $d_{n_j}(u(p), u(o))$ denotes the distance between utility of proposal offer ($u(p)$) and utility of optimal offer ($u(p)$). $N$ represents the maximum number of concurrent negotiations of the agent $a_k$. The utility function of agent (i.e., $u_{a}\left(C^{i}, C^{o}\right)$) is defined in the equation \ref{equation:utility-agent} from \parencite{Mohammad2021}. It represents the \textbf{expected profit} of a factory.
 
 \begin{equation} \label{equation:utility-agent}
 \begin{aligned}
@@ -191,10 +191,11 @@ Where $C^{i}$ denotes the set of input contracts plus the exogenous input contra
 Traditional reinforcement learning approaches such as Q-Learning or policy gradient
 are poorly suited to multi-agent environments\parencite{maddpg2017, Rashid2018, en13010123}. One issue is that each agent’s policy is changing as training progresses, and the environment becomes non-stationary from the perspective of any individual agent (in a way that is not explainable by changes in the agent’s own policy).
 Due to the non-stationary environment, a method called centralized learning and decentralized execution is proposed to train multi-agents.
-\paragraph{Cooperative and Competitive} Independent learning agent consider just the goal of itself and can not deal with the cooperative and competitive problem. The centralized learning framework is an intuitive idea to solve this problem by changing the design of the reward function in different situations.
+\paragraph{Cooperative and Competitive} Independent learning agent consider just the goal of itself and can not deal with the cooperative and competitive problem. The centralized learning framework is an intuitive idea to solve this problem by changing the design of the reward function in different scenarios. Each agent is allowed to have self-defined reward function. For competitive scenario, agents
+have conflicting goals, the agents are rewarded while the adversary is penalized. For cooperative scenario, all agents must maximize a shared return.
 
 \subsubsection{\gls{maddpg} vs. \gls{qmix}}
-Centralised learning of joint actions(\textbf{\gls{maddpg}}) can naturally handle coordination problems and avoids non-stationarity, but is hard to scale, as the joint action space grows exponentially with the number of agents. In \parencite{Rashid2018}, author proposed a neural network(\textbf{\gls{qmix}}) to transform the centralised state into the weights of another neural network. This second neural network is constrained to be monotonic with respect to its inputs by keeping its weights positive. This feature makes it possible to learn when there are many agents.
+Centralised learning of joint actions (\textbf{\gls{maddpg}}) can naturally handle coordination problems and avoids non-stationarity, but is hard to scale, as the joint action space grows exponentially with the number of agents. In \parencite{Rashid2018}, author proposed a neural network (\textbf{\gls{qmix}}) to transform the centralised state into the weights of another neural network. This second neural network is constrained to be monotonic with respect to its inputs by keeping its weights positive. This feature makes it possible to learn when there are many agents.
 
 \subsection{Conclusion}
 Compared with \gls{sbe}, \gls{mcbe} consider not just single learnable \gls{rl} agent. Multi-agent is the basic setting of this environment. Hence, the number of agent, the observation space and action space of single agent, the design reward are needed to be considered carefully. With the help of \gls{mcbe} developers just need to focus on the configuration of training scenario. \gls{mcbe} decouples well the algorithms and environment. 
