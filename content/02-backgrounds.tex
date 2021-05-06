@@ -80,7 +80,7 @@ Protocols assign turns to the negotiating agents. Turns are taken according to a
 
 \subsection{Rubinstein Bargaining Mechanism}
 Rubinstein bargaining mechanism is widely cited for multi-round bilateral negotiation\parencite{Baarslag2014, Mohammad2021, 10.1007/3-540-45448-9_28}.
-Two agents join the mechanism which has an infinite time horizon and have to reach an agreement. In a turn, one agent proposes an offer, the other needs to decide either to accept it, or to reject it and continue the bargaining\parencite{Rubinstein1982}. The offer is about how to divide a pie of size 1. After the two agents have played indefinitely, they may get the corresponding nash equilibrium solution. The both ufuns are common knowledges that the Nash equilibrium is achievable in a single round when the two players have possibly different time pressures (***).
+Two agents join the mechanism which has an infinite time horizon and have to reach an agreement. In a turn, one agent proposes an offer, the other needs to decide either to accept it, or to reject it and continue the bargaining\parencite{Rubinstein1982}. The offer is about how to divide a pie of size 1. After the two agents have played indefinitely, they may get the corresponding nash equilibrium solution. For example, when the both utility functions are common knowledge, the Nash equilibrium is achievable in a single round.
 
 \subsection{Stacked Alternating Offers Mechanism(\gls{saom})} \label{background:saom}
 In the alternating offers protocol also called AOM, one of the agents start to propose an offer. The other can either accept or reject the given offer. If an agreement is reached, the negotiation is successful and ended. When rejecting the offers the other agent can either end the negotiation or give a counter offer.
@@ -214,13 +214,13 @@ Just like the description of Markov games in the chapter background \ref{backgro
 \textbf{State Value Function($V$)} measures the goodness of each state. It is based on the return reward $G$ following a policy $\pi$. In a formal way, the value of $V_\pi(s)$ is:
 
 \begin{equation} 
-V_{\pi}(s)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s \right]=\mathbb{E}_{\pi}\left[\sum_{j=0}^{T} \gamma^{j} r_{t+j+1} \mid S_{t}=s\right]
+V_{\pi}(s)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s \right]=\mathbb{E}_{\pi}\left[\sum_{j=0}^{T-t-1} \gamma^{j} r_{t+j+1} \mid S_{t}=s\right]
 \end{equation}
 Compared with an infinite \gls{mdp} the time horizon here is set as $T$. The discount is $\gamma$. At the time $t$, $S_t$ denotes the state of agent.
 
 \textbf{State-Action Value Function($Q$)} which measures the goodness of each pair of state and action. Compared with state value function, an action is also determined. The meaning of $G$, $S_t$ and $\gamma$ are same as in the state value function. $A_t$ indicates the action of agent at the time $t$.
 \begin{equation}
-Q_{\pi}(s, a)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{j=0}^{T} \gamma^{j} r_{t+j+1} \mid S_{t}=s, A_{t}=a\right]
+Q_{\pi}(s, a)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{j=0}^{T-t-1} \gamma^{j} r_{t+j+1} \mid S_{t}=s, A_{t}=a\right]
 \end{equation}
 
 \subsection{Bellman Function}

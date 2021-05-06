@@ -49,9 +49,9 @@ There are two different actions from the opponent that could be considered "nice
 \subsection{Concurrent Negotiation Strategy (\gls{cns})}
 In a concurrent negotiation environment, an agent will negotiate with many opponents at the same time(one-to-many). One issue is how to coordinate all these negotiations. The author of the paper \parencite{Williams12Concurrent} designed an intuitive model with two key parts, namely the \textbf{Coordinator} and \textbf{Negotiation Thread} to deal with this problem.
 
-\paragraph{Negotiation Threads} The strategy of each negotiation thread is an extension of a principled, adaptive bilateral negotiation agent. This agent was designed to be used in a similarly complex environment, but only for negotiations against a single opponent.
+\paragraph{Negotiation Threads} The strategy of each negotiation thread is an extension of a principled, adaptive bilateral negotiation agent. This agent was designed to be used in a similarly complex environment, but only for negotiations against a single opponent. In this thread, agent $i$ performs gaussian process regression to predict the future concession of its opponent. With the probability distribution $p_{i, t}(u_i)$ over the utility, prediction of the future concession of opponent can be captured (see \parencite{Williams2011} for details). The probability distribution is then passed to the coordinator.
 
-\paragraph{Coordinator} The role of the coordinator is to calculate the best time, $t_i$ and utility value, $u_i$ at that time, for each thread. To do so, it uses the probability distributions received from the individual threads, which predict future utilities offered by the opponents.
+\paragraph{Coordinator} The role of the coordinator is to calculate the best time $t_i$ to reach agreement and utility value $u_i$ at that time, for each thread. To do so, it uses the probability distribution received from the individual threads, which predict future utilities offered by the opponents.  
 
 Related components and data flow are diagrammed in the figure \ref{fig:heuristic-concurrent-negotiation}.
 \begin{figure}[htbp]
