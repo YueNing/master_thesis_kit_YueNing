@@ -149,7 +149,7 @@ Artificial neural network is a technology based on the study of the brain and ne
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{./images/neuron.png}
+\includegraphics[width=0.5\textwidth]{./images/neuron.png}
 \caption{Aritifical Neuron}
 \label{fig:neuron}
 \end{figure}
@@ -181,7 +181,7 @@ In a recurrent neural network, the output of some neurons are fed back to the sa
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{./images/recurrent-layer-ann.png}
+\includegraphics[width=0.5\textwidth]{./images/recurrent-layer-ann.png}
 \caption{Recurrent Neural Network where h* are outputs of hidden layers, x* are inputs, y* are outputs of network, w* are the weights corresponding to the layers.}
 \label{fig:recurrent-layer-ann}
 \end{figure}
@@ -192,7 +192,7 @@ The reinforcement learning problem is meant to be a straightforward framing of t
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{./images/agent-environment-interaction.png}
+\includegraphics[width=0.5\textwidth]{./images/agent-environment-interaction.png}
 \caption{The agent–environment interaction in reinforcement learning, Source: Own illustration based
 on\parencite{Sutton2018}.}
 \label{fig:agent-environment-interaction}
@@ -202,7 +202,7 @@ The process is a typical single-agent interaction process. Single-agent reinforc
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{./images/multi-agent-environment-interaction.png}
+\includegraphics[width=0.6\textwidth]{./images/multi-agent-environment-interaction.png}
 \caption{The multi-agent–environment interaction in reinforcement learning, Source: Own illus-
 tration based on \parencite{en13010123}.}
 \label{fig:multi-agent-environment-interaction}
