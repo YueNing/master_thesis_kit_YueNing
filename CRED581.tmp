@@ -24,11 +24,9 @@
 \newcommand{\nameofauthor}{Ning Yue}
 \newcommand{\placeofexam}{Karlsruhe}
 \newcommand{\dateofexam}{10. Mai 2021}
-\newcommand{\reviewerA}{Prof. Dr.-Ing. Jürgen Beyerer}
-\newcommand{\reviewerB}{Prof. Dr.-Ing. Thomas Längle}
-
-\newcommand{\advisorA}{Junior Prof. Dr.-Ing. Yasser Mohammad}
-\newcommand{\advisorB}{Tim Zander, Ph.D.}
+\newcommand{\reviewer}{Prof. Dr.-Ing. habil. Jürgen Beyerer}
+\newcommand{\advisorA}{Associate Prof. Dr.-Ing. Yasser Mohammad}
+\newcommand{\advisorB}{Dr.-Ing. Tim Zander}
 
 
 \input{preamble-final-setup}

@@ -2,7 +2,7 @@
 In order to keep clean, some derivation processes were moved to the appendix. Nevertheless, for completeness, detailed algorithms training pseudo-code were provided after the derivation.
 	\chapter{Derivation Process} \label{appendices-derivation-process}
 	\section{Proof of Policy Gradient Theorem} \label{derivation-process-gradient-pg}
-	The policy is usually modeled with a parameterized function respect to $\theta$, $\pi_{\theta}(a|s)$. The value of the reward(objective) function depends on this policy. The reward function is defined as:
+	The policy is usually modeled with a parameterized function respect to $\theta$, $\pi_{\theta}(a|s)$. The value of the reward (objective) function depends on this policy. The reward function is defined as:
 	\begin{equation}
 	J(\theta)=\sum_{s \in \mathcal{S}} d^{\pi}(s) V^{\pi}(s)=\sum_{s \in \mathcal{S}} d^{\pi}(s) \sum_{a \in \mathcal{A}} \pi_{\theta}(a \mid s) Q^{\pi}(s, a)
 \end{equation}
@@ -81,7 +81,7 @@ In order to keep clean, some derivation processes were moved to the appendix. Ne
 		$\theta_{\text{old}} \leftarrow \theta$ \;
 	}
 	
-	\caption{PPO, Actor-Critic Style []}
+	\caption{PPO, Actor-Critic Style \parencite{schulman2017proximal}}
 	\end{algorithm}
 	
 	\subsection{DDPG}

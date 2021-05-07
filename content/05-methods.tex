@@ -22,7 +22,7 @@ The training logic of DQN is shown in the figure \ref{fig:dqn}, and the detailed
 \end{figure}
 
 \subsection{Experiment} \label{sbe:experiment}
-Figure \ref{fig:bilateral-negotiation} depicts a game composed of two negotiators: \textbf{RL negotiator} and \textbf{Opponent negotiator}(AspirationNegotiator). The type of opponent negotiator can be changed in the settings file. All negotiators, which inherit the base abstract negotiator class in \gls{negmas} can be configured in the experiment. AspirationNegotiator is selected as the baseline negotiator in this experiment.
+Figure \ref{fig:bilateral-negotiation} depicts a game composed of two negotiators: \textbf{RL negotiator} and \textbf{Opponent negotiator} (AspirationNegotiator). The type of opponent negotiator can be changed in the settings file. All negotiators, which inherit the base abstract negotiator class in \gls{negmas} can be configured in the experiment. AspirationNegotiator is selected as the baseline negotiator in this experiment.
 
 \begin{figure}[htbp]
 \centering
@@ -33,7 +33,7 @@ Figure \ref{fig:bilateral-negotiation} depicts a game composed of two negotiator
 
 The negotiation mechanism is \gls{saom}, the RL negotiator can learn two strategies called \textbf{acceptance strategy} and \textbf{offer strategy}, which will be described in detail in the following paragraphs. 
 
-\paragraph{Acceptance strategy} The variables observed by the agent are current offer of opponent and current time(running time, or relative round of negotiation mechanism).
+\paragraph{Acceptance strategy} The variables observed by the agent are current offer of opponent and current time (running time, or relative round of negotiation mechanism).
 
 \paragraph{Offer strategy} Actions of the negotiator are the set of outcomes in the outcome space. The observation space is the same as in the acceptance strategy. There is a special requirement when learning this strategy: Before feeding variables into the algorithm, observation is normalized. The equation of normalization is defined as follows:
 \begin{equation}
@@ -46,9 +46,9 @@ Where $rng_{max}$ (1) and $rng_{min}$ (-1) are the boundary value of normalizati
 
 Two different categories of agents are used for the experiments.
 
-\paragraph{RL agent} was trained in the training environment for acceptance strategy and for offer strategy. Each strategy was learned under single issue(Table \ref{tab:attributes-sbe}) and under multi-issues(Table \ref{tab:attributes-sbe-multi-issues}) cases. 
+\paragraph{RL agent} was trained in the training environment for acceptance strategy and for offer strategy. Each strategy was learned under single issue (Table \ref{tab:attributes-sbe}) and under multi-issues (Table \ref{tab:attributes-sbe-multi-issues}) cases. 
 
-\paragraph{Heuristic agents(e.g., AspirationNegotiator)} Negotiators were implemented in the package scml. In this experiment, the baseline negotiator is \textbf{ApsirationNegotiator} \ref{related-work:heuristic-negotiation}, which is a time-based heuristic negotiator.
+\paragraph{Heuristic agents (e.g., AspirationNegotiator)} Negotiators were implemented in the package scml. In this experiment, the baseline negotiator is \textbf{ApsirationNegotiator} \ref{related-work:heuristic-negotiation}, which is a time-based heuristic negotiator.
 
 \subsubsection{single issue}
 The training environment is based on the \gls{sbe} and sets concrete limits and attributes for it, which are defined in table \ref{tab:attributes-sbe}.
@@ -66,7 +66,7 @@ The training environment is based on the \gls{sbe} and sets concrete limits and 
 \textbf{Actions}                 & [ACCEPT, REJCT, END, NO RESPONSE], Outcomes\\
 \bottomrule
 \end{tabular}
-\caption{Attributes of the training environment(sbe), single-issue}
+\caption{Attributes of the training environment (sbe), single-issue}
 \label{tab:attributes-sbe}
 \end{table}
 
@@ -82,11 +82,11 @@ Algorithms \gls{dqn}, \gls{ppo}, ACER\parencite{DBLP:journals/corr/WangBHMMKF16}
     \\[\smallskipamount]
     \includegraphics[width=.44\textwidth]{./images/of_s.png}\hfill
     \includegraphics[width=.44\textwidth]{./images/of_s_wall.png}
-    \caption{Mean reward of \textbf{Acceptance Strategy}(top left(step), top right(wall)) and of \textbf{Offer Strategy}(bottom left(step), bottom right(wall)) under single issue negotiation}
+    \caption{Mean reward of \textbf{Acceptance Strategy} (top left(step), top right (wall)) and of \textbf{Offer Strategy} (bottom left(step), bottom right (wall)) under single issue negotiation}
 		\label{fig:single-issue}
 \end{figure}
 
-\paragraph{Evaluation} When training independent negotiator with SAOMechanism in the environment \gls{sbe}, almost all well-known \gls{drl} algorithms have the ability to learn. \gls{acer}, \gls{ppo} and A2C have learned very good acceptance strategy, the mean reward curve converged to around 70(i.e., 68.9). However, the performance of DQN is not particularly good. For learning offer strategy, PPO2(improved version of \gls{ppo}) and A2C perform best. The reward curve converged to around 100. The result of \gls{ddpg} are also valuable. Although the reward curve does not converge, it oscillates around a better strategy. Overall, normal version \gls{ppo} does not perform well here. 
+\paragraph{Evaluation} When training independent negotiator with SAOMechanism in the environment \gls{sbe}, almost all well-known \gls{drl} algorithms have the ability to learn. \gls{acer}, \gls{ppo} and A2C have learned very good acceptance strategy, the mean reward curve converged to around 70 (i.e., 68.9). However, the performance of DQN is not particularly good. For learning offer strategy, PPO2 (improved version of \gls{ppo}) and A2C perform best. The reward curve converged to around 100. The result of \gls{ddpg} are also valuable. Although the reward curve does not converge, it oscillates around a better strategy. Overall, normal version \gls{ppo} does not perform well here. 
 
 \subsubsection{multi issues}
 The training environment is almost the same as the training environment for single issue. It is based on \gls{sbe} and sets concrete limits and attributes for it, which are defined in table \ref{tab:attributes-sbe-multi-issues}.
@@ -104,7 +104,7 @@ The training environment is almost the same as the training environment for sing
 \textbf{Actions}                 & [ACCEPT, REJCT, END, NO RESPONSE], Outcomes                                 \\
 \bottomrule
 \end{tabular}
-\caption{Attributes of the training environment(sbe), multi-issues}
+\caption{Attributes of the training environment (sbe), multi-issues}
 \label{tab:attributes-sbe-multi-issues}
 \end{table}
 
@@ -115,14 +115,14 @@ In the single issue cases, the curve of mean episode reward of \textbf{multi-iss
     \\[\smallskipamount]
     \includegraphics[width=.40\textwidth]{./images/of_s_multi_issues.png}\hfill
     \includegraphics[width=.40\textwidth]{./images/of_s_multi_issues_wall.png}
-    \caption{Mean reward of \textbf{Acceptance Strategy}(top left(step), top right(wall)) and of \textbf{Offer Strategy}(bottom left(step), bottom right(wall)) under multi-issues negotiation}
+    \caption{Mean reward of \textbf{Acceptance Strategy} (top left(step), top right (wall)) and of \textbf{Offer Strategy} (bottom left(step), bottom right (wall)) under multi-issues negotiation}
 		\label{fig:multi-issues}
 \end{figure}
 
 \paragraph{Evaluation} The most characteristics of the mean episode reward curve are the same as in single-issue cases. All algoritms (DQN, ACER, PPO1, PPO2, A2C) can learn better acceptance strategy than random (best reward of around 70). It's just that the performance of DQN is not as good as others. For learning the offer strategy, DDPG and PPO2 converged to about 80 and 100, respectively. After increasing the action space, the training time increased rapidly. From the figure, we can find the curve of A2C is very strange, after 28 thousand time steps, the mean episode reward is suddenly decreasing to zero. The reason needs to be analyzed, not particularly clear.
 
 \section{Multi-Agent Concurrent Bilateral Negotiation Environment (\gls{mcbe})} 
-The agent interacting with environment have many related trainable agents(e.g. one seller, one buyer, named as trainer) as the part of learner in the model. Each seller and buyer control multiple negotiation sessions. The detail of interactive logic is shown below in \ref{fig:interacting-logic-scml}
+The agent interacting with environment have many related trainable agents (e.g. one seller, one buyer, named as trainer) as the part of learner in the model. Each seller and buyer control multiple negotiation sessions. The detail of interactive logic is shown below in \ref{fig:interacting-logic-scml}
 
 \begin{figure}[htbp]
 \centering
@@ -131,7 +131,7 @@ The agent interacting with environment have many related trainable agents(e.g. o
 \label{fig:interacting-logic-scml}
 \end{figure}
 
-Where environment contains six factories and two system entities (SELLER and BUYER). Three RL agents(A1, A2, An) are located at two production positions. Each RL agent contains three parts:
+Where environment contains six factories and two system entities (SELLER and BUYER). Three RL agents (A1, A2, An) are located at two production positions. Each RL agent contains three parts:
 
 \begin{itemize}
 \item \textbf{Perceptor} Receives state, reward from environment and send these to Learner.
@@ -149,7 +149,7 @@ In the standard scml environment, one problem have to be solved by MADDPG.
 
 \paragraph{Problem: Dynamic Range Of Negotiation Issues}At the beginning of every negotiation, the agent will determine the range which constraints values for each negotiation issue. In the experiment, the negotiation issues are \textbf{QUANTITY}, \textbf{PRICE} and \textbf{TIME}. After creating the simulated world, simulator determines the minimum and maximum values for each negotiation issue taken by the entire simulation episode, such as value of \textbf{QUANTITY} between (1, 10), \textbf{PRICE} between (0, 100) and \textbf{TIME} between (0, 100). However, for every negotiation session created inside the entire simulation episode, it has its dynamic range of negotiation issues which is determined by the agent. This question was raised based on such a situation.
 
-From an algorithm perspective, the data flow of the model is shown in \ref{fig:method-maddpg-scml}. The basic concepts of \gls{maddpg} are introduced in chapter background \ref{background:maddpg}. Two trainers are created in MADDPG for each agent. One trainer(trainer\_seller) manages sell negotiations and another(trainer\_buyer) manages buy negotiations. 
+From an algorithm perspective, the data flow of the model is shown in \ref{fig:method-maddpg-scml}. The basic concepts of \gls{maddpg} are introduced in chapter background \ref{background:maddpg}. Two trainers are created in MADDPG for each agent. One trainer (trainer\_seller) manages sell negotiations and another (trainer\_buyer) manages buy negotiations. 
 
 \begin{figure}[htbp]
 \centering
@@ -165,7 +165,7 @@ In the model \ref{fig:method-maddpg-scml}, policy output action as input to rela
 \item \textbf{trainer\_buyer} controls all buy negotiations. The action of the trainer is the boundary value of all buy negotiation issues.
 \end{itemize}
 
-The equation \ref{actions-maddpg} defines the actions of two trainers(i.e., trainer\_seller and trainer\_buyer). The observation is defined in the equation \ref{observation-maddpg}.
+The equation \ref{actions-maddpg} defines the actions of two trainers (i.e., trainer\_seller and trainer\_buyer). The observation is defined in the equation \ref{observation-maddpg}.
 
 \begin{equation} \label{actions-maddpg}
 \begin{aligned}
@@ -185,7 +185,7 @@ o_{trainer\_buyer} &= \prod_{i=0}^{N_{buy}}[e_{i}, m_{i}, c_{i}, n_{i, buy}, t_{
 Where $e_{i}$ denotes the economic profit of agent $i$, $m_{i}$ represents the production costs, catalog prices of products are denoted by $c_{i}$. $n_{i, sell}$ and $n_{i, buy}$ represent the number of ongoing buying and selling negotiations of the agent $i$, respectively. Time is represented by $t_{i}$. 
 
 \subsubsection{Experiment}
-Standard \gls{scml} is a complex simulation world, which contains various parts with specific functions. The brief description of this simulation is introduced in chapter Background \ref{background-scml}. The experiment of this thesis focus on only the Negotiation Manager(Negotiation Control Strategy) of Decision-Maker Agent. The above mentioned method maddpg \ref{methods:maddpg} is used in this experiment. 
+Standard \gls{scml} is a complex simulation world, which contains various parts with specific functions. The brief description of this simulation is introduced in chapter Background \ref{background-scml}. The experiment of this thesis focus on only the Negotiation Manager (Negotiation Control Strategy) of Decision-Maker Agent. The above mentioned method maddpg \ref{methods:maddpg} is used in this experiment. 
 Scenario is diagrammed in Figure \ref{fig:scenario-standard-scml}.
 
 \begin{figure}[htbp]
@@ -198,9 +198,9 @@ Scenario is diagrammed in Figure \ref{fig:scenario-standard-scml}.
 Two different categories of agents are used for the experiments:
 \paragraph{RL agents} were trained with twenty-five thousand time episodes in the training environment for the algorithms maddpg. The Rl-Agents are titled as M* in the scenario image \ref{fig:scenario-standard-scml}. All RL agents have been trained together. After training, they reload the strategy from disk and run it in the standard scml world.
 
-\paragraph{Heuristic agent(e.g., IndDecentralizingAgent)} acts according to the strategy implemented in the scml package. The heuristic agent is named as C* in the scenario image \ref{fig:scenario-standard-scml}. There are many heuristic agents, such as IndDecentralzingAgent, BuyCheapSellExpensiveAgent, MarketAwareBuyCheapSellExpensiveAgent, etc. In this experiment, IndDecentralizingAgent is used for baseline agent.
+\paragraph{Heuristic agent (e.g., IndDecentralizingAgent)} acts according to the strategy implemented in the scml package. The heuristic agent is named as C* in the scenario image \ref{fig:scenario-standard-scml}. There are many heuristic agents, such as IndDecentralzingAgent, BuyCheapSellExpensiveAgent, MarketAwareBuyCheapSellExpensiveAgent, etc. In this experiment, IndDecentralizingAgent is used for baseline agent.
 
-The training environment is based on the \gls{mcbe} and sets concrete limits and attributes for it, which are defined in table \ref{tab:attributes-mcbe-dynamical-range-negotiation-issue}. The simulated world is SCML2020World designed in the package standard scml. Negotiation mechanism SAOMechanism is the default mechanism of simulated world. The environment sets the negotiation speed(negotiation rate as 1) equal to the world speed. Because the negotiation speed has a self-running speed independent of the world speed. In the default world settings, the same negotiation partner can conduct concurrent negotiations with the same partner. In this experiment, in order to fix the size of the action space, this is not allowed, which means that the maximum number of concurrent negotiations is prior knowledge. RL agents can determine the best range of negotiation issues (i.e, actions of agents). Negotiation issues are the quantity, time, and price commonly used in the SCM world.
+The training environment is based on the \gls{mcbe} and sets concrete limits and attributes for it, which are defined in table \ref{tab:attributes-mcbe-dynamical-range-negotiation-issue}. The simulated world is SCML2020World designed in the package standard scml. Negotiation mechanism SAOMechanism is the default mechanism of simulated world. The environment sets the negotiation speed (negotiation rate as 1) equal to the world speed. Because the negotiation speed has a self-running speed independent of the world speed. In the default world settings, the same negotiation partner can conduct concurrent negotiations with the same partner. In this experiment, in order to fix the size of the action space, this is not allowed, which means that the maximum number of concurrent negotiations is prior knowledge. RL agents can determine the best range of negotiation issues (i.e, actions of agents). Negotiation issues are the quantity, time, and price commonly used in the SCM world.
 
 \begin{table}[htbp]
 \centering
@@ -218,20 +218,20 @@ The training environment is based on the \gls{mcbe} and sets concrete limits and
 \textbf{Actions}                 & Range of Negotiation Issues                                          \\
 \bottomrule
 \end{tabular}
-\caption{Attributes of the training environment(mcbe), DNSP: Disallow Negotiation with Same Partners, standard scml}
+\caption{Attributes of the training environment (mcbe), DNSP: Disallow Negotiation with Same Partners, standard scml}
 \label{tab:attributes-mcbe-dynamical-range-negotiation-issue}
 \end{table}
 
 The following paragraphs will evaulate the results based on the two questions and method maddpg. 
 
-\paragraph{Evaluation:} The results after training are shown in figure \ref{fig:dynamical-range-issues-maddpg}. From the mean episode reward curve(right in the figure \ref{fig:dynamical-range-issues-maddpg}), we can see that the agent has not learned a valuable strategy in this situation. The mean episode reward always oscillates around 7. In a sense, this is the best strategy that our RL agent can obtain. For this type of situation,  only range of negotiation issues can be controlled by the RL agents, but others part, such as offering strategy is a normal heuristic strategy.
+\paragraph{Evaluation:} The results after training are shown in figure \ref{fig:dynamical-range-issues-maddpg}. From the mean episode reward curve (right in the figure \ref{fig:dynamical-range-issues-maddpg}), we can see that the agent has not learned a valuable strategy in this situation. The mean episode reward always oscillates around 7. In a sense, this is the best strategy that our RL agent can obtain. For this type of situation,  only range of negotiation issues can be controlled by the RL agents, but others part, such as offering strategy is a normal heuristic strategy.
 
-It means, merely changing the dynamic range of negotiation issues cannot effectively improve strategy of RL agents. Compared with baseline agent IndDecentralizingAgent(left in figure \ref{fig:dynamical-range-issues-maddpg}), the score of MyComponentsBasedAgent is almost the same.  
+It means, merely changing the dynamic range of negotiation issues cannot effectively improve strategy of RL agents. Compared with baseline agent IndDecentralizingAgent (left in figure \ref{fig:dynamical-range-issues-maddpg}), the score of MyComponentsBasedAgent is almost the same.  
 
 \begin{figure}
     \includegraphics[width=.45\textwidth]{./images/dynamic_range_issues_maddpg.png}\hfill
     \includegraphics[width=.49\textwidth]{./images/dynamical_mean_episode_reward.png}
-    \caption{Scores(left) of agents running in simulation world after training, Mean Episode Reward(right)}
+    \caption{Scores (left) of agents running in simulation world after training, Mean Episode Reward (right)}
 		\label{fig:dynamical-range-issues-maddpg}
 \end{figure}
 
@@ -242,9 +242,9 @@ In this environment, the agent represents a factory manager.
 
 The world created by \gls{scml-oneshot} is described in detail in the chapter background \ref{background-scml}. 
 
-\paragraph{Question: The Offer For Every Step} Unlike in standard scml \textbf{Dynamical Range of Negotiation Issues} is not controlled by agents. Hence, question in the standard SCML does not need to be discussed here. Although the design of oneshot world is very different with the standard SCML, the key question is also how to find the optimal sequence action(offer for every negotiation round). When the offer of the opponent is the same as the offer of the RL-agent's negotiator, the negotiator will accept this offer.
+\paragraph{Question: The Offer For Every Step} Unlike in standard scml \textbf{Dynamical Range of Negotiation Issues} is not controlled by agents. Hence, question in the standard SCML does not need to be discussed here. Although the design of oneshot world is very different with the standard SCML, the key question is how to find the optimal sequence action (offer for every negotiation round). When the offer of the opponent is the same as the offer of the RL-agent's negotiator, the negotiator will accept this offer.
 
-In the current version \gls{qmix}, which is used in the experiment, one trainable agent is create for each negotiation session. When the agents are located in different locations in the scml world, the agents have different numbers of concurrent negotiation issues. For example, since the agent \textbf{A1} shown in Figure \ref{fig:interacting-logic-scml} has three consumers, the maximum number of concurrent negotiations for it is 3. Based on this value, we need to create three trainable agents(trainers) in QMIX, and each trainable agent(trainer) controls one negotiation session of interactive agent.
+In the current version \gls{qmix}, which is used in the experiment, one trainable agent is create for each negotiation session. When the agents are located in different locations in the scml world, the agents have different numbers of concurrent negotiation issues. For example, since the agent \textbf{A1} shown in Figure \ref{fig:interacting-logic-scml} has three consumers, the maximum number of concurrent negotiations for it is 3. Based on this value, we need to create three trainable agents (trainers) in QMIX, and each trainable agent (trainer) controls one negotiation session of interactive agent.
 
 The data flow is shown in fig \ref{fig:method-qmix-scml}, the total number of trainers is equal to the sum of the number of concurrent negotiations of all agents. Additionally, unlike in MADDPG, in QMIX, there is only one global learner, which can control all trainers together.
 
@@ -256,7 +256,7 @@ The data flow is shown in fig \ref{fig:method-qmix-scml}, the total number of tr
 \end{figure}
 
 \subsubsection{Experiment}
-In this experment, first, the training scenario is defined and how the various agents play is described. Secondly, the configuration of training environment is introuduced in the setting table. At the end of each experiment, the results(i.e., scores or mean episode award) will be evaluated and compared.
+In this experment, first, the training scenario is defined and how the various agents play is described. Secondly, the configuration of training environment is introuduced in the setting table. At the end of each experiment, the results (i.e., scores or mean episode award) will be evaluated and compared.
 
 World created in scml-oneshot is a new simpler world which only cares about concurrent negotiation in supply chain management, and the agents used in this world can be easily transferred to standard scml. In other words, agent focus only the negotiation control strategy, which is one of the three components of a standard SCML agent\ref{background:scml2020}.
  
@@ -275,7 +275,7 @@ In this scenario, just only one category of agent, which is RL agent. Because it
 \paragraph{RL agents} were trained with 10 thousands time steps in the training environment for QMIX. The RL-agents are named as M* in the scenario image \ref{fig:scenario-oneshot-scml-self-play}. The reward is sum of reward of each agent. Because it is a cooperative game, RL agents try to maximize profit at the end of simulation.
 
 Although the attributes of the scml-oneshot world are very different from the standard scml world, we only consider the negotiation part. Therefore, the negotiation control attributes are almost the same, such as negotiation mechanism, max negotiation steps, max simulation steps, issues, etc.
-The main difference is that we do not need to set the negotiation speed multiplier, because all negotiations will be finished inside each world(simulation) step. The name of simulated world is SCML2020OneShotWorld. The actions of each agent is outcomes(\textbf{QUANTITY}, \textbf{PRICE}) defined in the equation \ref{action-qmix}. All attributes are defined in table \ref{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot}.
+The main difference is that we do not need to set the negotiation speed multiplier, because all negotiations will be finished inside each world (simulation) step. The name of simulated world is SCML2020OneShotWorld. The actions of each agent is outcomes (\textbf{QUANTITY}, \textbf{PRICE}) defined in the equation \ref{action-qmix}. All attributes are defined in table \ref{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot}.
 \begin{equation} \label{action-qmix}
 a_{i} = [q_i, p_i]
 \end{equation}
@@ -294,7 +294,7 @@ a_{i} = [q_i, p_i]
 \textbf{Actions}                 & Joint-Outcomes                                                             \\
 \bottomrule
 \end{tabular}
-\caption{Attributes of the training environment(mcbe), scml-oneshot, self-play}
+\caption{Attributes of the training environment (mcbe), scml-oneshot, self-play}
 \label{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot}
 \end{table}
 
@@ -312,7 +312,7 @@ Two different categories of agents are used for the experiment:
 \paragraph{RL agents} The key part is same as RL agents mentioned in self-play. In addition to the normal negotiation ability, the agent can also determine whether the negotiator is his teammate. RL agents were trained with 10 thousands time steps in the training environment with QMIX. The RL-agents are named M* in the scenario image \ref{fig:scenario-oneshot-scml-play-with-greedy}.
 \paragraph{Baseline agents} There are many baseline agents realized in scml-oneshot package, such as GreedyAgent, which uses the greedy strategy to act the negotiation action. Overall, it is a simple strategy. In the future, in order to evaluate the performance of this algorithm, more sophisticated agents will need to be tested in this environment. 
 
-The setting of this scenario is the same as in the scenario self-play. Only the competitors are changed as MyAgent vs. GreedyAgent. The negotiation mechanism is an alternative rubinstein negotiation mechanism. Negotiation issues are Quantity and Price. Based on the characteristic(all negotiations finished in each world step) of the world, time is not necessary to be considered here(i.e., set the issue time equal to the simulation step in the offer). This characteristic is briefly introduced in the section \ref{background:scml2020-oneshot}. 
+The setting of this scenario is the same as in the scenario self-play. Only the competitors are changed as MyAgent vs. GreedyAgent. The negotiation mechanism is an alternative rubinstein negotiation mechanism. Negotiation issues are Quantity and Price. Based on the characteristic (all negotiations finished in each world step) of the world, time is not necessary to be considered here (i.e., set the issue time equal to the simulation step in the offer). This characteristic is briefly introduced in the section \ref{background:scml2020-oneshot}. 
 All parameters are defined in table \ref{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot-with-others}.
 
 \begin{table}[htbp]
@@ -329,7 +329,7 @@ All parameters are defined in table \ref{tab:attributes-mcbe-concurrent-negotiat
 \textbf{Actions}                 & Joint-Outcomes                                                             \\
 \bottomrule
 \end{tabular}
-\caption{Attributes of the training environment(mcbe), scml-oneshot, play-with-others}
+\caption{Attributes of the training environment (mcbe), scml-oneshot, play-with-others}
 \label{tab:attributes-mcbe-concurrent-negotiation-scml-oneshot-with-others}
 \end{table}
 
@@ -347,7 +347,7 @@ Curve of mean episode reward is shown in the figure \ref{fig:oneshot-self-play}.
 
 \paragraph{Evaluation of play-with-others}
 
-Mean episode reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the reward is only minus 400 at the beginning(random strategy), the reward curve finally converges to around 300. Obviously, RL agents have learned a good strategy. In addition, the training time is also very short. Thus, the results are very meaningful.
+Mean episode reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the reward is only minus 400 at the beginning (random strategy), the reward curve finally converges to around 300. Obviously, RL agents have learned a good strategy. In addition, the training time is also very short. Thus, the results are very meaningful.
 
 \begin{figure}[htbp]
 \centering
@@ -359,4 +359,4 @@ Mean episode reward curve is shown in \ref{fig:oneshot-my-vs-greedy}. When the r
 In the scenario \textbf{self-play} and \textbf{play with other agent}, agents learned better strategy than random. It means, method \gls{qmix} is valid in scml-oneshot world.
 
 \section{Conclusion}
-The result of training of single agent(negotiator) is not bad. For multi-agent concurrent negotiations, it is not easy to implemente. The work of this thesis focuses on two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}. In the future, one more experiment will be needed: In order to check generalization ability, trained RL agent against strategies it was not trained.
+The result of training of single agent (negotiator) is not bad. For multi-agent concurrent negotiations, it is not easy to implemente. The work of this thesis focuses on two algortims \gls{maddpg} and \gls{qmix}. The performance and results of \gls{qmix} have certain reference value. In the future many work and algorithms are needed to be finished and implemented in the environment \gls{mcbe}. In the future, one more experiment will be needed: In order to check generalization ability, trained RL agent against strategies it was not trained.

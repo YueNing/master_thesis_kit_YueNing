@@ -1,8 +1,8 @@
 \chapter{Analysis}
-Two environments are developed for comparing the \gls{drl} algorithms used in this thesis: \textbf{single-agent bilateral negotiation environment}(\gls{sbe}) and multi-agent \textbf{concurrent bilateral negotiation environment}(\gls{mcbe}). The details are described in section \ref{single-agent-env} and \ref{multi-agent-env}. In addition to these environments, some methods have been implemented to make the training logic clearer, such as \texttt{Game} in section \ref{game} and \texttt{Scenario} in section \ref{scenario}.
+Two environments are developed for comparing the \gls{drl} algorithms used in this thesis: \textbf{single-agent bilateral negotiation environment} (\gls{sbe}) and multi-agent \textbf{concurrent bilateral negotiation environment} (\gls{mcbe}). The details are described in section \ref{single-agent-env} and \ref{multi-agent-env}. In addition to these environments, some methods have been implemented to make the training logic clearer, such as \texttt{Game} in section \ref{game} and \texttt{Scenario} in section \ref{scenario}.
 
 \section{\gls{negmas} with \gls{openai gym}}
-\gls{negmas} has implemented some negotiation mechanisms and specific simulated world, such as \gls{saom} and \gls{scml}(now as an independent project). In order to compare the algorithms in a specific simulated world more easily, an interface is needed to connect \gls{negmas} and \gls{rl} algorithms. This interface and all algorithms can be rewritten from scratch, but it is very time-consuming and not ideal. The second option is to implement some interfaces of an existing RL framework, which will reduce the required work. OpenAI realizes the environmental standardization and comparison of algorithms with the help of toolkit \gls{openai gym}\parencite{brockman2016openai}. Although \gls{openai gym} is not enough to complete the work in this thesis, the baseline algorithms and the environmental interface in the package greatly speed up the work. In this section, the implementation of training environment and assisted methods used in bilateral negotiation will be presented.
+\gls{negmas} has implemented some negotiation mechanisms and specific simulated world, such as \gls{saom} and \gls{scml} (now as an independent project). In order to compare the algorithms in a specific simulated world more easily, an interface is needed to connect \gls{negmas} and \gls{rl} algorithms. This interface and all algorithms can be rewritten from scratch, but it is very time-consuming and not ideal. The second option is to implement some interfaces of an existing RL framework, which will reduce the required work. OpenAI realizes the environmental standardization and comparison of algorithms with the help of toolkit \gls{openai gym}\parencite{brockman2016openai}. Although \gls{openai gym} is not enough to complete the work in this thesis, the baseline algorithms and the environmental interface in the package greatly speed up the work. In this section, the implementation of training environment and assisted methods used in bilateral negotiation will be presented.
 
 With the help of \gls{openai gym}, a bilateral negotiation environment can be developed on top of \gls{saom} from \gls{negmas} to study reinforcement learning algorithms. The package \textbf{Stable Baseline} \ref{backgrounds:stable-baselines} implemented many baseline algorithms, which can be easily tested in a custom environment.
 
@@ -25,7 +25,7 @@ Except for the negotiation mechanism mentioned in sections \ref{autonomous-negot
 
 First, we give a brief introduction of the five parts in this section.
 \textbf{Environment \gls{sbe}} inherits from \texttt{gym.env} and implements the interfaces, mainly the step function. 
-\textbf{Negotiation Game} controls the logic and several properties of the negotiation(e.g. negotiaton issues, type of learning strategies)and provides the functions and parameters required by training algorithms.
+\textbf{Negotiation Game} controls the logic and several properties of the negotiation (e.g. negotiaton issues, type of learning strategies)and provides the functions and parameters required by training algorithms.
 \textbf{Negotiation Mechanism} is realized in the simulator \gls{negmas}.
 \textbf{Negotiator} is a general class of negotiators, which can execute negotiation behavior and have learning ability in \gls{sbe}.
 \textbf{Trainer} is the true learnable agent corresponding to the reinforcement learning algorithm, which receives observation, state from \gls{sbe}. After training and feedward calculation it sends the action to \gls{sbe}. Then, the interactive agent in the environment will execute this action. The entire model is shown in \ref{fig:environment-single-agent}.
@@ -45,19 +45,19 @@ Since the default interface of the \gls{openai gym} environment was designed for
 	\item Observation: Offer proposed by opponent and current relative time.
 	\item Reward: Utility value of the current offer and extra reward when an agreement is reached.
 	\item Done: Reaches the final state or there is no agreement within the maximum running time.
-	\item Info: State of the negotiation mechanism, extra info(i.e., state from negotiation mechanism(e.g, SAOMechanism)) used for evaluation.
+	\item Info: State of the negotiation mechanism, extra info (i.e., state from negotiation mechanism (e.g, SAOMechanism)) used for evaluation.
 \end{itemize}
 
 \paragraph{RESET} resets the environment to an initial state and returns an initial observation, which contains negotiators' initial observation and other information relative to the design of the training environment. It will reset some environmental parameters at the same time, such as time and current step and creates a new negotiation mechanism session.
 \paragraph{RENDER} This application is not required because there is no visual output.
-\paragraph{CLOSE} Save debugging information (such as historical offer) about the training process.
+\paragraph{CLOSE} Save debugging information (e.g., historical offer) about the training process.
 \paragraph{SEED} Sets the seed for the env's random number generator(s), such as random generator in negotiation mechanism.
 
 \subsection{Game} \label{game}
-In addition to implementing the official \gls{openai gym} \texttt{Env} interface, class \textbf{Game} is designed to control the entire negotiation mechanism. The purpose of this design is to reduce the modification of negotiatioin mechanism in \gls{negmas}. In this class, there are some parameters, which are received from the mechanism in \gls{negmas} and passed to the \gls{rl} algorithms as additional information(e.g., goal of learning). The two main methods are defined below.
+In addition to implementing the official \gls{openai gym} \texttt{Env} interface, class \textbf{Game} is designed to control the entire negotiation mechanism. The purpose of this design is to reduce the modification of negotiatioin mechanism in \gls{negmas}. In this class, there are some parameters, which are received from the mechanism in \gls{negmas} and passed to the \gls{rl} algorithms as additional information (e.g., goal of learning). The two main methods are defined below.
  
 \paragraph{STEP} Checks the state of \texttt{Game}, runs the negotiation mechanism for one step.
-\paragraph{STEP\_FORWARD} realizes the key logic for the running of the negotiation mechanism, because negotiator can learn different strategies(acceptance and offer strategy) in \gls{sbe}. 
+\paragraph{STEP\_FORWARD} realizes the key logic for the running of the negotiation mechanism, because negotiator can learn different strategies (acceptance and offer strategy) in \gls{sbe}. 
 
 \subsection{Challenges of the environment}
 Although \gls{openai gym} provides a unified interface for custom environments, it has some problems, which cannot be directly solved by the interface. These problems occurred during environmental design and will be listed and discussed in the following sections. 
@@ -88,12 +88,12 @@ Where $d(u(a), u(o))$ denotes the distance between of utility of an agreement an
 
 \subsection{Analysis of the reinforcement learning algorithms}
 \subsubsection{Policy-based vs. Value-based}
-Policy-based(e.g., \gls{pg}, \gls{dpg} and \gls{ppo}) methods use a policy $\pi:s \to a$ to output action based on state and keep the parameters in the memory. Value-based(e.g., tabular q-learning, \gls{dqn} and \gls{sarsa}) methods do not explicitly store any policy, only a value function or value tabular. The policy can be implicitly derived from the value function(e.g., greedy selection). A well-known \gls{rl} framework A2C combined both policy-based and value-based parts.
+Policy-based (e.g., \gls{pg}, \gls{dpg} and \gls{ppo}) methods use a policy $\pi:s \to a$ to output action based on state and keep the parameters in the memory. Value-based (e.g., tabular q-learning, \gls{dqn} and \gls{sarsa}) methods do not explicitly store any policy, only a value function or value tabular. The policy can be implicitly derived from the value function (e.g., greedy selection). A well-known \gls{rl} framework A2C combined both policy-based and value-based parts.
 
 \subsubsection{Model-based vs. Model-free}
 One problem when applying the \gls{rl} is whenever you are in state $s$ and make an action $a$ you might not know the next state $s^{\prime}$.
 
-For model-based approach learner has access to the model(i.e., environment or world) and knows some parameters, such as transition probability between states. Generally, if learner can predict the next state $s^{\prime}$ or reward $r$ after learning, these approaches of this learner are model-based. In model-free learner will collect some experience and derive optimal policy. It is not given any explicit information of model.
+For model-based approach learner has access to the model (i.e., environment or world) and knows some parameters, such as transition probability between states. Generally, if learner can predict the next state $s^{\prime}$ or reward $r$ after learning, these approaches of this learner are model-based. In model-free learner will collect some experience and derive optimal policy. It is not given any explicit information of model.
 
 \subsection{Conclusion}
 With the help of \gls{openai gym} and \gls{negmas}, the design of \gls{sbe} and the training of negotiators are not too complicated. The purpose of this part is to explore the implementation possibilities of deep reinforcement learning negotiators.
@@ -105,14 +105,14 @@ With the help of \gls{openai gym} and \gls{negmas}, the design of \gls{sbe} and 
 \paragraph{\gls{scml-oneshot}} Negotiation issues are multi-issues, QUANTITY and PRICE. Time is not important in this simulated world. All contracts will be executed at the same step in which agents reach agreements.
 
 \subsection{Model}
-The model consists of six parts: environment \texttt{\gls{mcbe}}, Scenario, World, Agent, Interfaces and \gls{madrl} algorithms(trainer).
+The model consists of six parts: environment \texttt{\gls{mcbe}}, Scenario, World, Agent, Interfaces and \gls{madrl} algorithms (trainer).
 All six parts are needed to be rewritten according to \gls{scml} and \gls{openai gym}. 
 \textbf{Environment \texttt{\gls{mcbe}}} is a new universal environment for multi-agent learning. The key functions have the same names as functions in \gls{sbe}, such as \texttt{step}. It provides the pre-definition action spaces and observation spaces.  Additionally, the function \texttt{run} is used to run the complete simulation process. 
 \textbf{Scenario} is the same as the class \texttt{Game} designed in \gls{sbe}. However, it does not consider the detailed logic of the game. The configuration of \gls{scm} world and the interactive logic of the agent with environment will be set and implemented by class scenario.
 \textbf{World} is the key class which simulates the \gls{scm} world. Negotiation and manufacturing process are executed by it.
-\textbf{Agent} is a general abstract class of agents(factory manager) which can run in \gls{mcbe}. 
+\textbf{Agent} is a general abstract class of agents (factory manager) which can run in \gls{mcbe}. 
 \textbf{Interfaces} are a type of classes and functions, which control communication between environment and algorithms.
-\textbf{\gls{madrl} algorithms(trainer)} are deep reinforcement learning algorithms(trainer) used for training multi-agent.
+\textbf{\gls{madrl} algorithms (trainer)} are deep reinforcement learning algorithms (trainer) used for training multi-agent.
 Entire model is shown in \ref{fig:environment-multi-agent}. Using \gls{madrl} algorithms can avoid the challenge of non-stationary environment and train multi-agent together to maximize the profit of the same type of agent.
 
 \begin{figure}[htbp]
@@ -126,7 +126,7 @@ Entire model is shown in \ref{fig:environment-multi-agent}. Using \gls{madrl} al
 In order to be able to realize deep reinforcement learning for multi-agent with an OpenAI Gym Environment, the interface would have to be expanded. In the following, alternative possibilities for using an OpenAI Gym Environment for \gls{marl} are discussed. 
 In addition to implementing the \gls{openai gym} env interface methods, \gls{mcbe} added a new method called \texttt{run} to execute the entire episode.
 \paragraph{STEP} Runs the simulated world for one step.
-\paragraph{RESET} Resets the environment(MCBE) and other related parameters to an initial state after every episode and returns an initial observation.
+\paragraph{RESET} Resets the environment (MCBE) and other related parameters to an initial state after every episode and returns an initial observation.
 \paragraph{RENDER} This application is not required because there is no visual output.
 \paragraph{CLOSE} This application is not needed because there is no need to save the data created by
 the environment.
